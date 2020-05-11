@@ -3,9 +3,9 @@
  * It is controlled by ROS topic through trackcmd & flipcmd.
  * /Nubot_Pummba/nubotcontrol/trackcmd geometry_msgs/Twist linear.x angular.z
  * /Nubot_Pummba/nubotcontrol/flipcmd nubot_pummba_msg/FlipCmd
- * The core simulation mechanism is based on the brilliant work of Martin Peica.
+ * The core simulation mechanism is based on the brilliant work of Martin Pecka.
  * TrackedVehiclePlugin.hh SimpleTrackedVehiclePlugin.hh 2020/02
- * Contributer: Skywalker1941 from NuBot team.
+ * Contributer: skywalker1941 from NuBot team.
  *
 /// \brief An abstract gazebo model plugin for tracked vehicles.
 /// \since 8.1
