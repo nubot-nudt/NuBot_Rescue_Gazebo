@@ -45,7 +45,7 @@ The self defined ROS message for flippers control.
 
 The core code of Nubot_Pummba_Gazebo Plugin.  
 
-## Compiling Note
+## Compilation Note
 Before compiling please change the self defined include head file direction in:  
 
 >/src/Pummba_Plugin/Nubot_Pummba_Gazebo_Plugin.hh
