@@ -94,7 +94,7 @@
 #include "Nubot_Pummba_Gazebo_Plugin.hh"
 #include "/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/devel/include/nubot_pummba_msg/FlipCmd.h"
 // This contact.h must be include, it is ralated to the ode
-#include "/home/nubot/Documents/Study/GazeboStudy/gazebo/deps/opende/src/joints/contact.h"
+#include "/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/gazebo_deps_opende/src/joints/contact.h"
 
 namespace gazebo
 {
