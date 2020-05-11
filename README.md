@@ -51,8 +51,7 @@ Before compiling please change the self defined include head file direction in:
 >/src/Pummba_Plugin/Nubot_Pummba_Gazebo_Plugin.hh
 
 use  
-'catkin_make'
-
+`catkin_make`
 to compile the project.  
 
 ## Run the Project
@@ -65,7 +64,7 @@ roslaunch Nubot_Pummba_test.launch
 
 ## Parameter Adjustment
 You can adjust most robot & environment parameters by modifying the ".sdf" & ".world" files.  
-At the end of:  
+At the ***end*** of:  
 
 >/src/gazebo_description/models/Nubot_Pummba/model.sdf
 
