@@ -1,0 +1,2 @@
+Pummba_Msg:Pummba_Plugin:gazebo_description
+-DCATKIN_DEVEL_PREFIX=/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/devel -DCMAKE_INSTALL_PREFIX=/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/install -G Unix Makefiles

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>gazebo_description</name>
+  <version>0.0.0</version>
+  <description>Describes model for Gazebo</description>
+  <maintainer email="skywalker1941@163.com">Skywalker1941</maintainer>
+  <author email="skywalker1941@163.com">Skywalker1941</author>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <run_depend>gazebo_ros</run_depend>
+  
+  <export>      
+    <gazebo_ros gazebo_model_path="${prefix}/models/" />
+    <gazebo_ros gazebo_media_path="${prefix}" />
+  </export>
+</package>

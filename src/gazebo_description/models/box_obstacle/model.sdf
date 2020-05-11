@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+        <model name="box_obstacle">
+            <static>true</static>
+            <pose>2 -1 0.028 1.7821 0 0</pose>
+            <link name="box">
+                <collision name="box_collision">
+                    <pose frame="">0 0 0 0 0 0</pose>
+                    <geometry>
+                        <box>
+                            <size>0.85 0.15 0.50</size>
+                        </box>
+                    </geometry>
+                    <surface>
+                        <friction>
+                            <ode>
+                                <mu>1</mu>
+                            </ode>
+                        </friction>
+                    </surface>
+                </collision>
+                <visual name="box_visual">
+                    <pose frame="">0 0 0 0 0 0</pose>
+                    <geometry>
+                        <box>
+                            <size>0.85 0.15 0.50</size>
+                        </box>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+</sdf>
