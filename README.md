@@ -87,4 +87,3 @@ rostopic pub -1 /Nubot_Pummba/nubotcontrol/flipcmd nubot_pummba_msg/FlipCmd
 2.Add self designed flipper position controller.  
 3.Add RGBD camera.  
 4.Connect to nubot_joy_stick.  
-

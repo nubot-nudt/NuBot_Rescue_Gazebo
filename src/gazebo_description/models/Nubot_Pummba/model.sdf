@@ -6,14 +6,14 @@
       <pose frame=''>0 0 0 0 0 0</pose>
       <inertial>
         <pose frame=''>-0.122 0 0.118 1.5708 -0 0</pose>
-        <mass>15</mass>
+        <mass>10</mass>
         <inertia>
           <ixx>0.0545</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.41992</iyy>
+          <iyy>0.37442</iyy>
           <iyz>0</iyz>
-          <izz>0.37442</izz>
+          <izz>0.41992</izz>
         </inertia>
       </inertial>
       <self_collide>0</self_collide>
@@ -96,15 +96,15 @@
     <link name='left_track'>
       <pose frame=''>-0 0.132 0 0 -0 0</pose>
       <inertial>
-        <pose frame=''>0 0 0.0141 0 -0 0</pose>
-        <mass>15</mass>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>20</mass>
         <inertia>
-          <ixx>0.422451</ixx>
+          <ixx>0.15</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.41992</iyy>
+          <iyy>0.9</iyy>
           <iyz>0</iyz>
-          <izz>0.102531</izz>
+          <izz>0.9</izz>
         </inertia>
       </inertial>
       <gravity>1</gravity>
@@ -259,15 +259,15 @@
     <link name='right_track'>
       <pose frame=''>0 -0.132 -0 0 -0 0</pose>
       <inertial>
-        <pose frame=''>0 0 0.0141 0 -0 0</pose>
-        <mass>15</mass>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>20</mass>
         <inertia>
-          <ixx>0.422451</ixx>
+          <ixx>0.15</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.41992</iyy>
+          <iyy>0.9</iyy>
           <iyz>0</iyz>
-          <izz>0.102531</izz>
+          <izz>0.9</izz>
         </inertia>
       </inertial>
       <gravity>1</gravity>
@@ -421,15 +421,15 @@
     <link name='front_left_flipper'>
       <pose frame=''>0.272 0.263 0 0 -0.0 0</pose>
       <inertial>
-        <pose frame=''>0.08 0 0 0 -0 0</pose>
-        <mass>2</mass>
+        <pose frame=''>0.135 0 0 0 -0 0</pose>
+        <mass>2.4</mass>
         <inertia>
-          <ixx>0.00437401</ixx>
+          <ixx>0.00574</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.00437401</iyy>
+          <iyy>0.05090</iyy>
           <iyz>0</iyz>
-          <izz>0.007921</izz>
+          <izz>0.04640</izz>
         </inertia>
       </inertial>
       <gravity>1</gravity>
@@ -623,7 +623,7 @@
       </collision>
       <collision name='front_left_flipper_collision_middle_bar_collision_4'>
         <max_contacts>20</max_contacts>
-        <pose frame=''>0.166 0 0.004 0 -0.02 0</pose>
+        <pose frame=''>0.166 0 0 0 0 0</pose>
         <geometry>
           <box>
             <size>0.2 0.048 0.07</size>
@@ -688,17 +688,17 @@
 
     <!--rear_left_flipper-->
     <link name='rear_left_flipper'>
-      <pose frame=''>-0.272 0.263 0 3.14159 -0.0 3.14159</pose>
+      <pose frame=''>-0.272 0.263 0 3.1416 -0.0 3.1416</pose>
       <inertial>
-        <pose frame=''>0.08 0 0 0 -0 0</pose>
-        <mass>2</mass>
+        <pose frame=''>0.135 0 0 0 -0 0</pose>
+        <mass>2.4</mass>
         <inertia>
-          <ixx>0.00437401</ixx>
+          <ixx>0.00574</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.00437401</iyy>
+          <iyy>0.05090</iyy>
           <iyz>0</iyz>
-          <izz>0.007921</izz>
+          <izz>0.04640</izz>
         </inertia>
       </inertial>
       <gravity>1</gravity>
@@ -888,7 +888,7 @@
       </collision>
       <collision name='rear_left_flipper_collision_middle_bar_collision_4'>
         <max_contacts>20</max_contacts>
-        <pose frame=''>0.166 0 0.004 0 -0.02 0</pose>
+        <pose frame=''>0.166 0 0 0 0 0</pose>
         <geometry>
           <box>
             <size>0.2 0.048 0.07</size>
@@ -944,17 +944,17 @@
     
     <!--front_right_flipper-->
     <link name='front_right_flipper'>
-      <pose frame=''>0.272 -0.263 0 3.14159 0.0 3.14159</pose>
+      <pose frame=''>0.272 -0.263 0 3.1416 0.0 3.1416</pose>
       <inertial>
-        <pose frame=''>-0.08 0 0 0 -0 0</pose>
-        <mass>2</mass>
+        <pose frame=''>-0.135 0 0 0 -0 0</pose>
+        <mass>2.4</mass>
         <inertia>
-          <ixx>0.00437401</ixx>
+          <ixx>0.00574</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.00437401</iyy>
+          <iyy>0.05090</iyy>
           <iyz>0</iyz>
-          <izz>0.007921</izz>
+          <izz>0.04640</izz>
         </inertia>
       </inertial>
       <gravity>1</gravity>
@@ -1026,7 +1026,7 @@
         -->
       </visual>
       <visual name='front_right_flipper_visual_middle_bar_visual_4'><!--flipper_board outside-->
-        <pose frame=''>0 -0.023 0 -0 -0.02 0</pose>
+        <pose frame=''>0 -0.023 0 -0 0 0</pose>
         <geometry>
           <!--
           <box>
@@ -1056,7 +1056,7 @@
         -->
       </visual>
       <visual name='front_right_flipper_visual_bottom_bar_visual_3'>
-        <pose frame=''>-0.1635 0 -0.04 0 -0.076 -3.14159</pose>
+        <pose frame=''>-0.1635 0 -0.04 0 -0.076 -3.1416</pose>
         <geometry>
           <box>
             <size>0.327 0.048 0.105</size>
@@ -1079,7 +1079,7 @@
         <cast_shadows>1</cast_shadows>
       </visual>
       <visual name='front_right_flipper_visual_top_bar_visual_2'>
-        <pose frame=''>-0.1635 0 0.04 -0 0.076 -3.14159</pose>
+        <pose frame=''>-0.1635 0 0.04 -0 0.076 -3.1416</pose>
         <geometry>
           <box>
             <size>0.327 0.048 0.105</size>
@@ -1142,7 +1142,7 @@
       </collision>
       <collision name='front_right_flipper_collision_middle_bar_collision_4'>
         <max_contacts>20</max_contacts>
-        <pose frame=''>-0.166 0 0.004 -0 -0.02 -3.14159</pose>
+        <pose frame=''>-0.166 0 0 -0 0 -3.1416</pose>
         <geometry>
           <box>
             <size>0.2 0.048 0.07</size>
@@ -1160,7 +1160,7 @@
       </collision>
       <collision name='front_right_flipper_collision_bottom_bar_collision_3'>
         <max_contacts>20</max_contacts>
-        <pose frame=''>-0.1635 0 -0.04 0 -0.076 -3.14159</pose>
+        <pose frame=''>-0.1635 0 -0.04 0 -0.076 -3.1416</pose>
         <geometry>
           <box>
             <size>0.327 0.048 0.105</size>
@@ -1178,7 +1178,7 @@
       </collision>
       <collision name='front_right_flipper_collision_top_bar_collision_2'>
         <max_contacts>20</max_contacts>
-        <pose frame=''>-0.1635 0 0.04 -0 0.076 -3.14159</pose>
+        <pose frame=''>-0.1635 0 0.04 -0 0.076 -3.1416</pose>
         <geometry>
           <box>
             <size>0.327 0.048 0.105</size>
@@ -1200,15 +1200,15 @@
     <link name='rear_right_flipper'>
       <pose frame=''>-0.272 -0.263 0 0 0.0 0</pose>
       <inertial>
-        <pose frame=''>-0.08 0 0 0 -0 0</pose>
-        <mass>2</mass>
+        <pose frame=''>-0.135 0 0 0 -0 0</pose>
+        <mass>2.4</mass>
         <inertia>
-          <ixx>0.00437401</ixx>
+          <ixx>0.00574</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.00437401</iyy>
+          <iyy>0.05090</iyy>
           <iyz>0</iyz>
-          <izz>0.007921</izz>
+          <izz>0.04640</izz>
         </inertia>
       </inertial>
       <gravity>1</gravity>
@@ -1279,7 +1279,7 @@
         -->
       </visual>
       <visual name='rear_right_flipper_visual_middle_bar_visual_4'><!--flipper_board outsides-->
-        <pose frame=''>0 -0.023 0 -0 -0.02 0</pose>
+        <pose frame=''>0 -0.023 0 -0 0 0</pose>
         <geometry>
           <!--
           <box>
@@ -1309,7 +1309,7 @@
         -->
       </visual>
       <visual name='rear_right_flipper_visual_bottom_bar_visual_3'>
-        <pose frame=''>-0.1635 0 -0.04 0 -0.076 -3.14159</pose>
+        <pose frame=''>-0.1635 0 -0.04 0 -0.076 -3.1416</pose>
         <geometry>
           <box>
             <size>0.327 0.048 0.105</size>
@@ -1332,7 +1332,7 @@
         <cast_shadows>1</cast_shadows>
       </visual>
       <visual name='rear_right_flipper_visual_top_bar_visual_2'>
-        <pose frame=''>-0.1635 0 0.04 -0 0.076 -3.14159</pose>
+        <pose frame=''>-0.1635 0 0.04 -0 0.076 -3.1416</pose>
         <geometry>
           <box>
             <size>0.327 0.048 0.105</size>
@@ -1395,7 +1395,7 @@
       </collision>
       <collision name='rear_right_flipper_collision_middle_bar_collision_4'>
         <max_contacts>20</max_contacts>
-        <pose frame=''>-0.166 0 0.004 -0 -0.02 -3.14159</pose>
+        <pose frame=''>-0.166 0 0 -0 0 -3.1416</pose>
         <geometry>
           <box>
             <size>0.2 0.048 0.07</size>
@@ -1413,7 +1413,7 @@
       </collision>
       <collision name='rear_right_flipper_collision_bottom_bar_collision_3'>
         <max_contacts>20</max_contacts>
-        <pose frame=''>-0.1635 0 -0.04 0 -0.076 -3.14159</pose>
+        <pose frame=''>-0.1635 0 -0.04 0 -0.076 -3.1416</pose>
         <geometry>
           <box>
             <size>0.327 0.048 0.105</size>
@@ -1431,7 +1431,7 @@
       </collision>
       <collision name='rear_right_flipper_collision_top_bar_collision_2'>
         <max_contacts>20</max_contacts>
-        <pose frame=''>-0.1635 0 0.04 -0 0.076 -3.14159</pose>
+        <pose frame=''>-0.1635 0 0.04 -0 0.076 -3.1416</pose>
         <geometry>
           <box>
             <size>0.327 0.048 0.105</size>
@@ -1469,16 +1469,14 @@
         <xyz>0 1 0</xyz>
         <use_parent_model_frame>1</use_parent_model_frame>
         <limit>
-          <lower>-3.14159</lower>
-          <upper>3.14159</upper>
+          <lower>-3.1416</lower>
+          <upper>3.1416</upper>
           <effort>-1</effort>
-          <velocity>1</velocity>
+          <velocity>0.15</velocity>
         </limit>
         <dynamics>
           <spring_reference>0</spring_reference>
-          <!--The spring stiffness for this joint axis.-->
-          <!--Inorder to give the joint sufficient stiffness -->
-          <spring_stiffness>20</spring_stiffness>
+          <spring_stiffness>0</spring_stiffness>
           <!--The physical velocity dependent viscous damping coefficient of the joint-->
           <!--Due to the controll method is directly set the position target-->
           <damping>10</damping>
@@ -1504,16 +1502,14 @@
         <xyz>0 1 0</xyz>
         <use_parent_model_frame>1</use_parent_model_frame>
         <limit>
-          <lower>-3.14159</lower>
-          <upper>3.14159</upper>
+          <lower>-3.1416</lower>
+          <upper>3.1416</upper>
           <effort>-1</effort>
-          <velocity>1</velocity>
+          <velocity>0.15</velocity>
         </limit>
         <dynamics>
           <spring_reference>0</spring_reference>
-          <!--The spring stiffness for this joint axis.-->
-          <!--Inorder to give the joint sufficient stiffness -->
-          <spring_stiffness>20</spring_stiffness>
+          <spring_stiffness>0</spring_stiffness>
           <!--The physical velocity dependent viscous damping coefficient of the joint-->
           <!--Due to the controll method is directly set the position target-->
           <damping>10</damping>
@@ -1541,16 +1537,14 @@
         <xyz>0 1 0</xyz>
         <use_parent_model_frame>1</use_parent_model_frame>
         <limit>
-          <lower>-3.14159</lower>
-          <upper>3.14159</upper>
+          <lower>-3.1416</lower>
+          <upper>3.1416</upper>
           <effort>-1</effort>
-          <velocity>1</velocity>
+          <velocity>0.15</velocity>
         </limit>
         <dynamics>
           <spring_reference>0</spring_reference>
-          <!--The spring stiffness for this joint axis.-->
-          <!--Inorder to give the joint sufficient stiffness -->
-          <spring_stiffness>20</spring_stiffness>
+          <spring_stiffness>0</spring_stiffness>
           <!--The physical velocity dependent viscous damping coefficient of the joint-->
           <!--Due to the controll method is directly set the position target-->
           <damping>10</damping>
@@ -1576,16 +1570,14 @@
         <xyz>0 1 0</xyz>
         <use_parent_model_frame>1</use_parent_model_frame>
         <limit>
-          <lower>-3.14159</lower>
-          <upper>3.14159</upper>
+          <lower>-3.1416</lower>
+          <upper>3.1416</upper>
           <effort>-1</effort>
-          <velocity>1</velocity>
+          <velocity>0.15</velocity>
         </limit>
         <dynamics>
           <spring_reference>0</spring_reference>
-          <!--The spring stiffness for this joint axis.-->
-          <!--Inorder to give the joint sufficient stiffness -->
-          <spring_stiffness>20</spring_stiffness>
+          <spring_stiffness>0</spring_stiffness>
           <!--The physical velocity dependent viscous damping coefficient of the joint-->
           <!--Due to the controll method is directly set the position target-->
           <damping>10</damping>
@@ -1624,11 +1616,11 @@
       <!--The Mu/Mu2 of tracks, which influnce the simulating performance-->
       <track_mu>2</track_mu>
       <track_mu2>0.5</track_mu2>
-      <!--The PID parameter of flippers position controll & initial position-->
-      <flip_p>200</flip_p>
-      <flip_i>0</flip_i>
+      <!--The PID parameter of flippers position controll & initial position 1.5708 -->
+      <flip_p>1000</flip_p>
+      <flip_i>1</flip_i>
       <flip_d>0</flip_d>
-      <flip_initial>1.5708</flip_initial>
+      <flip_initial>0</flip_initial>
       <!--The parameters of tracks-->
       <tracksSeparation>0.165</tracksSeparation>
       <steeringEfficiency>0.5</steeringEfficiency>
