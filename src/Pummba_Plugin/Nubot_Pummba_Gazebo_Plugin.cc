@@ -415,6 +415,7 @@ void NubotPummbaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Publishers
   // omin_vision_pub_   = rosnode_->advertise<nubot_common::OminiVisionInfo>("omnivision/OmniVisionInfo",10);
   // debug_pub_ = rosnode_->advertise<std_msgs::Float64MultiArray>("debug",10);
+  RobotStates_pub_ = rosnode_->advertise<geometry_msgs::Pose>("nubotstate/robotstate",10);
 
   // Subscribers.
   //ros::SubscribeOptions so1 = ros::SubscribeOptions::create<gazebo_msgs::ModelStates>(
@@ -1106,6 +1107,7 @@ void NubotPummbaGazebo::update_child()
       //nubot_be_control();
       //nubot_test();
   this->DriveTracks();
+  message_publish();
   //this->SetFlipPose(0,front_right_j_speed,0,0);
   //gzmsg << "NubotPummbaGazebo_Plugin: update_child is running" << std::endl;
 
@@ -1113,6 +1115,20 @@ void NubotPummbaGazebo::update_child()
   //}
   //srvCB_lock_.unlock();
   msgCB_lock_.unlock();
+}
+
+void NubotPummbaGazebo::message_publish(void)
+{
+  geometry_msgs::Pose RobotPose;
+  RobotPose.position.x = body_->WorldPose().Pos().X();
+  RobotPose.position.y = body_->WorldPose().Pos().Y();
+  RobotPose.position.z = body_->WorldPose().Pos().Z();
+
+  RobotPose.orientation.x = body_->WorldPose().Rot().X();
+  RobotPose.orientation.y = body_->WorldPose().Rot().Y();
+  RobotPose.orientation.z = body_->WorldPose().Rot().Z();
+  RobotPose.orientation.w = body_->WorldPose().Rot().W();
+  RobotStates_pub_.publish(RobotPose);
 }
 
 void NubotPummbaGazebo::Track_Cmd_CB(const geometry_msgs::Twist::ConstPtr &_msg)

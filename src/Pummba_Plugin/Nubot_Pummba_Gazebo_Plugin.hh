@@ -149,11 +149,11 @@ namespace gazebo
       sdf::ElementPtr             robot_sdf_;         // Pointer to the robot sdf file
 
       ros::NodeHandle*            rosnode_;           // A pointer to the ROS node.
-      ros::Subscriber             ModelStates_sub_;
-      ros::Subscriber             TrackCmd_sub_;      //listen to the Tracks command
-      ros::Subscriber             FlipCmd_sub_;       //listen to the Flippers command
-      ros::Publisher              omin_vision_pub_;   //not used yet
+      ros::Subscriber             TrackCmd_sub_;      // listen to the Tracks command
+      ros::Subscriber             FlipCmd_sub_;       // listen to the Flippers command
+      ros::Publisher              omin_vision_pub_;   // not used yet
       ros::Publisher              debug_pub_;
+      ros::Publisher              RobotStates_pub_;   // Publish the pose of the robot
 
       boost::thread               message_callback_queue_thread_;     // Thead object for the Ros running callback Thread.
       boost::thread               service_callback_queue_thread_;
@@ -278,11 +278,9 @@ namespace gazebo
       void SetGeomCategories();
 
       /// \brief ROS Functions
-      ///
-      /// \brief Handle an incoming message from ROS
-      /// \brief ModelStates message CallBack function
-      /// \param[in] _msg model_states msg shared pointer
-      //void model_states_CB(const gazebo_msgs::ModelStates::ConstPtr& _msg);
+      ///  
+      /// \brief Publish messages to nubot_control node
+      void message_publish(void);
 
       /// \brief TrackCmd message CallBack function
       /// \param[in] _msg TrackCmd msg shared pointer that is used to set the Tracks velocity
