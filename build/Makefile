@@ -1169,32 +1169,6 @@ sensor_msgs_generate_messages_py/fast:
 .PHONY : sensor_msgs_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named nubot_pummba_msg_geneus
-
-# Build rule for target.
-nubot_pummba_msg_geneus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nubot_pummba_msg_geneus
-.PHONY : nubot_pummba_msg_geneus
-
-# fast build rule for target.
-nubot_pummba_msg_geneus/fast:
-	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_geneus.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_geneus.dir/build
-.PHONY : nubot_pummba_msg_geneus/fast
-
-#=============================================================================
-# Target rules for targets named nubot_pummba_msg_generate_messages_eus
-
-# Build rule for target.
-nubot_pummba_msg_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nubot_pummba_msg_generate_messages_eus
-.PHONY : nubot_pummba_msg_generate_messages_eus
-
-# fast build rule for target.
-nubot_pummba_msg_generate_messages_eus/fast:
-	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_generate_messages_eus.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_generate_messages_eus.dir/build
-.PHONY : nubot_pummba_msg_generate_messages_eus/fast
-
-#=============================================================================
 # Target rules for targets named nubot_pummba_msg_gencpp
 
 # Build rule for target.
@@ -1234,30 +1208,56 @@ nubot_pummba_msg_gennodejs/fast:
 .PHONY : nubot_pummba_msg_gennodejs/fast
 
 #=============================================================================
-# Target rules for targets named nubot_pummba_msg_generate_messages
+# Target rules for targets named nubot_pummba_msg_geneus
 
 # Build rule for target.
-nubot_pummba_msg_generate_messages: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nubot_pummba_msg_generate_messages
-.PHONY : nubot_pummba_msg_generate_messages
+nubot_pummba_msg_geneus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nubot_pummba_msg_geneus
+.PHONY : nubot_pummba_msg_geneus
 
 # fast build rule for target.
-nubot_pummba_msg_generate_messages/fast:
-	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_generate_messages.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_generate_messages.dir/build
-.PHONY : nubot_pummba_msg_generate_messages/fast
+nubot_pummba_msg_geneus/fast:
+	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_geneus.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_geneus.dir/build
+.PHONY : nubot_pummba_msg_geneus/fast
 
 #=============================================================================
-# Target rules for targets named nubot_pummba_msg_genpy
+# Target rules for targets named nubot_pummba_msg_generate_messages_eus
 
 # Build rule for target.
-nubot_pummba_msg_genpy: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nubot_pummba_msg_genpy
-.PHONY : nubot_pummba_msg_genpy
+nubot_pummba_msg_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nubot_pummba_msg_generate_messages_eus
+.PHONY : nubot_pummba_msg_generate_messages_eus
 
 # fast build rule for target.
-nubot_pummba_msg_genpy/fast:
-	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_genpy.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_genpy.dir/build
-.PHONY : nubot_pummba_msg_genpy/fast
+nubot_pummba_msg_generate_messages_eus/fast:
+	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_generate_messages_eus.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_generate_messages_eus.dir/build
+.PHONY : nubot_pummba_msg_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named _nubot_pummba_msg_generate_messages_check_deps_PummbaCmd
+
+# Build rule for target.
+_nubot_pummba_msg_generate_messages_check_deps_PummbaCmd: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _nubot_pummba_msg_generate_messages_check_deps_PummbaCmd
+.PHONY : _nubot_pummba_msg_generate_messages_check_deps_PummbaCmd
+
+# fast build rule for target.
+_nubot_pummba_msg_generate_messages_check_deps_PummbaCmd/fast:
+	$(MAKE) -f Pummba_Msg/CMakeFiles/_nubot_pummba_msg_generate_messages_check_deps_PummbaCmd.dir/build.make Pummba_Msg/CMakeFiles/_nubot_pummba_msg_generate_messages_check_deps_PummbaCmd.dir/build
+.PHONY : _nubot_pummba_msg_generate_messages_check_deps_PummbaCmd/fast
+
+#=============================================================================
+# Target rules for targets named nubot_pummba_msg_genlisp
+
+# Build rule for target.
+nubot_pummba_msg_genlisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nubot_pummba_msg_genlisp
+.PHONY : nubot_pummba_msg_genlisp
+
+# fast build rule for target.
+nubot_pummba_msg_genlisp/fast:
+	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_genlisp.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_genlisp.dir/build
+.PHONY : nubot_pummba_msg_genlisp/fast
 
 #=============================================================================
 # Target rules for targets named nubot_pummba_msg_generate_messages_lisp
@@ -1286,32 +1286,6 @@ nubot_pummba_msg_generate_messages_nodejs/fast:
 .PHONY : nubot_pummba_msg_generate_messages_nodejs/fast
 
 #=============================================================================
-# Target rules for targets named nubot_pummba_msg_genlisp
-
-# Build rule for target.
-nubot_pummba_msg_genlisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nubot_pummba_msg_genlisp
-.PHONY : nubot_pummba_msg_genlisp
-
-# fast build rule for target.
-nubot_pummba_msg_genlisp/fast:
-	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_genlisp.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_genlisp.dir/build
-.PHONY : nubot_pummba_msg_genlisp/fast
-
-#=============================================================================
-# Target rules for targets named _nubot_pummba_msg_generate_messages_check_deps_FlipCmd
-
-# Build rule for target.
-_nubot_pummba_msg_generate_messages_check_deps_FlipCmd: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _nubot_pummba_msg_generate_messages_check_deps_FlipCmd
-.PHONY : _nubot_pummba_msg_generate_messages_check_deps_FlipCmd
-
-# fast build rule for target.
-_nubot_pummba_msg_generate_messages_check_deps_FlipCmd/fast:
-	$(MAKE) -f Pummba_Msg/CMakeFiles/_nubot_pummba_msg_generate_messages_check_deps_FlipCmd.dir/build.make Pummba_Msg/CMakeFiles/_nubot_pummba_msg_generate_messages_check_deps_FlipCmd.dir/build
-.PHONY : _nubot_pummba_msg_generate_messages_check_deps_FlipCmd/fast
-
-#=============================================================================
 # Target rules for targets named nubot_pummba_msg_generate_messages_py
 
 # Build rule for target.
@@ -1323,6 +1297,32 @@ nubot_pummba_msg_generate_messages_py: cmake_check_build_system
 nubot_pummba_msg_generate_messages_py/fast:
 	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_generate_messages_py.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_generate_messages_py.dir/build
 .PHONY : nubot_pummba_msg_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named nubot_pummba_msg_generate_messages
+
+# Build rule for target.
+nubot_pummba_msg_generate_messages: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nubot_pummba_msg_generate_messages
+.PHONY : nubot_pummba_msg_generate_messages
+
+# fast build rule for target.
+nubot_pummba_msg_generate_messages/fast:
+	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_generate_messages.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_generate_messages.dir/build
+.PHONY : nubot_pummba_msg_generate_messages/fast
+
+#=============================================================================
+# Target rules for targets named nubot_pummba_msg_genpy
+
+# Build rule for target.
+nubot_pummba_msg_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nubot_pummba_msg_genpy
+.PHONY : nubot_pummba_msg_genpy
+
+# fast build rule for target.
+nubot_pummba_msg_genpy/fast:
+	$(MAKE) -f Pummba_Msg/CMakeFiles/nubot_pummba_msg_genpy.dir/build.make Pummba_Msg/CMakeFiles/nubot_pummba_msg_genpy.dir/build
+.PHONY : nubot_pummba_msg_genpy/fast
 
 #=============================================================================
 # Target rules for targets named NubotPummbaGazeboPlugin
@@ -1427,18 +1427,18 @@ help:
 	@echo "... sensor_msgs_generate_messages_lisp"
 	@echo "... tf_generate_messages_py"
 	@echo "... sensor_msgs_generate_messages_py"
-	@echo "... nubot_pummba_msg_geneus"
-	@echo "... nubot_pummba_msg_generate_messages_eus"
 	@echo "... nubot_pummba_msg_gencpp"
 	@echo "... nubot_pummba_msg_generate_messages_cpp"
 	@echo "... nubot_pummba_msg_gennodejs"
-	@echo "... nubot_pummba_msg_generate_messages"
-	@echo "... nubot_pummba_msg_genpy"
+	@echo "... nubot_pummba_msg_geneus"
+	@echo "... nubot_pummba_msg_generate_messages_eus"
+	@echo "... _nubot_pummba_msg_generate_messages_check_deps_PummbaCmd"
+	@echo "... nubot_pummba_msg_genlisp"
 	@echo "... nubot_pummba_msg_generate_messages_lisp"
 	@echo "... nubot_pummba_msg_generate_messages_nodejs"
-	@echo "... nubot_pummba_msg_genlisp"
-	@echo "... _nubot_pummba_msg_generate_messages_check_deps_FlipCmd"
 	@echo "... nubot_pummba_msg_generate_messages_py"
+	@echo "... nubot_pummba_msg_generate_messages"
+	@echo "... nubot_pummba_msg_genpy"
 	@echo "... NubotPummbaGazeboPlugin"
 .PHONY : help
 

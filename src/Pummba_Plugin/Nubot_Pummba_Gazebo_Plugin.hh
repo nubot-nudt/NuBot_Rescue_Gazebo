@@ -92,9 +92,9 @@
 
 // Replace those paths before complie
 #include "Nubot_Pummba_Gazebo_Plugin.hh"
-#include "/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/devel/include/nubot_pummba_msg/FlipCmd.h"
+#include "../../devel/include/nubot_pummba_msg/PummbaCmd.h"
 // This contact.h must be include, it is ralated to the ode
-#include "/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/gazebo_deps_opende/src/joints/contact.h"
+#include "../../gazebo_deps_opende/src/joints/contact.h"
 
 namespace gazebo
 {
@@ -149,8 +149,7 @@ namespace gazebo
       sdf::ElementPtr             robot_sdf_;         // Pointer to the robot sdf file
 
       ros::NodeHandle*            rosnode_;           // A pointer to the ROS node.
-      ros::Subscriber             TrackCmd_sub_;      // listen to the Tracks command
-      ros::Subscriber             FlipCmd_sub_;       // listen to the Flippers command
+      ros::Subscriber             PummbaCmd_sub_;      // listen to the Tracks & Flippers command
       ros::Publisher              omin_vision_pub_;   // not used yet
       ros::Publisher              debug_pub_;
       ros::Publisher              RobotStates_pub_;   // Publish the pose of the robot
@@ -282,13 +281,9 @@ namespace gazebo
       /// \brief Publish messages to nubot_control node
       void message_publish(void);
 
-      /// \brief TrackCmd message CallBack function
-      /// \param[in] _msg TrackCmd msg shared pointer that is used to set the Tracks velocity
-      void Track_Cmd_CB(const geometry_msgs::Twist::ConstPtr &_msg);
-
-      /// \brief FlipCmd message CallBack function
-      /// \param[in] _msg FlipCmd msg shared pointer that is used to set the Flippers pose
-      void Flip_Cmd_CB(const nubot_pummba_msg::FlipCmd::ConstPtr &_msg);
+      /// \brief PummbaCmd message CallBack function
+      /// \param[in] _msg shared pointer that is used to set the Tracks velocity & Flippers angle
+      void Pummba_Cmd_CB(const nubot_pummba_msg::PummbaCmd::ConstPtr &_msg);
 
       /// \brief ROS Custom message callback queue thread
       void message_queue_thread();

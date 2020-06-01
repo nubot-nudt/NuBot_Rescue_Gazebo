@@ -423,15 +423,11 @@ void NubotPummbaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   //            ros::VoidPtr(), &message_queue_);
   //ModelStates_sub_ = rosnode_->subscribe(so1);
 
-  ros::SubscribeOptions so2 = ros::SubscribeOptions::create<geometry_msgs::Twist>(
-            "nubotcontrol/trackcmd", 100, boost::bind(&NubotPummbaGazebo::Track_Cmd_CB,this,_1),
+  ros::SubscribeOptions so2 = ros::SubscribeOptions::create<nubot_pummba_msg::PummbaCmd>(
+            "nubotcontrol/pummbacmd", 100, boost::bind(&NubotPummbaGazebo::Pummba_Cmd_CB,this,_1),
             ros::VoidPtr(), &message_queue_);
-  TrackCmd_sub_ = rosnode_->subscribe(so2);
+  PummbaCmd_sub_ = rosnode_->subscribe(so2);
 
-  ros::SubscribeOptions so3 = ros::SubscribeOptions::create<nubot_pummba_msg::FlipCmd>(
-            "nubotcontrol/flipcmd", 100, boost::bind( &NubotPummbaGazebo::Flip_Cmd_CB,this,_1),
-            ros::VoidPtr(), &message_queue_);
-  FlipCmd_sub_ = rosnode_->subscribe(so3);
   // Service Servers & clients
   // dribbleId_client_ = rosnode_->serviceClient<nubot_common::DribbleId>("/DribbleId");
 
@@ -1131,9 +1127,9 @@ void NubotPummbaGazebo::message_publish(void)
   RobotStates_pub_.publish(RobotPose);
 }
 
-void NubotPummbaGazebo::Track_Cmd_CB(const geometry_msgs::Twist::ConstPtr &_msg)
+void NubotPummbaGazebo::Pummba_Cmd_CB(const nubot_pummba_msg::PummbaCmd::ConstPtr &_msg)
 {
-  gzmsg << "NubotPummbaGazebo_Plugin: Track_Cmd_CB " << "ContactCount=" <<
+  gzmsg << "NubotPummbaGazebo_Plugin: Pummba_Cmd_CB " << "ContactCount=" <<
         std::to_string(contactManager->GetContactCount()) << std::endl;
 //  gzmsg << "NubotPummbaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.X:"
 //        << std::to_string(body_->WorldPose().Pos().X()) << std::endl;
@@ -1142,27 +1138,15 @@ void NubotPummbaGazebo::Track_Cmd_CB(const geometry_msgs::Twist::ConstPtr &_msg)
 //  gzmsg << "NubotPummbaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.Z:"
 //        << std::to_string(body_->WorldPose().Pos().Z()) << std::endl;
   msgCB_lock_.lock();
-  double MsglinearSpeed = _msg->linear.x;
-  double MsgangularSpeed = _msg->angular.z;
-  SetBodyVelocity(MsglinearSpeed,MsgangularSpeed);
-  msgCB_lock_.unlock();
-}
+  double MsglinearSpeed = _msg->vel_linear;
+  double MsgangularSpeed = _msg->vel_angular;
 
-void NubotPummbaGazebo::Flip_Cmd_CB(const nubot_pummba_msg::FlipCmd::ConstPtr &_msg)
-{
-  msgCB_lock_.lock();
   double MsgFL = _msg->front_left;
   double MsgFR = _msg->front_right;
   double MsgRL = _msg->rear_left;
   double MsgRR = _msg->rear_right;
-  gzmsg << "NubotPummbaGazebo_Plugin: Flip_Cmd_CB msg->front_left:"
-        << std::to_string(MsgFL) << std::endl;
-  gzmsg << "NubotPummbaGazebo_Plugin: Flip_Cmd_CB msg->front_right:"
-        << std::to_string(MsgFR) << std::endl;
-  gzmsg << "NubotPummbaGazebo_Plugin: Flip_Cmd_CB msg->rear_left:"
-        << std::to_string(MsgRL) << std::endl;
-  gzmsg << "NubotPummbaGazebo_Plugin: Flip_Cmd_CB msg->rear_right:"
-        << std::to_string(MsgRR) << std::endl;
+
+  SetBodyVelocity(MsglinearSpeed,MsgangularSpeed);
   SetFlipPose(-MsgFL,-MsgFR,MsgRL,MsgRR);
   msgCB_lock_.unlock();
 }

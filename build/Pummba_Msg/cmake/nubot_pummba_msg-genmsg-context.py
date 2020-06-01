@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/src/Pummba_Msg/msg/FlipCmd.msg"
+messages_str = "/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/src/Pummba_Msg/msg/PummbaCmd.msg"
 services_str = ""
 pkg_name = "nubot_pummba_msg"
 dependencies_str = "std_msgs"

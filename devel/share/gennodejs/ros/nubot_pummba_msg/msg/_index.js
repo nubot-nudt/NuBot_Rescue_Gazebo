@@ -1,8 +1,8 @@
 
 "use strict";
 
-let FlipCmd = require('./FlipCmd.js');
+let PummbaCmd = require('./PummbaCmd.js');
 
 module.exports = {
-  FlipCmd: FlipCmd,
+  PummbaCmd: PummbaCmd,
 };

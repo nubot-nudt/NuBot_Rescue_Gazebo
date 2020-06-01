@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/devel/include/nubot_pummba_msg/FlipCmd.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-
 /home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/gazebo_deps_opende/src/array.h
 gazebo/ode/odeconfig.h
 -
@@ -133,10 +117,10 @@ dynamic_reconfigure/server.h
 -
 Nubot_Pummba_Gazebo_Plugin.hh
 /home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/src/Pummba_Plugin/Nubot_Pummba_Gazebo_Plugin.hh
-/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/devel/include/nubot_pummba_msg/FlipCmd.h
--
+../../devel/include/nubot_pummba_msg/PummbaCmd.h
+/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/devel/include/nubot_pummba_msg/PummbaCmd.h
+../../gazebo_deps_opende/src/joints/contact.h
 /home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/gazebo_deps_opende/src/joints/contact.h
--
 
 /opt/ros/melodic/include/dynamic_reconfigure/BoolParameter.h
 string

@@ -14,16 +14,30 @@ const _getByteLength = _ros_msg_utils.getByteLength;
 
 //-----------------------------------------------------------
 
-class FlipCmd {
+class PummbaCmd {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
+      this.vel_linear = null;
+      this.vel_angular = null;
       this.front_left = null;
       this.front_right = null;
       this.rear_left = null;
       this.rear_right = null;
     }
     else {
+      if (initObj.hasOwnProperty('vel_linear')) {
+        this.vel_linear = initObj.vel_linear
+      }
+      else {
+        this.vel_linear = 0.0;
+      }
+      if (initObj.hasOwnProperty('vel_angular')) {
+        this.vel_angular = initObj.vel_angular
+      }
+      else {
+        this.vel_angular = 0.0;
+      }
       if (initObj.hasOwnProperty('front_left')) {
         this.front_left = initObj.front_left
       }
@@ -52,7 +66,11 @@ class FlipCmd {
   }
 
   static serialize(obj, buffer, bufferOffset) {
-    // Serializes a message object of type FlipCmd
+    // Serializes a message object of type PummbaCmd
+    // Serialize message field [vel_linear]
+    bufferOffset = _serializer.float32(obj.vel_linear, buffer, bufferOffset);
+    // Serialize message field [vel_angular]
+    bufferOffset = _serializer.float32(obj.vel_angular, buffer, bufferOffset);
     // Serialize message field [front_left]
     bufferOffset = _serializer.float32(obj.front_left, buffer, bufferOffset);
     // Serialize message field [front_right]
@@ -65,9 +83,13 @@ class FlipCmd {
   }
 
   static deserialize(buffer, bufferOffset=[0]) {
-    //deserializes a message object of type FlipCmd
+    //deserializes a message object of type PummbaCmd
     let len;
-    let data = new FlipCmd(null);
+    let data = new PummbaCmd(null);
+    // Deserialize message field [vel_linear]
+    data.vel_linear = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [vel_angular]
+    data.vel_angular = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [front_left]
     data.front_left = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [front_right]
@@ -80,22 +102,24 @@ class FlipCmd {
   }
 
   static getMessageSize(object) {
-    return 16;
+    return 24;
   }
 
   static datatype() {
     // Returns string type for a message object
-    return 'nubot_pummba_msg/FlipCmd';
+    return 'nubot_pummba_msg/PummbaCmd';
   }
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '704d6e45a144b051d9261eee9f265122';
+    return '37f5dcb42b8ba6407dc6ea2389a5de4c';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
+    float32 vel_linear
+    float32 vel_angular
     float32 front_left
     float32 front_right
     float32 rear_left
@@ -109,7 +133,21 @@ class FlipCmd {
     if (typeof msg !== 'object' || msg === null) {
       msg = {};
     }
-    const resolved = new FlipCmd(null);
+    const resolved = new PummbaCmd(null);
+    if (msg.vel_linear !== undefined) {
+      resolved.vel_linear = msg.vel_linear;
+    }
+    else {
+      resolved.vel_linear = 0.0
+    }
+
+    if (msg.vel_angular !== undefined) {
+      resolved.vel_angular = msg.vel_angular;
+    }
+    else {
+      resolved.vel_angular = 0.0
+    }
+
     if (msg.front_left !== undefined) {
       resolved.front_left = msg.front_left;
     }
@@ -142,4 +180,4 @@ class FlipCmd {
     }
 };
 
-module.exports = FlipCmd;
+module.exports = PummbaCmd;

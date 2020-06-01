@@ -1,35 +1,45 @@
 ;; Auto-generated. Do not edit!
 
 
-(when (boundp 'nubot_pummba_msg::FlipCmd)
+(when (boundp 'nubot_pummba_msg::PummbaCmd)
   (if (not (find-package "NUBOT_PUMMBA_MSG"))
     (make-package "NUBOT_PUMMBA_MSG"))
-  (shadow 'FlipCmd (find-package "NUBOT_PUMMBA_MSG")))
-(unless (find-package "NUBOT_PUMMBA_MSG::FLIPCMD")
-  (make-package "NUBOT_PUMMBA_MSG::FLIPCMD"))
+  (shadow 'PummbaCmd (find-package "NUBOT_PUMMBA_MSG")))
+(unless (find-package "NUBOT_PUMMBA_MSG::PUMMBACMD")
+  (make-package "NUBOT_PUMMBA_MSG::PUMMBACMD"))
 
 (in-package "ROS")
-;;//! \htmlinclude FlipCmd.msg.html
+;;//! \htmlinclude PummbaCmd.msg.html
 
 
-(defclass nubot_pummba_msg::FlipCmd
+(defclass nubot_pummba_msg::PummbaCmd
   :super ros::object
-  :slots (_front_left _front_right _rear_left _rear_right ))
+  :slots (_vel_linear _vel_angular _front_left _front_right _rear_left _rear_right ))
 
-(defmethod nubot_pummba_msg::FlipCmd
+(defmethod nubot_pummba_msg::PummbaCmd
   (:init
    (&key
+    ((:vel_linear __vel_linear) 0.0)
+    ((:vel_angular __vel_angular) 0.0)
     ((:front_left __front_left) 0.0)
     ((:front_right __front_right) 0.0)
     ((:rear_left __rear_left) 0.0)
     ((:rear_right __rear_right) 0.0)
     )
    (send-super :init)
+   (setq _vel_linear (float __vel_linear))
+   (setq _vel_angular (float __vel_angular))
    (setq _front_left (float __front_left))
    (setq _front_right (float __front_right))
    (setq _rear_left (float __rear_left))
    (setq _rear_right (float __rear_right))
    self)
+  (:vel_linear
+   (&optional __vel_linear)
+   (if __vel_linear (setq _vel_linear __vel_linear)) _vel_linear)
+  (:vel_angular
+   (&optional __vel_angular)
+   (if __vel_angular (setq _vel_angular __vel_angular)) _vel_angular)
   (:front_left
    (&optional __front_left)
    (if __front_left (setq _front_left __front_left)) _front_left)
@@ -45,6 +55,10 @@
   (:serialization-length
    ()
    (+
+    ;; float32 _vel_linear
+    4
+    ;; float32 _vel_angular
+    4
     ;; float32 _front_left
     4
     ;; float32 _front_right
@@ -58,6 +72,10 @@
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
+     ;; float32 _vel_linear
+       (sys::poke _vel_linear (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
+     ;; float32 _vel_angular
+       (sys::poke _vel_angular (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;; float32 _front_left
        (sys::poke _front_left (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;; float32 _front_right
@@ -70,6 +88,10 @@
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
+   ;; float32 _vel_linear
+     (setq _vel_linear (sys::peek buf ptr- :float)) (incf ptr- 4)
+   ;; float32 _vel_angular
+     (setq _vel_angular (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;; float32 _front_left
      (setq _front_left (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;; float32 _front_right
@@ -82,10 +104,12 @@
    self)
   )
 
-(setf (get nubot_pummba_msg::FlipCmd :md5sum-) "704d6e45a144b051d9261eee9f265122")
-(setf (get nubot_pummba_msg::FlipCmd :datatype-) "nubot_pummba_msg/FlipCmd")
-(setf (get nubot_pummba_msg::FlipCmd :definition-)
-      "float32 front_left
+(setf (get nubot_pummba_msg::PummbaCmd :md5sum-) "37f5dcb42b8ba6407dc6ea2389a5de4c")
+(setf (get nubot_pummba_msg::PummbaCmd :datatype-) "nubot_pummba_msg/PummbaCmd")
+(setf (get nubot_pummba_msg::PummbaCmd :definition-)
+      "float32 vel_linear
+float32 vel_angular
+float32 front_left
 float32 front_right
 float32 rear_left
 float32 rear_right
@@ -94,6 +118,6 @@ float32 rear_right
 
 
 
-(provide :nubot_pummba_msg/FlipCmd "704d6e45a144b051d9261eee9f265122")
+(provide :nubot_pummba_msg/PummbaCmd "37f5dcb42b8ba6407dc6ea2389a5de4c")
 
 

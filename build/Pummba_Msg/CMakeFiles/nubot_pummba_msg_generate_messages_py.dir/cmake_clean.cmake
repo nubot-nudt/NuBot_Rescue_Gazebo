@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/nubot_pummba_msg_generate_messages_py"
-  "/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/devel/lib/python2.7/dist-packages/nubot_pummba_msg/msg/_FlipCmd.py"
+  "/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/devel/lib/python2.7/dist-packages/nubot_pummba_msg/msg/_PummbaCmd.py"
   "/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/devel/lib/python2.7/dist-packages/nubot_pummba_msg/msg/__init__.py"
 )
 

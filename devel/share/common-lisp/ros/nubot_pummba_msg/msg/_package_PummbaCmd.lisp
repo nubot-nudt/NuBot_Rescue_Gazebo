@@ -1,5 +1,9 @@
 (cl:in-package nubot_pummba_msg-msg)
-(cl:export '(FRONT_LEFT-VAL
+(cl:export '(VEL_LINEAR-VAL
+          VEL_LINEAR
+          VEL_ANGULAR-VAL
+          VEL_ANGULAR
+          FRONT_LEFT-VAL
           FRONT_LEFT
           FRONT_RIGHT-VAL
           FRONT_RIGHT
