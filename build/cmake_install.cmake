@@ -131,9 +131,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/build/gtest/cmake_install.cmake")
-  include("/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/build/gazebo_description/cmake_install.cmake")
-  include("/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/build/Pummba_Msg/cmake_install.cmake")
-  include("/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/build/Pummba_Plugin/cmake_install.cmake")
+  include("/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/build/Pummba_Control/cmake_install.cmake")
 
 endif()
 

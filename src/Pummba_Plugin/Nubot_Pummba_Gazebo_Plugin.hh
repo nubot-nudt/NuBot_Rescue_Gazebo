@@ -90,7 +90,6 @@
 #include <geometry_msgs/Twist.h>
 #include <dynamic_reconfigure/server.h>
 
-// Replace those paths before complie
 #include "Nubot_Pummba_Gazebo_Plugin.hh"
 #include "../../devel/include/nubot_pummba_msg/PummbaCmd.h"
 // This contact.h must be include, it is ralated to the ode
@@ -152,7 +151,7 @@ namespace gazebo
       ros::Subscriber             PummbaCmd_sub_;      // listen to the Tracks & Flippers command
       ros::Publisher              omin_vision_pub_;   // not used yet
       ros::Publisher              debug_pub_;
-      ros::Publisher              RobotStates_pub_;   // Publish the pose of the robot
+      ros::Publisher              RobotState_pub_;   // Publish the pose of the robot
 
       boost::thread               message_callback_queue_thread_;     // Thead object for the Ros running callback Thread.
       boost::thread               service_callback_queue_thread_;

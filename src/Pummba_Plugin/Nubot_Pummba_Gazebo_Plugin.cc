@@ -415,7 +415,7 @@ void NubotPummbaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Publishers
   // omin_vision_pub_   = rosnode_->advertise<nubot_common::OminiVisionInfo>("omnivision/OmniVisionInfo",10);
   // debug_pub_ = rosnode_->advertise<std_msgs::Float64MultiArray>("debug",10);
-  RobotStates_pub_ = rosnode_->advertise<geometry_msgs::Pose>("nubotstate/robotstate",10);
+  RobotState_pub_ = rosnode_->advertise<geometry_msgs::Pose>("nubotstate/robotstate",10);
 
   // Subscribers.
   //ros::SubscribeOptions so1 = ros::SubscribeOptions::create<gazebo_msgs::ModelStates>(
@@ -1124,7 +1124,7 @@ void NubotPummbaGazebo::message_publish(void)
   RobotPose.orientation.y = body_->WorldPose().Rot().Y();
   RobotPose.orientation.z = body_->WorldPose().Rot().Z();
   RobotPose.orientation.w = body_->WorldPose().Rot().W();
-  RobotStates_pub_.publish(RobotPose);
+  RobotState_pub_.publish(RobotPose);
 }
 
 void NubotPummbaGazebo::Pummba_Cmd_CB(const nubot_pummba_msg::PummbaCmd::ConstPtr &_msg)

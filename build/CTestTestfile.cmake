@@ -5,6 +5,4 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 subdirs("gtest")
-subdirs("gazebo_description")
-subdirs("Pummba_Msg")
-subdirs("Pummba_Plugin")
+subdirs("Pummba_Control")

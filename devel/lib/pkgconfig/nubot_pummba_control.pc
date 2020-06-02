@@ -1,0 +1,8 @@
+prefix=/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/devel
+
+Name: nubot_pummba_control
+Description: Description of nubot_pummba_control
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
