@@ -35,14 +35,14 @@ def robotstate_CB(_msg):
 
 
 def control_al(robot_state):
-    rospy.loginfo("control_al %f", robot_state.position.x)
+    rospy.loginfo("control_al %f %f", robot_state.position.x, robot_state.position.z)
     robot_cmd = PummbaCmd()
     robot_cmd.vel_linear = 0.5
-    robot_cmd.vel_angular = 0.5
-    robot_cmd.front_left = 1
-    robot_cmd.front_right = 1
-    robot_cmd.rear_left = 1
-    robot_cmd.rear_right = 1
+    robot_cmd.vel_angular = 0
+    robot_cmd.front_left = 1.5708
+    robot_cmd.front_right = 1.5708
+    robot_cmd.rear_left = 1.5708
+    robot_cmd.rear_right = 1.5708
     return robot_cmd
 
 
