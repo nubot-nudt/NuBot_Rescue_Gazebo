@@ -1,8 +1,0 @@
-prefix=/home/nubot/Documents/Study/GazeboStudy/Tracked-Vehicle/Nubot_Pummba_Gazebo/install
-
-Name: nubot_pummba_msg
-Description: Description of nubot_pummba_msg
-Version: 0.0.0
-Cflags: -I${prefix}/include -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include
-Libs: -L${prefix}/lib 
-Requires: 
