@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+    <world name="Nubot_Pumbaa_test_plate">
+        <!--A demo world for tracked vehicles.-->
+
+        <include>
+            <uri>model://sun</uri>
+        </include>
+
+        <include>
+            <uri>model://ground_plane</uri>
+        </include>
+
+        <model name="plate_obstacle">
+            <pose frame=''>2.5 0 0 0 0 0</pose>
+            <include>
+                <uri>model://plate_obstacle</uri>
+            </include>
+        </model>        
+        
+        <model name="Nubot_Pumbaa">
+            <pose frame=''>0 0 0.15 0 0 0</pose>
+            <include>
+                <uri>model://Nubot_Pumbaa</uri>
+            </include>
+        </model>
+
+    </world>
+</sdf>
