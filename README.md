@@ -34,26 +34,32 @@ This is a folder contains the original code of Martin Peica's work.
 
 This is a library pakage that may be needed during compilation. Just install it to the system.  
 
->/src/gazebo_description
+>/gazebo_description
 
 The modle of robot & obstacles in the environment, including ".sdf" & ".world" file.  
 
->/src/Pumbaa_Msg
+>/Pumbaa_Msg
 
-The self defined ROS message for flippers control.  
+The self defined ROS message for Pumbaa control.  
 
->/src/Pumbaa_Plugin
+>/Pumbaa_Plugin
 
 The core code of Nubot_Pumbaa_Gazebo Plugin.  
 
->/src/Pumbaa_Control
+>/Pumbaa_Control
 
 The control algorithm of Nubot_Pumbaa in Python3.  
 
 ## Compilation Note
 
 use  
-`catkin_make`
+```c++
+mkdir src
+cd src/
+git pull https://github.com/skywalker1941/Nubot_Pummba_Gazebo.git
+cd ..
+catkin_make
+```
 to compile the project.  
 
 ## Run the Project
@@ -61,6 +67,7 @@ After compilation, run:
 ```c++
 roscore
 source devel/setup.bash
+cd src/
 roslaunch Nubot_Pumbaa_test.launch
 ```
 
@@ -68,7 +75,7 @@ roslaunch Nubot_Pumbaa_test.launch
 You can adjust most robot & environment parameters by modifying the ".sdf" & ".world" files.  
 At the ***end*** of:  
 
->/src/gazebo_description/models/Nubot_Pumbaa/model.sdf
+>/gazebo_description/models/Nubot_Pumbaa/model.sdf
 
 you can change mechanical parameters of robot, including friction, flippers PID and so on.  
 
