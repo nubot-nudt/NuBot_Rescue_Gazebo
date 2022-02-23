@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
-  <model name='Nubot_Pumbaa'>
+  <model name='NuBot_Pumbaa'>
     <!--base_link-->
     <link name='base_link'>
       <pose frame=''>0 0 0 0 0 0</pose>
@@ -121,7 +121,7 @@
           </cylinder>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/main_track.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/main_track.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -131,7 +131,7 @@
           </shader>
           <script>
             <name>PU_foam</name>
-            <uri>model://Nubot_Pumbaa/materials/textures/PU_foam.png</uri>
+            <uri>model://NuBot_Pumbaa/materials/textures/PU_foam.png</uri>
           </script>
           <ambient>0 0 0 1</ambient>
           <diffuse>0 0 0 1</diffuse>
@@ -151,7 +151,7 @@
           </box>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/main_board.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/main_board.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -161,8 +161,8 @@
           </shader>
           <script>
             <name>Carbon_fiber</name>
-            <uri>model://Nubot_Pumbaa/materials/scripts/Carbon_fiber.marerial</uri>
-            <uri>model://Nubot_Pumbaa/materials/textures/Carbon_fiber.png</uri>
+            <uri>model://NuBot_Pumbaa/materials/scripts/Carbon_fiber.marerial</uri>
+            <uri>model://NuBot_Pumbaa/materials/textures/Carbon_fiber.png</uri>
           </script>
           <ambient>0 0 0 1</ambient>
           <diffuse>0 0 0 1</diffuse>
@@ -284,7 +284,7 @@
           </cylinder>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/main_track.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/main_track.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -314,7 +314,7 @@
           </box>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/main_board.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/main_board.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -448,7 +448,7 @@
           </cylinder>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_track.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_track.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -479,7 +479,7 @@
           </cylinder>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_board.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_board.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -509,7 +509,7 @@
           </box>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_board.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_board.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -716,7 +716,7 @@
           </cylinder>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_track.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_track.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -747,7 +747,7 @@
           </cylinder>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_board.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_board.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -777,7 +777,7 @@
           </box>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_board.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_board.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -973,7 +973,7 @@
           </cylinder>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_track.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_track.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -1004,7 +1004,7 @@
           </cylinder>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_board.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_board.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -1034,7 +1034,7 @@
           </box>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_board.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_board.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -1226,7 +1226,7 @@
           </cylinder>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_track.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_track.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -1257,7 +1257,7 @@
           </cylinder>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_board.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_board.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -1287,7 +1287,7 @@
           </box>
           -->
           <mesh>
-            <uri>model://Nubot_Pumbaa/meshes/flipper_board.dae</uri>
+            <uri>model://NuBot_Pumbaa/meshes/flipper_board.dae</uri>
           </mesh>
         </geometry>
         <!--
@@ -1599,7 +1599,7 @@
     <static>0</static>
     <allow_auto_disable>1</allow_auto_disable>
     
-    <plugin name='Nubot_Pumbaa_Gazebo_Plugin' filename='libNubotPumbaaGazeboPlugin.so'>
+    <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libNuBotPumbaaGazeboPlugin.so'>
       <!--The link tags of tracks-->
       <body>base_link</body>
       <left_track>left_track</left_track>

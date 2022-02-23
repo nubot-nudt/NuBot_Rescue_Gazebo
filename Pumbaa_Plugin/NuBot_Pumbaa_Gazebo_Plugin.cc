@@ -1,8 +1,8 @@
 /*
- * This is a Gazebo simulation Plugin of Nubot_Pumbaa tracked vehicle.
+ * This is a Gazebo simulation Plugin of NuBot_Pumbaa tracked vehicle.
  * It is controlled by ROS topic through trackcmd & flipcmd.
- * /Nubot_Pumbaa/nubotcontrol/trackcmd geometry_msgs/Twist linear.x angular.z
- * /Nubot_Pumbaa/nubotcontrol/flipcmd nubot_pumbaa_msg/FlipCmd
+ * /NuBot_Pumbaa/nubotcontrol/trackcmd geometry_msgs/Twist linear.x angular.z
+ * /NuBot_Pumbaa/nubotcontrol/flipcmd nubot_pumbaa_msg/FlipCmd
  * The core simulation mechanism is based on the brilliant work of Martin Pecka.
  * TrackedVehiclePlugin.cc SimpleTrackedVehiclePlugin.cc 2020/02
  * Contributer: skywalker1941 from NuBot team.
@@ -13,7 +13,7 @@
 #include <ignition/math/Vector3.hh>
 #include <ignition/math/Pose3.hh>
 
-#include "Nubot_Pumbaa_Gazebo_Plugin.hh"
+#include "NuBot_Pumbaa_Gazebo_Plugin.hh"
 
 namespace std       ///Do not understand these code
 {
@@ -39,16 +39,16 @@ unordered_map<LinkPtr, unordered_map<Tracks, Link_V> > globalTracks;
 
 using namespace gazebo;
 using namespace std;
-GZ_REGISTER_MODEL_PLUGIN(NubotPumbaaGazebo)
+GZ_REGISTER_MODEL_PLUGIN(NuBotPumbaaGazebo)
 
-NubotPumbaaGazebo::NubotPumbaaGazebo()
+NuBotPumbaaGazebo::NuBotPumbaaGazebo()
 {
   // Variables initialization
   trackName_[Tracks::LEFT] = "left";
   trackName_[Tracks::RIGHT] = "right";
 }
 
-NubotPumbaaGazebo::~NubotPumbaaGazebo()
+NuBotPumbaaGazebo::~NuBotPumbaaGazebo()
 {
   update_connection_->~Connection();
   // Removes all callbacks from the queue. Does not wait for calls currently in progress to finish.
@@ -73,35 +73,35 @@ NubotPumbaaGazebo::~NubotPumbaaGazebo()
   }
 }
 
-void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
+void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 {
-  // This Plugin is placed in the Nubot_Pumbaa.sdf, _model represent the robot. Get the model.
-  GZ_ASSERT(_model, "NubotPumbaaPlugin _model pointer is NULL");
-  //robot_model_ means the pointer to the Nubot_Pumbaa robot, related to .sdf file
+  // This Plugin is placed in the NuBot_Pumbaa.sdf, _model represent the robot. Get the model.
+  GZ_ASSERT(_model, "NuBotPumbaaPlugin _model pointer is NULL");
+  //robot_model_ means the pointer to the NuBot_Pumbaa robot, related to .sdf file
   robot_model_ = _model;
-  //world_model_ means the environments where Nubot_Pumbaa robot simulating, related to .world file.
+  //world_model_ means the environments where NuBot_Pumbaa robot simulating, related to .world file.
   world_model_ = robot_model_->GetWorld();
 
-  GZ_ASSERT(robot_model_, "NubotPumbaaPlugin robot_model_ pointer is NULL");
-  GZ_ASSERT(world_model_, "NubotPumbaaPlugin world_model_ pointer is NULL");
+  GZ_ASSERT(robot_model_, "NuBotPumbaaPlugin robot_model_ pointer is NULL");
+  GZ_ASSERT(world_model_, "NuBotPumbaaPlugin world_model_ pointer is NULL");
 
   world_name_ = world_model_->Name();
   robot_name_ = robot_model_->GetName();
 
-  gzmsg << "NubotPumbaaGazebo_Plugin: world_model_ name is "
+  gzmsg << "NuBotPumbaaGazebo_Plugin: world_model_ name is "
         << world_name_ << std::endl;
-  gzmsg << "NubotPumbaaGazebo_Plugin: robot_model_ name is "
+  gzmsg << "NuBotPumbaaGazebo_Plugin: robot_model_ name is "
         << robot_name_ << std::endl;
 
   if (world_model_->Physics()->GetType() != "ode")
   {
     gzerr << "Tracked vehicle simulation works only with ODE." << std::endl;
-   throw std::runtime_error("NubotPumbaaGazebo_Plugin: Load() failed. ODE Problem");
+   throw std::runtime_error("NuBotPumbaaGazebo_Plugin: Load() failed. ODE Problem");
   }
 
   // Get the robot's .sdf file name.
   robot_sdf_ = _sdf;
-  GZ_ASSERT(_sdf, "NubotPumbaaGazebo_Plugin robot_sdf_ pointer is NULL");
+  GZ_ASSERT(_sdf, "NuBotPumbaaGazebo_Plugin robot_sdf_ pointer is NULL");
 
   /// Load the "track_mu" "track_mu2"
   ///          "tracksSeparation" "steeringEfficiency"
@@ -170,22 +170,22 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Check the "body" "left_track" "right_track" element
   if (!robot_sdf_->HasElement("body"))
   {
-    gzerr << "NubotPumbaaGazebo_Plugin: <body> tag missing." << std::endl;
-    throw std::runtime_error("NubotPumbaaGazebo_Plugin: Load() failed.");
+    gzerr << "NuBotPumbaaGazebo_Plugin: <body> tag missing." << std::endl;
+    throw std::runtime_error("NuBotPumbaaGazebo_Plugin: Load() failed.");
   }
 
   if (!robot_sdf_->HasElement("left_track"))
   {
-    gzerr << "NubotPumbaaGazebo_Plugin: <left_track> tag missing."
+    gzerr << "NuBotPumbaaGazebo_Plugin: <left_track> tag missing."
           << std::endl;
-    throw std::runtime_error("NubotPumbaaGazebo_Plugin: Load() failed.");
+    throw std::runtime_error("NuBotPumbaaGazebo_Plugin: Load() failed.");
   }
 
   if (!robot_sdf_->HasElement("right_track"))
   {
-    gzerr << "NubotPumbaaGazebo_Plugin: <right_track> tag missing."
+    gzerr << "NuBotPumbaaGazebo_Plugin: <right_track> tag missing."
           << std::endl;
-    throw std::runtime_error("NubotPumbaaGazebo_Plugin: Load() failed.");
+    throw std::runtime_error("NuBotPumbaaGazebo_Plugin: Load() failed.");
   }
 
   // Load the "body" link
@@ -193,13 +193,13 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
           robot_sdf_->GetElement("body")->Get<std::string>());
   if (body_ == nullptr)
   {
-    gzerr << "NubotPumbaaGazebo_Plugin: <body> link does not exist."
+    gzerr << "NuBotPumbaaGazebo_Plugin: <body> link does not exist."
           << std::endl;
-    throw std::runtime_error("NubotPumbaaGazebo_Plugin: Load() failed.");
+    throw std::runtime_error("NuBotPumbaaGazebo_Plugin: Load() failed.");
   }
   else
   {
-    gzmsg << "NubotPumbaaGazebo_Plugin: Successfully added robot body link "
+    gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added robot body link "
           << body_->GetName() << std::endl;
   }
   // Set the body_ link pair into globalTracks
@@ -213,13 +213,13 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   gtracks[Tracks::LEFT].push_back(trackLink_[Tracks::LEFT]);
   if (gtracks[Tracks::LEFT].at(0) == nullptr)
   {
-    gzerr << "NubotPumbaaGazebo_Plugin: <left_track> link does not exist."
+    gzerr << "NuBotPumbaaGazebo_Plugin: <left_track> link does not exist."
           << std::endl;
-    throw std::runtime_error("NubotPumbaaGazebo_Plugin: Load() failed.");
+    throw std::runtime_error("NuBotPumbaaGazebo_Plugin: Load() failed.");
   }
   else
   {
-    gzmsg << "NubotPumbaaGazebo_Plugin: Successfully added left track link "
+    gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added left track link "
           << gtracks[Tracks::LEFT].at(0)->GetName() << std::endl;
   }
 
@@ -229,13 +229,13 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   gtracks[Tracks::RIGHT].push_back(trackLink_[Tracks::RIGHT]);
   if (gtracks[Tracks::RIGHT].at(0) == nullptr)
   {
-    gzerr << "NubotPumbaaGazebo_Plugin: <right_track> link does not exist."
+    gzerr << "NuBotPumbaaGazebo_Plugin: <right_track> link does not exist."
           << std::endl;
-    throw std::runtime_error("NubotPumbaaGazebo_Plugin: Load() failed.");
+    throw std::runtime_error("NuBotPumbaaGazebo_Plugin: Load() failed.");
   }
   else
   {
-    gzmsg << "NubotPumbaaGazebo_Plugin: Successfully added right track link "
+    gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added right track link "
           << gtracks[Tracks::RIGHT].at(0)->GetName() << std::endl;
   }
 
@@ -249,13 +249,13 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
       const auto flipperLink = robot_model_->GetLink(flipperName);
       if (flipperLink == nullptr)
       {
-        gzerr << "NubotPumbaaGazebo_Plugin: <left_flipper> _track link '"
+        gzerr << "NuBotPumbaaGazebo_Plugin: <left_flipper> _track link '"
               << flipperName << "' does not exist." << std::endl;
       }
       else
       {
         gtracks[Tracks::LEFT].push_back(flipperLink);
-        gzmsg << "NubotPumbaaGazebo_Plugin: Successfully added left flipper track"
+        gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added left flipper track"
                  "link '" << flipperName << "'" << std::endl;
       }
       flipper = flipper->GetNextElement("left_flipper");
@@ -272,13 +272,13 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
       const auto flipperLink = robot_model_->GetLink(flipperName);
       if (flipperLink == nullptr)
       {
-        gzerr << "NubotPumbaaGazebo_Plugin: <right_flipper> _track link '"
+        gzerr << "NuBotPumbaaGazebo_Plugin: <right_flipper> _track link '"
               << flipperName << "' does not exist." << std::endl;
       }
       else
       {
         gtracks[Tracks::RIGHT].push_back(flipperLink);
-        gzmsg << "NubotPumbaaGazebo_Plugin: Successfully added right flipper track"
+        gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added right flipper track"
                  "link '" << flipperName << "'" << std::endl;
       }
       flipper = flipper->GetNextElement("right_flipper");
@@ -294,7 +294,7 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     const auto flipperJoint = robot_model_->GetJoint(flipperJoint_name);
     if (flipperJoint == nullptr)
     {
-      gzerr << "NubotPumbaaGazebo_Plugin: <front_left_flipper_j> joint '"
+      gzerr << "NuBotPumbaaGazebo_Plugin: <front_left_flipper_j> joint '"
             << flipperName_j << "' does not exist." << std::endl;
     }
     else
@@ -305,7 +305,7 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
                   front_left_j->GetScopedName(),common::PID(flip_p, flip_i, flip_d));
       robot_model_->GetJointController()->SetPositionTarget(
                   front_left_j->GetScopedName(), -flip_initial);
-      gzmsg << "NubotPumbaaGazebo_Plugin: Successfully added joint '"
+      gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
   }
@@ -319,7 +319,7 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     const auto flipperJoint = robot_model_->GetJoint(flipperJoint_name);
     if (flipperJoint == nullptr)
     {
-      gzerr << "NubotPumbaaGazebo_Plugin: <rear_left_flipper_j> joint '"
+      gzerr << "NuBotPumbaaGazebo_Plugin: <rear_left_flipper_j> joint '"
             << flipperName_j << "' does not exist." << std::endl;
     }
     else
@@ -330,7 +330,7 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
                   rear_left_j->GetScopedName(),common::PID(flip_p, flip_i, flip_d));
       robot_model_->GetJointController()->SetPositionTarget(
                   rear_left_j->GetScopedName(), flip_initial);
-      gzmsg << "NubotPumbaaGazebo_Plugin: Successfully added joint '"
+      gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
   }
@@ -344,7 +344,7 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     const auto flipperJoint = robot_model_->GetJoint(flipperJoint_name);
     if (flipperJoint == nullptr)
     {
-      gzerr << "NubotPumbaaGazebo_Plugin: <front_right_flipper_j> joint '"
+      gzerr << "NuBotPumbaaGazebo_Plugin: <front_right_flipper_j> joint '"
             << flipperName_j << "' does not exist." << std::endl;
     }
     else
@@ -355,7 +355,7 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
                   front_right_j->GetScopedName(),common::PID(flip_p, flip_i, flip_d));
       robot_model_->GetJointController()->SetPositionTarget(
                   front_right_j->GetScopedName(), -flip_initial);
-      gzmsg << "NubotPumbaaGazebo_Plugin: Successfully added joint '"
+      gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
   }
@@ -369,7 +369,7 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     const auto flipperJoint = robot_model_->GetJoint(flipperJoint_name);
     if (flipperJoint == nullptr)
     {
-      gzerr << "NubotPumbaaGazebo_Plugin: <rear_right_flipper_j> joint '"
+      gzerr << "NuBotPumbaaGazebo_Plugin: <rear_right_flipper_j> joint '"
             << flipperName_j << "' does not exist." << std::endl;
     }
     else
@@ -380,7 +380,7 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
                   rear_right_j->GetScopedName(),common::PID(flip_p, flip_i, flip_d));
       robot_model_->GetJointController()->SetPositionTarget(
                   rear_right_j->GetScopedName(), flip_initial);
-      gzmsg << "NubotPumbaaGazebo_Plugin: Successfully added joint '"
+      gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
   }
@@ -406,7 +406,7 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   if (!ros::isInitialized())
   {
     ROS_FATAL_STREAM("A ROS node for Gazebo has not been initialized, unable to load plugin. "
-                     << "Load the Gazebo system plugin 'libNubotPumbaaPlugin.so' in the gazebo_ros package)");
+                     << "Load the Gazebo system plugin 'libNuBotPumbaaPlugin.so' in the gazebo_ros package)");
     return;
   }
   // Load the ROS settings
@@ -419,12 +419,12 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 
   // Subscribers.
   //ros::SubscribeOptions so1 = ros::SubscribeOptions::create<gazebo_msgs::ModelStates>(
-  //            "/gazebo/model_states", 100, boost::bind( &NubotPumbaaGazebo::model_states_CB,this,_1),
+  //            "/gazebo/model_states", 100, boost::bind( &NuBotPumbaaGazebo::model_states_CB,this,_1),
   //            ros::VoidPtr(), &message_queue_);
   //ModelStates_sub_ = rosnode_->subscribe(so1);
 
   ros::SubscribeOptions so2 = ros::SubscribeOptions::create<nubot_pumbaa_msg::PumbaaCmd>(
-            "nubotcontrol/pumbaacmd", 100, boost::bind(&NubotPumbaaGazebo::Pumbaa_Cmd_CB,this,_1),
+            "nubotcontrol/pumbaacmd", 100, boost::bind(&NuBotPumbaaGazebo::Pumbaa_Cmd_CB,this,_1),
             ros::VoidPtr(), &message_queue_);
   PumbaaCmd_sub_ = rosnode_->subscribe(so2);
 
@@ -432,28 +432,28 @@ void NubotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // dribbleId_client_ = rosnode_->serviceClient<nubot_common::DribbleId>("/DribbleId");
 
 #if 0
-    reconfigureServer_ = new dynamic_reconfigure::Server<nubot_gazebo::NubotPumbaaGazeboConfig>(*rosnode_);
-    reconfigureServer_->setCallback(boost::bind(&NubotPumbaaGazebo::config, this, _1, _2));
+    reconfigureServer_ = new dynamic_reconfigure::Server<nubot_gazebo::NuBotPumbaaGazeboConfig>(*rosnode_);
+    reconfigureServer_->setCallback(boost::bind(&NuBotPumbaaGazebo::config, this, _1, _2));
 #endif
 
   // Custom Callback Queue Thread. Use threads to process message and service callback queue
-  message_callback_queue_thread_ = boost::thread( boost::bind( &NubotPumbaaGazebo::message_queue_thread,this ) );
-  //service_callback_queue_thread_ = boost::thread( boost::bind( &NubotPumbaaGazebo::service_queue_thread,this ) );
+  message_callback_queue_thread_ = boost::thread( boost::bind( &NuBotPumbaaGazebo::message_queue_thread,this ) );
+  //service_callback_queue_thread_ = boost::thread( boost::bind( &NuBotPumbaaGazebo::service_queue_thread,this ) );
 
   // This event is broadcast every simulation iteration.
   // "ConnectWorldUpdateBegin" is replaced by "ConnectBeforePhysicsUpdate"
   // Call "DriveTracks" in "update_child" to move the robot
   // update_connection_ = event::Events::ConnectWorldUpdateBegin(
-  //         boost::bind(&NubotPumbaaGazebo::update_child, this));
+  //         boost::bind(&NuBotPumbaaGazebo::update_child, this));
   update_connection_ = event::Events::ConnectBeforePhysicsUpdate(
-              boost::bind(&NubotPumbaaGazebo::update_child, this));
+              boost::bind(&NuBotPumbaaGazebo::update_child, this));
 
   // Output info
   // ROS_INFO(" %s  id: %d  flip_cord:%d  gaussian scale: %f  rate: %f\n",
   //           robot_name_.c_str(),  AgentID_, flip_cord_, noise_scale_, noise_rate_);
 }
 
-void NubotPumbaaGazebo::Reset()
+void NuBotPumbaaGazebo::Reset()
 {
   ROS_DEBUG("%s Reset() running now!", robot_name_.c_str());
   SetTrackVelocity(0., 0.);
@@ -463,7 +463,7 @@ void NubotPumbaaGazebo::Reset()
 }
 
 // Transform the linear/angular speed to tracks speed, called by Track_Cmd_CB.
-void NubotPumbaaGazebo::SetBodyVelocity(
+void NuBotPumbaaGazebo::SetBodyVelocity(
     const double _linear, const double _angular)
 {
   // Compute effective linear and angular speed.
@@ -487,9 +487,9 @@ void NubotPumbaaGazebo::SetBodyVelocity(
 }
 
 // Set the calculated tracks speed to Gazebo simulation
-void NubotPumbaaGazebo::SetTrackVelocity(double _left, double _right)
+void NuBotPumbaaGazebo::SetTrackVelocity(double _left, double _right)
 {
-  //gzmsg << "NubotPumbaaGazebo_Plugin: SetTrackVelocity is calling" << std::endl;
+  //gzmsg << "NuBotPumbaaGazebo_Plugin: SetTrackVelocity is calling" << std::endl;
   // Apply the max track velocity limit.
   const auto left = ignition::math::clamp(_left,
                                           -maxLinearSpeed,
@@ -509,16 +509,16 @@ void NubotPumbaaGazebo::SetTrackVelocity(double _left, double _right)
   */
 }
 
-void NubotPumbaaGazebo::SetTrackVelocityImpl(double _left,
+void NuBotPumbaaGazebo::SetTrackVelocityImpl(double _left,
                                              double _right)
 {
-  //gzmsg << "NubotPumbaaGazebo_Plugin: SetTrackVelocityImpl is calling" << std::endl;
+  //gzmsg << "NuBotPumbaaGazebo_Plugin: SetTrackVelocityImpl is calling" << std::endl;
   trackVelocity_[Tracks::LEFT] = _left;
   trackVelocity_[Tracks::RIGHT] = _right;
 }
 
 // Set the rotate position of flippers direct to the model, called by Flip_Cmd_CB.
-void NubotPumbaaGazebo::SetFlipPose(
+void NuBotPumbaaGazebo::SetFlipPose(
         double _frontleft, double _frontright, double _rearleft, double _rearright)
 {
     robot_model_->GetJointController()->SetPositionTarget(
@@ -531,7 +531,7 @@ void NubotPumbaaGazebo::SetFlipPose(
                 rear_right_j->GetScopedName(), _rearright);
 }
 
-void NubotPumbaaGazebo::UpdateTrackSurface()
+void NuBotPumbaaGazebo::UpdateTrackSurface()
 {
   auto& gtracks = globalTracks.at(body_);
   for (auto trackSide : gtracks)
@@ -543,34 +543,34 @@ void NubotPumbaaGazebo::UpdateTrackSurface()
   }
 }
 
-double NubotPumbaaGazebo::GetSteeringEfficiency()
+double NuBotPumbaaGazebo::GetSteeringEfficiency()
 {
   return this->steeringEfficiency;
 }
 
-double NubotPumbaaGazebo::GetTracksSeparation()
+double NuBotPumbaaGazebo::GetTracksSeparation()
 {
   return this->tracksSeparation;
 }
 
-boost::optional<double> NubotPumbaaGazebo::GetTrackMu()
+boost::optional<double> NuBotPumbaaGazebo::GetTrackMu()
 {
   return std::stod(trackMu->GetDefaultAsString());
 }
 
-boost::optional<double> NubotPumbaaGazebo::GetTrackMu2()
+boost::optional<double> NuBotPumbaaGazebo::GetTrackMu2()
 {
   return std::stod(trackMu2->GetDefaultAsString());
 }
 
-//void NubotPumbaaGazebo::SetSteeringEfficiency(double _steeringEfficiency)
+//void NuBotPumbaaGazebo::SetSteeringEfficiency(double _steeringEfficiency)
 //{
 //  this->steeringEfficiency = _steeringEfficiency;
 //  this->world_sdf_->GetElement("steering_efficiency")
 //    ->Set(_steeringEfficiency);
 //}
 
-void NubotPumbaaGazebo::SetLinkMu(const physics::LinkPtr &_link)
+void NuBotPumbaaGazebo::SetLinkMu(const physics::LinkPtr &_link)
 {
   if (!this->GetTrackMu().is_initialized() &&
     !this->GetTrackMu2().is_initialized())
@@ -612,7 +612,7 @@ void NubotPumbaaGazebo::SetLinkMu(const physics::LinkPtr &_link)
     }
 }
 
-void NubotPumbaaGazebo::SetGeomCategories()
+void NuBotPumbaaGazebo::SetGeomCategories()
 {
   auto linksToProcess = body_->GetModel()->GetLinks();
   // set ROBOT_CATEGORY to the whole body and all subparts
@@ -655,7 +655,7 @@ void NubotPumbaaGazebo::SetGeomCategories()
   }
 }
 
-void NubotPumbaaGazebo::DriveTracks(/*const common::UpdateInfo &_unused*/)
+void NuBotPumbaaGazebo::DriveTracks(/*const common::UpdateInfo &_unused*/)
 {
   if (this->contactManager->GetContactCount() == 0)
     return;
@@ -844,7 +844,7 @@ void NubotPumbaaGazebo::DriveTracks(/*const common::UpdateInfo &_unused*/)
   }
 }
 
-ignition::math::Vector3d NubotPumbaaGazebo::ComputeFrictionDirection(
+ignition::math::Vector3d NuBotPumbaaGazebo::ComputeFrictionDirection(
   const double _linearSpeed, const double _angularSpeed,
   const bool _drivingStraight, const ignition::math::Pose3d &_bodyPose,
   const ignition::math::Vector3d &_bodyYAxisGlobal,
@@ -900,7 +900,7 @@ ignition::math::Vector3d NubotPumbaaGazebo::ComputeFrictionDirection(
   return frictionDirection;
 }
 
-double NubotPumbaaGazebo::ComputeSurfaceMotion(const double _beltSpeed,
+double NuBotPumbaaGazebo::ComputeSurfaceMotion(const double _beltSpeed,
     const ignition::math::Vector3d &_beltDirection,
     const ignition::math::Vector3d &_frictionDirection) const
 {
@@ -910,8 +910,8 @@ double NubotPumbaaGazebo::ComputeSurfaceMotion(const double _beltSpeed,
   return -_beltDirection.Dot(_frictionDirection) * fabs(_beltSpeed);
 }
 
-NubotPumbaaGazebo::ContactIterator
-NubotPumbaaGazebo::ContactIterator::operator++()
+NuBotPumbaaGazebo::ContactIterator
+NuBotPumbaaGazebo::ContactIterator::operator++()
 {
   // initialized && null contact means we've reached the end of the iterator
   if (this->initialized && this->currentContact == nullptr)
@@ -980,21 +980,21 @@ NubotPumbaaGazebo::ContactIterator::operator++()
   return *this;
 }
 
-NubotPumbaaGazebo::ContactIterator::ContactIterator()
+NuBotPumbaaGazebo::ContactIterator::ContactIterator()
     : currentContact(nullptr), jointIndex(0), body(nullptr), geom1(nullptr),
       geom2(nullptr), initialized(false)
 {
 }
 
-NubotPumbaaGazebo::ContactIterator::ContactIterator(
+NuBotPumbaaGazebo::ContactIterator::ContactIterator(
     bool _initialized) : currentContact(nullptr), jointIndex(0), body(nullptr),
                          geom1(nullptr), geom2(nullptr),
                          initialized(_initialized)
 {
 }
 
-NubotPumbaaGazebo::ContactIterator::ContactIterator(
-    const NubotPumbaaGazebo::ContactIterator &_rhs)
+NuBotPumbaaGazebo::ContactIterator::ContactIterator(
+    const NuBotPumbaaGazebo::ContactIterator &_rhs)
 {
   this->currentContact = _rhs.currentContact;
   this->initialized = _rhs.initialized;
@@ -1004,28 +1004,28 @@ NubotPumbaaGazebo::ContactIterator::ContactIterator(
   this->geom2 = _rhs.geom2;
 }
 
-NubotPumbaaGazebo::ContactIterator::ContactIterator(
+NuBotPumbaaGazebo::ContactIterator::ContactIterator(
     dBodyID _body, dGeomID _geom1, dGeomID _geom2) :
     currentContact(nullptr), jointIndex(0), body(_body),
     geom1(_geom1), geom2(_geom2), initialized(false)
 {
 }
 
-NubotPumbaaGazebo::ContactIterator
-NubotPumbaaGazebo::ContactIterator::begin(
+NuBotPumbaaGazebo::ContactIterator
+NuBotPumbaaGazebo::ContactIterator::begin(
     dBodyID _body, dGeomID _geom1, dGeomID _geom2)
 {
   return ContactIterator(_body, _geom1, _geom2);
 }
 
-NubotPumbaaGazebo::ContactIterator
-NubotPumbaaGazebo::ContactIterator::end()
+NuBotPumbaaGazebo::ContactIterator
+NuBotPumbaaGazebo::ContactIterator::end()
 {
   return ContactIterator(true);
 }
 
-bool NubotPumbaaGazebo::ContactIterator::operator==(
-    const NubotPumbaaGazebo::ContactIterator &_rhs)
+bool NuBotPumbaaGazebo::ContactIterator::operator==(
+    const NuBotPumbaaGazebo::ContactIterator &_rhs)
 {
   if (this->currentContact == nullptr && !this->initialized)
     ++(*this);
@@ -1034,9 +1034,9 @@ bool NubotPumbaaGazebo::ContactIterator::operator==(
          this->initialized == _rhs.initialized;
 }
 
-NubotPumbaaGazebo::ContactIterator&
-NubotPumbaaGazebo::ContactIterator::operator=(
-    const NubotPumbaaGazebo::ContactIterator &_rhs)
+NuBotPumbaaGazebo::ContactIterator&
+NuBotPumbaaGazebo::ContactIterator::operator=(
+    const NuBotPumbaaGazebo::ContactIterator &_rhs)
 {
   this->currentContact = _rhs.currentContact;
   this->initialized = _rhs.initialized;
@@ -1048,16 +1048,16 @@ NubotPumbaaGazebo::ContactIterator::operator=(
   return *this;
 }
 
-NubotPumbaaGazebo::ContactIterator
-NubotPumbaaGazebo::ContactIterator::operator++(int /*_unused*/)
+NuBotPumbaaGazebo::ContactIterator
+NuBotPumbaaGazebo::ContactIterator::operator++(int /*_unused*/)
 {
   ContactIterator i = *this;
   ++(*this);
   return i;
 }
 
-NubotPumbaaGazebo::ContactIterator::reference
-NubotPumbaaGazebo::ContactIterator::operator*()
+NuBotPumbaaGazebo::ContactIterator::reference
+NuBotPumbaaGazebo::ContactIterator::operator*()
 {
   if (!this->initialized)
     ++(*this);
@@ -1065,8 +1065,8 @@ NubotPumbaaGazebo::ContactIterator::operator*()
   return *this->currentContact;
 }
 
-NubotPumbaaGazebo::ContactIterator::pointer
-NubotPumbaaGazebo::ContactIterator::operator->()
+NuBotPumbaaGazebo::ContactIterator::pointer
+NuBotPumbaaGazebo::ContactIterator::operator->()
 {
   if (!this->initialized)
     ++(*this);
@@ -1074,8 +1074,8 @@ NubotPumbaaGazebo::ContactIterator::operator->()
   return this->currentContact;
 }
 
-NubotPumbaaGazebo::ContactIterator::pointer
-NubotPumbaaGazebo::ContactIterator::getPointer()
+NuBotPumbaaGazebo::ContactIterator::pointer
+NuBotPumbaaGazebo::ContactIterator::getPointer()
 {
   if (!this->initialized)
     ++(*this);
@@ -1083,14 +1083,14 @@ NubotPumbaaGazebo::ContactIterator::getPointer()
   return this->currentContact;
 }
 
-bool NubotPumbaaGazebo::ContactIterator::operator!=(
-    const NubotPumbaaGazebo::ContactIterator &_rhs)
+bool NuBotPumbaaGazebo::ContactIterator::operator!=(
+    const NuBotPumbaaGazebo::ContactIterator &_rhs)
 {
-  return !NubotPumbaaGazebo::ContactIterator::operator==(_rhs);
+  return !NuBotPumbaaGazebo::ContactIterator::operator==(_rhs);
 }
 
 
-void NubotPumbaaGazebo::update_child()
+void NuBotPumbaaGazebo::update_child()
 {
   msgCB_lock_.lock(); // lock access to fields that are used in ROS message callbacks
   //srvCB_lock_.lock();
@@ -1105,7 +1105,7 @@ void NubotPumbaaGazebo::update_child()
   this->DriveTracks();
   message_publish();
   //this->SetFlipPose(0,front_right_j_speed,0,0);
-  //gzmsg << "NubotPumbaaGazebo_Plugin: update_child is running" << std::endl;
+  //gzmsg << "NuBotPumbaaGazebo_Plugin: update_child is running" << std::endl;
 
       /**********  EDIT ENDS  **********/
   //}
@@ -1113,7 +1113,7 @@ void NubotPumbaaGazebo::update_child()
   msgCB_lock_.unlock();
 }
 
-void NubotPumbaaGazebo::message_publish(void)
+void NuBotPumbaaGazebo::message_publish(void)
 {
   geometry_msgs::Pose RobotPose;
   RobotPose.position.x = body_->WorldPose().Pos().X();
@@ -1127,15 +1127,15 @@ void NubotPumbaaGazebo::message_publish(void)
   RobotState_pub_.publish(RobotPose);
 }
 
-void NubotPumbaaGazebo::Pumbaa_Cmd_CB(const nubot_pumbaa_msg::PumbaaCmd::ConstPtr &_msg)
+void NuBotPumbaaGazebo::Pumbaa_Cmd_CB(const nubot_pumbaa_msg::PumbaaCmd::ConstPtr &_msg)
 {
-  gzmsg << "NubotPumbaaGazebo_Plugin: Pumbaa_Cmd_CB " << "ContactCount=" <<
+  gzmsg << "NuBotPumbaaGazebo_Plugin: Pumbaa_Cmd_CB " << "ContactCount=" <<
         std::to_string(contactManager->GetContactCount()) << std::endl;
-//  gzmsg << "NubotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.X:"
+//  gzmsg << "NuBotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.X:"
 //        << std::to_string(body_->WorldPose().Pos().X()) << std::endl;
-//  gzmsg << "NubotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.Y:"
+//  gzmsg << "NuBotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.Y:"
 //        << std::to_string(body_->WorldPose().Pos().Y()) << std::endl;
-//  gzmsg << "NubotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.Z:"
+//  gzmsg << "NuBotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.Z:"
 //        << std::to_string(body_->WorldPose().Pos().Z()) << std::endl;
   msgCB_lock_.lock();
   double MsglinearSpeed = _msg->vel_linear;
@@ -1151,7 +1151,7 @@ void NubotPumbaaGazebo::Pumbaa_Cmd_CB(const nubot_pumbaa_msg::PumbaaCmd::ConstPt
   msgCB_lock_.unlock();
 }
 
-void NubotPumbaaGazebo::message_queue_thread()
+void NuBotPumbaaGazebo::message_queue_thread()
 {
   static const double timeout = 0.01;
   while (rosnode_->ok())
@@ -1160,6 +1160,6 @@ void NubotPumbaaGazebo::message_queue_thread()
     // pushes it back onto the queue. This version includes a timeout which lets you specify
     // the amount of time to wait for a callback to be available before returning.
     message_queue_.callAvailable(ros::WallDuration(timeout));
-    // gzmsg << "NubotPumbaaGazebo_Plugin: message_queue_thread is running" << std::endl;
+    // gzmsg << "NuBotPumbaaGazebo_Plugin: message_queue_thread is running" << std::endl;
   }
 }

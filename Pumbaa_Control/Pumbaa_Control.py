@@ -15,9 +15,9 @@ def node_init():
     pumbaa_cmd = PumbaaCmd()
     pumbaa_state = Pose()
 
-    rospy.init_node('Nubot_Control', anonymous=True)
-    rospy.Subscriber("Nubot_Pumbaa/nubotstate/robotstate", Pose, robotstate_CB)
-    cmd_pub = rospy.Publisher('Nubot_Pumbaa/nubotcontrol/pumbaacmd', PumbaaCmd, queue_size=10)
+    rospy.init_node('NuBot_Control', anonymous=True)
+    rospy.Subscriber("NuBot_Pumbaa/nubotstate/robotstate", Pose, robotstate_CB)
+    cmd_pub = rospy.Publisher('NuBot_Pumbaa/nubotcontrol/pumbaacmd', PumbaaCmd, queue_size=10)
     # rate = rospy.Rate(10)  # 10hz
     # spin() simply keeps python from exiting until this node is stopped
     # rospy.spin()

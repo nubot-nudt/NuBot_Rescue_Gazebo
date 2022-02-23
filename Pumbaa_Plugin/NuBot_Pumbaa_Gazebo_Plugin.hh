@@ -1,8 +1,8 @@
 /*
- * This is a Gazebo simulation Plugin of Nubot_Pumbaa tracked vehicle.
+ * This is a Gazebo simulation Plugin of NuBot_Pumbaa tracked vehicle.
  * It is controlled by ROS topic through trackcmd & flipcmd.
- * /Nubot_Pumbaa/nubotcontrol/trackcmd geometry_msgs/Twist linear.x angular.z
- * /Nubot_Pumbaa/nubotcontrol/flipcmd nubot_pumbaa_msg/FlipCmd
+ * /NuBot_Pumbaa/nubotcontrol/trackcmd geometry_msgs/Twist linear.x angular.z
+ * /NuBot_Pumbaa/nubotcontrol/flipcmd nubot_pumbaa_msg/FlipCmd
  * The core simulation mechanism is based on the brilliant work of Martin Pecka.
  * TrackedVehiclePlugin.hh SimpleTrackedVehiclePlugin.hh 2020/02
  * Contributer: skywalker1941 from NuBot team.
@@ -90,7 +90,7 @@
 #include <geometry_msgs/Twist.h>
 #include <dynamic_reconfigure/server.h>
 
-#include "Nubot_Pumbaa_Gazebo_Plugin.hh"
+#include "NuBot_Pumbaa_Gazebo_Plugin.hh"
 #include "../../devel/include/nubot_pumbaa_msg/PumbaaCmd.h"
 // This contact.h must be include, it is ralated to the ode
 #include "../gazebo_deps_opende/src/joints/contact.h"
@@ -115,14 +115,14 @@ namespace std   ///Do not understand these code
 
 namespace gazebo
 {
-  class NubotPumbaaGazebo : public ModelPlugin
+  class NuBotPumbaaGazebo : public ModelPlugin
   {
     public:
       /// \brief Constructor. Will be called firstly
-      NubotPumbaaGazebo();
+      NuBotPumbaaGazebo();
 
       /// \brief Destructor
-      virtual ~NubotPumbaaGazebo();
+      virtual ~NuBotPumbaaGazebo();
 
     protected:
       /// \brief Load the controller.

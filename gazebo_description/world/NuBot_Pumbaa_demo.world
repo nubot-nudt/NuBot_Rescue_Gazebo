@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-    <world name="Nubot_Pumbaa_demo">
+    <world name="NuBot_Pumbaa_demo">
         <!--A demo world for tracked vehicles.-->
 
         <include>
@@ -23,10 +23,10 @@
             <uri>model://box_obstacle</uri>
         </include>
         
-        <model name="Nubot_Pumbaa">
+        <model name="NuBot_Pumbaa">
             <pose frame=''>0 3 0.15 0 0 -1.5708</pose>
             <include>
-                <uri>model://Nubot_Pumbaa</uri>
+                <uri>model://NuBot_Pumbaa</uri>
             </include>
         </model>
 

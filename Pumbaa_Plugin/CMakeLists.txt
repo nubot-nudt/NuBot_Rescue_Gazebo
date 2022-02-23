@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
-project(NubotPumbaaGazeboPlugin)
+project(NuBotPumbaaGazeboPlugin)
 
 # Find ROS
 find_package(roscpp REQUIRED)
@@ -34,8 +34,8 @@ link_directories(
 )
 
 # Build plugin
-add_library(NubotPumbaaGazeboPlugin SHARED Nubot_Pumbaa_Gazebo_Plugin.cc)
-add_dependencies(NubotPumbaaGazeboPlugin ${PROJECT_NAME}_EXPORTED_TARGETS})
-target_link_libraries(NubotPumbaaGazeboPlugin ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
+add_library(NuBotPumbaaGazeboPlugin SHARED NuBot_Pumbaa_Gazebo_Plugin.cc)
+add_dependencies(NuBotPumbaaGazeboPlugin ${PROJECT_NAME}_EXPORTED_TARGETS})
+target_link_libraries(NuBotPumbaaGazeboPlugin ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
 
 
