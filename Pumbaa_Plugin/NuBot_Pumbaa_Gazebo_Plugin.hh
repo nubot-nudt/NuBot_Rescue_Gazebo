@@ -91,7 +91,11 @@
 #include <dynamic_reconfigure/server.h>
 
 #include "NuBot_Pumbaa_Gazebo_Plugin.hh"
-#include "../../devel/include/nubot_pumbaa_msg/PumbaaCmd.h"
+
+#include "nubot_msgs/base_info.h"
+#include "nubot_msgs/base_drive_cmd.h"
+#include "math.h"
+
 // This contact.h must be include, it is ralated to the ode
 #include "../gazebo_deps_opende/src/joints/contact.h"
 
@@ -177,6 +181,9 @@ namespace gazebo
       double                      flip_i;             // Parameter of flippers position control
       double                      flip_d;             // Parameter of flippers position control
       double                      flip_initial;       // Parameter of flippers position control
+      const float main_velocity_trans = 0.1*2*3.1416/25/60;  // 2pi/减速机减速比/60
+      const float fin_rate_trans = 2*3.1416/(64*40/30)/60;  // 2pi/减速机减速比/60
+      const float angle2radian = 3.1416/180; // pi/180
 
       /// \brief Friction coefficient in the first friction direction.
       sdf::ParamPtr               trackMu;
@@ -267,7 +274,15 @@ namespace gazebo
       /// \param[in] _frontright Desired angular position of the front_right flipper.
       /// \param[in] _rearleft Desired angular position of the rear_left flipper.
       /// \param[in] _rearright Desired angular position of the rear_right flipper.
-      void SetFlipPose(double _frontleft, double _frontright, double _rearleft,
+      void SetFlipAngle(double _frontleft, double _frontright, double _rearleft,
+                       double _rearright);  // TODO: make virtual
+
+      /// \brief Set new target position for the flippers.
+      /// \param[in] _frontleft Desired angular position of the front_left flipper.
+      /// \param[in] _frontright Desired angular position of the front_right flipper.
+      /// \param[in] _rearleft Desired angular position of the rear_left flipper.
+      /// \param[in] _rearright Desired angular position of the rear_right flipper.
+      void SetFlipVelocity(double _frontleft, double _frontright, double _rearleft,
                        double _rearright);  // TODO: make virtual
 
       /// \brief Set collide categories and bits of all geometries to the
@@ -282,7 +297,7 @@ namespace gazebo
 
       /// \brief PumbaaCmd message CallBack function
       /// \param[in] _msg shared pointer that is used to set the Tracks velocity & Flippers angle
-      void Pumbaa_Cmd_CB(const nubot_pumbaa_msg::PumbaaCmd::ConstPtr &_msg);
+      void Drive_Cmd_CB(const nubot_msgs::base_drive_cmd::ConstPtr &_msg);
 
       /// \brief ROS Custom message callback queue thread
       void message_queue_thread();

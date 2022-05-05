@@ -1599,7 +1599,7 @@
     <static>0</static>
     <allow_auto_disable>1</allow_auto_disable>
     
-    <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libNuBotPumbaaGazeboPlugin.so'>
+    <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
       <!--The link tags of tracks-->
       <body>base_link</body>
       <left_track>left_track</left_track>

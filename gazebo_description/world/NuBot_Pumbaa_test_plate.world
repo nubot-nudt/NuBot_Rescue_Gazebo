@@ -18,12 +18,22 @@
             </include>
         </model>        
         
-        <model name="NuBot_Pumbaa">
+        <!-- <model name="NuBot_Pumbaa">
             <pose frame=''>0 0 0.15 0 0 0</pose>
             <include>
                 <uri>model://NuBot_Pumbaa</uri>
             </include>
+        </model> -->
+        <model name="NuBot_Pumbaa_v2">
+            <pose frame=''>0 0 0.15 0 0 0</pose>
+            <include>
+                <uri>model://NuBot_Pumbaa_v2</uri>
+            </include>
         </model>
+
+	<plugin name="ElevationMapGroundTruthPlugin" filename="libhector_elevation_map_ground_truth_plugin.so"/>
+
+	<plugin name="ContactPointPublisherPlugin" filename="libhector_contact_points_publisher_plugin.so"/>
 
     </world>
 </sdf>

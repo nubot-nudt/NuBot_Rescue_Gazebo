@@ -415,7 +415,7 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Publishers
   // omin_vision_pub_   = rosnode_->advertise<nubot_common::OminiVisionInfo>("omnivision/OmniVisionInfo",10);
   // debug_pub_ = rosnode_->advertise<std_msgs::Float64MultiArray>("debug",10);
-  RobotState_pub_ = rosnode_->advertise<geometry_msgs::Pose>("nubotstate/robotstate",10);
+  RobotState_pub_ = rosnode_->advertise<geometry_msgs::Pose>("/nubot_state/base_state",10);
 
   // Subscribers.
   //ros::SubscribeOptions so1 = ros::SubscribeOptions::create<gazebo_msgs::ModelStates>(
@@ -423,10 +423,10 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   //            ros::VoidPtr(), &message_queue_);
   //ModelStates_sub_ = rosnode_->subscribe(so1);
 
-  ros::SubscribeOptions so2 = ros::SubscribeOptions::create<nubot_pumbaa_msg::PumbaaCmd>(
-            "nubotcontrol/pumbaacmd", 100, boost::bind(&NuBotPumbaaGazebo::Pumbaa_Cmd_CB,this,_1),
+  ros::SubscribeOptions so3 = ros::SubscribeOptions::create<nubot_msgs::base_drive_cmd>(
+            "/nubot_drive/base_drive_cmd", 100, boost::bind(&NuBotPumbaaGazebo::Drive_Cmd_CB,this,_1),
             ros::VoidPtr(), &message_queue_);
-  PumbaaCmd_sub_ = rosnode_->subscribe(so2);
+  PumbaaCmd_sub_ = rosnode_->subscribe(so3);
 
   // Service Servers & clients
   // dribbleId_client_ = rosnode_->serviceClient<nubot_common::DribbleId>("/DribbleId");
@@ -457,7 +457,7 @@ void NuBotPumbaaGazebo::Reset()
 {
   ROS_DEBUG("%s Reset() running now!", robot_name_.c_str());
   SetTrackVelocity(0., 0.);
-  SetFlipPose(-flip_initial, -flip_initial, flip_initial, flip_initial);
+  SetFlipAngle(-flip_initial, -flip_initial, flip_initial, flip_initial);
 
   ModelPlugin::Reset();
 }
@@ -518,7 +518,7 @@ void NuBotPumbaaGazebo::SetTrackVelocityImpl(double _left,
 }
 
 // Set the rotate position of flippers direct to the model, called by Flip_Cmd_CB.
-void NuBotPumbaaGazebo::SetFlipPose(
+void NuBotPumbaaGazebo::SetFlipAngle(
         double _frontleft, double _frontright, double _rearleft, double _rearright)
 {
     robot_model_->GetJointController()->SetPositionTarget(
@@ -528,6 +528,19 @@ void NuBotPumbaaGazebo::SetFlipPose(
     robot_model_->GetJointController()->SetPositionTarget(
                 rear_left_j->GetScopedName(), _rearleft);
     robot_model_->GetJointController()->SetPositionTarget(
+                rear_right_j->GetScopedName(), _rearright);
+}
+// Set the rotate velocity of flippers direct to the model, called by Flip_Cmd_CB.
+void NuBotPumbaaGazebo::SetFlipVelocity(
+        double _frontleft, double _frontright, double _rearleft, double _rearright)
+{
+    robot_model_->GetJointController()->SetVelocityTarget(
+                front_left_j->GetScopedName(), _frontleft);
+    robot_model_->GetJointController()->SetVelocityTarget(
+                front_right_j->GetScopedName(), _frontright);
+    robot_model_->GetJointController()->SetVelocityTarget(
+                rear_left_j->GetScopedName(), _rearleft);
+    robot_model_->GetJointController()->SetVelocityTarget(
                 rear_right_j->GetScopedName(), _rearright);
 }
 
@@ -697,7 +710,8 @@ void NuBotPumbaaGazebo::DriveTracks(/*const common::UpdateInfo &_unused*/)
   size_t i = 0;
   const auto contacts = this->contactManager->GetContacts();
   const auto model = this->body_->GetModel();
-
+  gzmsg << "NuBotPumbaaGazebo_Plugin: DriveTracks " << "ContactCount=" <<
+        std::to_string(contactManager->GetContactCount()) << std::endl;
   for (auto contact : contacts)
   {
     // Beware! There may be invalid contacts beyond GetContactCount()...
@@ -1104,7 +1118,7 @@ void NuBotPumbaaGazebo::update_child()
       //nubot_test();
   this->DriveTracks();
   message_publish();
-  //this->SetFlipPose(0,front_right_j_speed,0,0);
+  //this->SetFlipAngle(0,front_right_j_speed,0,0);
   //gzmsg << "NuBotPumbaaGazebo_Plugin: update_child is running" << std::endl;
 
       /**********  EDIT ENDS  **********/
@@ -1127,27 +1141,81 @@ void NuBotPumbaaGazebo::message_publish(void)
   RobotState_pub_.publish(RobotPose);
 }
 
-void NuBotPumbaaGazebo::Pumbaa_Cmd_CB(const nubot_pumbaa_msg::PumbaaCmd::ConstPtr &_msg)
+void NuBotPumbaaGazebo::Drive_Cmd_CB(const nubot_msgs::base_drive_cmd::ConstPtr &_msg)
 {
-  gzmsg << "NuBotPumbaaGazebo_Plugin: Pumbaa_Cmd_CB " << "ContactCount=" <<
-        std::to_string(contactManager->GetContactCount()) << std::endl;
-//  gzmsg << "NuBotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.X:"
-//        << std::to_string(body_->WorldPose().Pos().X()) << std::endl;
-//  gzmsg << "NuBotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.Y:"
-//        << std::to_string(body_->WorldPose().Pos().Y()) << std::endl;
-//  gzmsg << "NuBotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.Z:"
-//        << std::to_string(body_->WorldPose().Pos().Z()) << std::endl;
+  // gzmsg << "NuBotPumbaaGazebo_Plugin: Drive_Cmd_CB " << "ContactCount=" <<
+  //       std::to_string(contactManager->GetContactCount()) << std::endl;
+  double Speed_cmd[6];
+  double FinAng_exp[4];
+
   msgCB_lock_.lock();
-  double MsglinearSpeed = _msg->vel_linear;
-  double MsgangularSpeed = _msg->vel_angular;
 
-  double MsgFL = _msg->front_left;
-  double MsgFR = _msg->front_right;
-  double MsgRL = _msg->rear_left;
-  double MsgRR = _msg->rear_right;
+  //读取前进方向
+  int8 drive_direction = _msg->drive_direction;
+  //读取摆臂是否自动控制
+  int8 fin_angle_mode = _msg->fin_angle_mode;
+  // ###### 电机编号示意图 ######
+  //  CAN-ID对应+1
+  //      |——|              |——|
+  //    2 |——|    front     |——| 4
+  //      |——|              |——|
+  //        |——————|  |——————|
+  //      0 |——————|  |——————| 1
+  //        |——————|  |——————|
+  //        |——————|  |——————|
+  //      |——|              |——|
+  //    3 |——|     back     |——| 5
+  //      |——|    /rear     |——|
+  //  速度正负：前进+ 后退- 上抬+ 下压-
 
-  SetBodyVelocity(MsglinearSpeed,MsgangularSpeed);
-  SetFlipPose(-MsgFL,-MsgFR,MsgRL,MsgRR);
+  //根据前进方向设置电机速度
+  //切记：电机旋转方向矫正只在这里进行！！！！！
+  /********* Pumbaa v2.1 *********/
+  if(drive_direction == 1)
+  {
+      Speed_cmd[0] = _msg->speed[0]*main_velocity_trans;
+      Speed_cmd[1] = _msg->speed[1]*main_velocity_trans;
+
+      if (fin_angle_mode == 1)
+      {
+          FinAng_exp[0] = -1*_msg->fin_expect[0]*angle2radian;
+          FinAng_exp[1] =    _msg->fin_expect[1]*angle2radian;
+          FinAng_exp[2] = -1*_msg->fin_expect[2]*angle2radian;
+          FinAng_exp[3] =    _msg->fin_expect[3]*angle2radian;
+          SetFlipAngle(FinAng_exp[0],FinAng_exp[2],FinAng_exp[1],FinAng_exp[3]);
+      }
+      else
+      {
+          Speed_cmd[2] = -1*_msg->speed[2]*fin_rate_trans;
+          Speed_cmd[3] =    _msg->speed[3]*fin_rate_trans;
+          Speed_cmd[4] = -1*_msg->speed[4]*fin_rate_trans;
+          Speed_cmd[5] =    _msg->speed[5]*fin_rate_trans;
+          SetFlipVelocity(Speed_cmd[2],Speed_cmd[4],Speed_cmd[3],Speed_cmd[5]);
+      }
+  }
+  else//反向，电机序号调换
+  {
+      Speed_cmd[0] = -1*_msg->speed[1]*main_velocity_trans;
+      Speed_cmd[1] = -1*_msg->speed[0]*main_velocity_trans;
+
+      if (fin_angle_mode == 1)
+      {
+          FinAng_exp[0] = -1*_msg->fin_expect[3]*angle2radian;
+          FinAng_exp[1] =    _msg->fin_expect[2]*angle2radian;
+          FinAng_exp[2] = -1*_msg->fin_expect[1]*angle2radian;
+          FinAng_exp[3] =    _msg->fin_expect[0]*angle2radian;
+          SetFlipAngle(FinAng_exp[0],FinAng_exp[2],FinAng_exp[1],FinAng_exp[3]);
+      }
+      else
+      {
+          Speed_cmd[2] = -1*_msg->speed[5]*fin_rate_trans;
+          Speed_cmd[3] =    _msg->speed[4]*fin_rate_trans;
+          Speed_cmd[4] = -1*_msg->speed[3]*fin_rate_trans;
+          Speed_cmd[5] =    _msg->speed[2]*fin_rate_trans;
+          SetFlipVelocity(Speed_cmd[2],Speed_cmd[4],Speed_cmd[3],Speed_cmd[5]);
+      }
+  }
+  SetTrackVelocity(Speed_cmd[0],Speed_cmd[1]);
   msgCB_lock_.unlock();
 }
 

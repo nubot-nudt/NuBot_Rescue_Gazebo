@@ -32,13 +32,16 @@ This is a folder contains the original code of Martin Peica's work.
 
 >/Reference_File/threadpool-0_2_5-src.zip
 
-This is a library pakage that may be needed during compilation. Just install it to the system.  
+This is a library pakage that may be needed during compilation. Just install it to the system. 
+（copy /boost/threadpool.hpp & threadpool/ to /usr/include/boost/ or /usr/local/include/boost/)  
+`sudo cp boost/threadpool.hpp /usr/include/boost/threadpool.hpp`
+`sudo cp -r boost/threadpool/ /usr/include/boost/threadpool/`
 
 >/gazebo_description
 
 The modle of robot & obstacles in the environment, including ".sdf" & ".world" file.  
 
->/Pumbaa_Msg
+>/nubot_msgs
 
 The self defined ROS message for Pumbaa control.  
 
@@ -46,9 +49,9 @@ The self defined ROS message for Pumbaa control.
 
 The core code of NuBot_Pumbaa_Gazebo Plugin.  
 
->/Pumbaa_Control
+>/nubot_teleop
 
-The control algorithm of NuBot_Pumbaa in Python3.  
+The control code of NuBot_Pumbaa in Python3.
 
 ## Compilation Note
 
@@ -80,16 +83,13 @@ At the ***end*** of:
 you can change mechanical parameters of robot, including friction, flippers PID and so on.  
 
 ## Control the Robot
-Control the velocity & angular by sending messages through rostopic.  
+Control the robot with PS4 joy or sending messageto rostopic:'/nubot_msgs/drive_base_cmd'.  
 ```c++
-rostopic pub -1 /NuBot_Pumbaa/nubotcontrol/pumbaacmd nubot_pumbaa_msg/PumbaaCmd
+rosrun joy joy_node
 ```
-'nubot_pumbaa_msg/PumbaaCmd' is a self defined message type.  
-"vel_linear" means the linear velocity of the robot, "vel_angular" means the angular velocity.  
-"front_left" means the rotate position of the front_left flipper, the rest are similar.  
+'/nubot_msgs/drive_base_cmd' is a self defined message type.  
 
 ## TODO
 1.Find out the problem of current robot motion simulating mechanism, make it more real.  
 2.Add self designed flipper position controller.  
-3.Add RGBD camera.  
-4.Connect to nubot_joy_stick.  
+3.Add RGBD camera & LiDAR.  
