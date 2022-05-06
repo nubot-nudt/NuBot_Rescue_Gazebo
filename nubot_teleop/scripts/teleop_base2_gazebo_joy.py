@@ -98,10 +98,10 @@ class Callbacks:
         self.drive_direction = 1 #前进方向 1正向 0反向
 
         self.fin_pos_reset = 0
-        self.fin_angle_mode = 0
+        self.fin_angle_mode = 1 #Gazebo摆臂速度控制模式不太好用，直接角度控制
         self.fin_auto_mode = 0
         self.fin_add = [0,0,0,0]
-        self.fin_add_delta = 0.5
+        self.fin_add_delta = 0.7 #摆臂转速调整
         self.fin_expect_pub = [0,0,0,0]
         self.fin_angle_real = [0,0,0,0]
         self.driver_emcy = 0

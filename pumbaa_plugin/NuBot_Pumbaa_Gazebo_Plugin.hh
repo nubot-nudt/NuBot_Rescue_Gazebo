@@ -153,9 +153,9 @@ namespace gazebo
 
       ros::NodeHandle*            rosnode_;           // A pointer to the ROS node.
       ros::Subscriber             PumbaaCmd_sub_;      // listen to the Tracks & Flippers command
-      ros::Publisher              omin_vision_pub_;   // not used yet
       ros::Publisher              debug_pub_;
       ros::Publisher              RobotState_pub_;   // Publish the pose of the robot
+      ros::Publisher              RobotPose_pub_;   // Publish the pose of the robot
 
       boost::thread               message_callback_queue_thread_;     // Thead object for the Ros running callback Thread.
       boost::thread               service_callback_queue_thread_;

@@ -305,6 +305,8 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
                   front_left_j->GetScopedName(),common::PID(flip_p, flip_i, flip_d));
       robot_model_->GetJointController()->SetPositionTarget(
                   front_left_j->GetScopedName(), -flip_initial);
+      // robot_model_->GetJointController()->SetVelocityPID(
+      //             front_left_j->GetScopedName(),common::PID(100, 20, 0));
       gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
@@ -330,6 +332,8 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
                   rear_left_j->GetScopedName(),common::PID(flip_p, flip_i, flip_d));
       robot_model_->GetJointController()->SetPositionTarget(
                   rear_left_j->GetScopedName(), flip_initial);
+      // robot_model_->GetJointController()->SetVelocityPID(
+      //             rear_left_j->GetScopedName(),common::PID(100, 20, 0));
       gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
@@ -355,6 +359,8 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
                   front_right_j->GetScopedName(),common::PID(flip_p, flip_i, flip_d));
       robot_model_->GetJointController()->SetPositionTarget(
                   front_right_j->GetScopedName(), -flip_initial);
+      // robot_model_->GetJointController()->SetVelocityPID(
+      //             front_right_j->GetScopedName(),common::PID(100, 20, 0));
       gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
@@ -380,6 +386,9 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
                   rear_right_j->GetScopedName(),common::PID(flip_p, flip_i, flip_d));
       robot_model_->GetJointController()->SetPositionTarget(
                   rear_right_j->GetScopedName(), flip_initial);
+                  // Setup a P-controller, with a gain of 0.1.
+      // robot_model_->GetJointController()->SetVelocityPID(
+      //             rear_right_j->GetScopedName(),common::PID(100, 20, 0));
       gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
@@ -413,9 +422,8 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   rosnode_ = new ros::NodeHandle(robot_name_);
 
   // Publishers
-  // omin_vision_pub_   = rosnode_->advertise<nubot_common::OminiVisionInfo>("omnivision/OmniVisionInfo",10);
-  // debug_pub_ = rosnode_->advertise<std_msgs::Float64MultiArray>("debug",10);
-  RobotState_pub_ = rosnode_->advertise<geometry_msgs::Pose>("/nubot_state/base_state",10);
+  RobotPose_pub_ = rosnode_->advertise<geometry_msgs::Pose>("/gazebo_state/pumbaa_pose",10);
+  RobotState_pub_ = rosnode_->advertise<nubot_msgs::base_info>("/nubot_drive/base_info",10);
 
   // Subscribers.
   //ros::SubscribeOptions so1 = ros::SubscribeOptions::create<gazebo_msgs::ModelStates>(
@@ -710,8 +718,8 @@ void NuBotPumbaaGazebo::DriveTracks(/*const common::UpdateInfo &_unused*/)
   size_t i = 0;
   const auto contacts = this->contactManager->GetContacts();
   const auto model = this->body_->GetModel();
-  gzmsg << "NuBotPumbaaGazebo_Plugin: DriveTracks " << "ContactCount=" <<
-        std::to_string(contactManager->GetContactCount()) << std::endl;
+  // gzmsg << "NuBotPumbaaGazebo_Plugin: DriveTracks " << "ContactCount=" <<
+  //       std::to_string(contactManager->GetContactCount()) << std::endl;
   for (auto contact : contacts)
   {
     // Beware! There may be invalid contacts beyond GetContactCount()...
@@ -1133,12 +1141,30 @@ void NuBotPumbaaGazebo::message_publish(void)
   RobotPose.position.x = body_->WorldPose().Pos().X();
   RobotPose.position.y = body_->WorldPose().Pos().Y();
   RobotPose.position.z = body_->WorldPose().Pos().Z();
-
   RobotPose.orientation.x = body_->WorldPose().Rot().X();
   RobotPose.orientation.y = body_->WorldPose().Rot().Y();
   RobotPose.orientation.z = body_->WorldPose().Rot().Z();
   RobotPose.orientation.w = body_->WorldPose().Rot().W();
-  RobotState_pub_.publish(RobotPose);
+  RobotPose_pub_.publish(RobotPose);
+
+  nubot_msgs::base_info RobotState;
+  RobotState.velocity[0] = (int)(   trackVelocity_[Tracks::LEFT]/main_velocity_trans);
+  RobotState.velocity[1] = (int)(   trackVelocity_[Tracks::RIGHT]/main_velocity_trans);
+  RobotState.velocity[2] = (int)(-1*front_left_j->GetVelocity(0)/fin_rate_trans);
+  RobotState.velocity[3] = (int)(   rear_left_j->GetVelocity(0)/fin_rate_trans);
+  RobotState.velocity[4] = (int)(-1*front_right_j->GetVelocity(0)/fin_rate_trans);
+  RobotState.velocity[5] = (int)(   rear_right_j->GetVelocity(0)/fin_rate_trans);
+  RobotState.fin_angle[0] = -1*front_left_j->Position(0)/angle2radian;
+  RobotState.fin_angle[1] =    rear_left_j->Position(0)/angle2radian;
+  RobotState.fin_angle[2] = -1*front_right_j->Position(0)/angle2radian;
+  RobotState.fin_angle[3] =    rear_right_j->Position(0)/angle2radian;
+  RobotState.current[0] = 0;
+  RobotState.current[1] = 0;
+  RobotState.current[2] = -1*front_left_j->GetForce(0);
+  RobotState.current[3] =    rear_left_j->GetForce(0);
+  RobotState.current[4] = -1*front_right_j->GetForce(0);
+  RobotState.current[5] =    rear_right_j->GetForce(0);
+  RobotState_pub_.publish(RobotState);
 }
 
 void NuBotPumbaaGazebo::Drive_Cmd_CB(const nubot_msgs::base_drive_cmd::ConstPtr &_msg)
