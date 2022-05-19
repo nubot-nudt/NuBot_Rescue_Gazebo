@@ -29,23 +29,27 @@
             <include>
                 <uri>model://NuBot_Pumbaa_v2</uri>
             </include>
-        <!-- </model>
-
-        <model name="velodyne_hdl_32"> -->
             <include>
-                <uri>model://velodyne_hdl_32</uri>
-                <pose>-0.16175 0 0.288 0 0 3.1416</pose>
+                <uri>model://RS_Helios_5515</uri>
+                <pose>-0.21175 0 0.138 0 0 3.1416</pose>
             </include>
-            <joint name='velodyne_joint' type='fixed'>
+            <include>
+                <uri>model://IMU</uri>
+                <pose>-0.21175 0 0.14 0 0 3.1416</pose>
+            </include>
+            <joint name='lidar_joint' type='fixed'>
                 <parent>NuBot_Pumbaa_v2::base_link</parent>
-                <child>velodyne_hdl_32::base</child>
+                <child>RS_Helios_5515::base_link</child>
             </joint>
-            <!-- <plugin name="velodyne_control" filename="libvelodyne_plugin.so"/> -->
+            <joint name='imu_joint' type='fixed'>
+                <parent>NuBot_Pumbaa_v2::base_link</parent>
+                <child>IMU::base_link</child>
+            </joint>
         </model>
 
-	<plugin name="ElevationMapGroundTruthPlugin" filename="libhector_elevation_map_ground_truth_plugin.so"/>
+	<!-- <plugin name="ElevationMapGroundTruthPlugin" filename="libhector_elevation_map_ground_truth_plugin.so"/>
 
-	<plugin name="ContactPointPublisherPlugin" filename="libhector_contact_points_publisher_plugin.so"/>
+	<plugin name="ContactPointPublisherPlugin" filename="libhector_contact_points_publisher_plugin.so"/> -->
 
     </world>
 </sdf>

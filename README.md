@@ -71,8 +71,10 @@ After compilation, run:
 ```c++
 roscore
 source devel/setup.bash
-roslaunch src/launch/NuBot_Pumbaa_test.launch
+roslaunch src/launch/pumbaa_lab.launch
 ```
+for LiDAR RS-Helios & IMU in .sdf format, run:
+`roslaunch src/launch/pumbaa_lidar_sdf.launch`
 
 ## Control the Robot
 Control the robot with PS4 joy or sending message to rostopic:"/nubot_msgs/drive_base_cmd".  
@@ -84,15 +86,28 @@ The robot pose in Gazebo are published through rostopic "/gazebo_state/pumbaa_po
 The robot state in Gazebo are published through rostopic "/nubot_drive/base_info"  
 "/nubot_msgs/drive_base_cmd" & "/nubot_drive/base_info" are self defined message types.  
 
+## Read sensor data
+LiDAR PointCloud2 in rostopic "/lidar_points"
+For LiDAR in .sdf format, need to change "Fixed Frame" in Rviz to `rs_helios`, and add rostopic "/lidar_points".
+
 ## Parameter Adjustment
-You can adjust most robot & environment parameters by modifying the ".sdf" & ".world" files.  
-At the ***end*** of:  
+You can adjust most robot & sensors & environment parameters by modifying the ".sdf" & ".world" files.  
+Robot:  
 
 >/gazebo_description/models/NuBot_Pumbaa/model.sdf
 >/gazebo_description/models/NuBot_Pumbaa_v2/model.sdf
 
+LiDAR:
+>/gazebo_description/models/RS_Helios_5515/model.sdf
+
+Installation of sensors:
+>/gazebo_description/world/Pumbaa_lidar_labfield.world
+
+robot in '.xacro' format is under development.
+
 you can change mechanical parameters of robot, including friction, flippers PID and so on.  
 
 ## TODO
-1.Add RGBD camera & LiDAR. This may require transfering the robot model .sdf -> .xacro.  
-2.Make the simulation more real.  
+1.Add RGBD camera.  
+2.Transfer the robot model .sdf -> .xacro.  
+3.Make the simulation more real.  

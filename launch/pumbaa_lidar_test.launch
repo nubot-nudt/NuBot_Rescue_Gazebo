@@ -1,0 +1,28 @@
+<launch>
+    <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <!-- <arg name="world_name" value="$(find gazebo_description)/world/Pumbaa_labfield.world" /> -->
+        <arg name="world_name" value="$(find gazebo_description)/world/labfield.world" />
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+        <arg name="recording" value="false"/>
+        <arg name="debug" value="false"/>
+        <arg name="verbose" value="true"/>
+    </include>
+
+    <param name="robot_description"
+         command="$(find xacro)/xacro $(find gazebo_description)/models/NuBot_Pumbaa_v2/model_v2.urdf.xacro
+                  --inorder" />
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_model" args="-urdf -param /robot_description -model example"/>
+
+    <!--teleop joy-->
+	<node name="nubot_teleop" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/>
+    
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="30.0" />
+    </node>
+
+    <!-- RViz -->
+    
+</launch>

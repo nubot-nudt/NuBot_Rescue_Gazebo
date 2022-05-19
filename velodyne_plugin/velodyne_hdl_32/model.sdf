@@ -2,7 +2,7 @@
 <sdf version="1.5">
   <model name="velodyne_hdl_32">
     <static>false</static>
-    <link name="base">
+    <link name="lidar_base_link">
       <pose>0 0 0.029335 0 0 0</pose>
       <inertial>
         <mass>1.2</mass>
@@ -21,7 +21,7 @@
       <kinematic>0</kinematic>
       <enable_wind>0</enable_wind>
 
-      <collision name="base_collision">
+      <collision name="lidar_base_collision">
         <geometry>
           <cylinder>
             <radius>.04267</radius>
@@ -29,7 +29,7 @@
           </cylinder>
         </geometry>
       </collision>
-      <visual name="base_visual">
+      <visual name="lidar_base_visual">
         <pose>0 0 -0.029335 0 0 0</pose>
         <geometry>
           <mesh>
@@ -39,7 +39,7 @@
       </visual>
     </link>
     
-    <link name="top">
+    <link name="lidar_top_link">
       <pose>0 0 0.095455 0 0 0</pose>
       <inertial>
         <mass>0.1</mass>
@@ -52,7 +52,7 @@
           <iyz>0</iyz>
         </inertia>
       </inertial>
-      <collision name="top_collision">
+      <collision name="lidar_top_collision">
         <geometry>
           <cylinder>
             <radius>0.04267</radius>
@@ -60,7 +60,7 @@
           </cylinder>
         </geometry>
       </collision>
-      <visual name="top_visual">
+      <visual name="lidar_top_visual">
         <pose>0 0 -0.0376785 0 0 1.5707</pose>
         <geometry>
           <mesh>
@@ -69,7 +69,7 @@
         </geometry>
       </visual>
 
-      <sensor type="ray" name="sensor">
+      <sensor type="ray" name="laser">
         <pose>0 0 -0.004645 1.5707 0 0</pose>
         <visualize>true</visualize>
         <update_rate>30</update_rate>
@@ -95,13 +95,14 @@
             <resolution>0.02</resolution>
           </range>
         </ray>
+        <plugin name="laser" filename="libRayPlugin.so" />
       </sensor>
     </link>
 
-    <joint type="revolute" name="joint">
+    <joint type="revolute" name="lidar_revolute_joint">
       <pose>0 0 -0.036785 0 0 0</pose>
-      <parent>base</parent>
-      <child>top</child>
+      <parent>lidar_base_link</parent>
+      <child>lidar_top_link</child>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -111,6 +112,7 @@
       </axis>
     </joint>
     <plugin name="velodyne_control" filename="libvelodyne_plugin.so">
+      <lidar_revolute_joint>lidar_revolute_joint</lidar_revolute_joint>
       <velocity>25</velocity>
     </plugin>
 

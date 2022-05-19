@@ -1,8 +1,8 @@
 <launch>
     <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find gazebo_description)/world/Pumbaa_labfield.world" />
-        <!-- <arg name="world_name" value="$(find gazebo_description)/world/Pumbaa_lidar_labfield.world" /> -->
+        <!-- <arg name="world_name" value="$(find gazebo_description)/world/Pumbaa_labfield.world" /> -->
+        <arg name="world_name" value="$(find gazebo_description)/world/Pumbaa_lidar_labfield.world" />
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="true"/>
@@ -12,4 +12,11 @@
     </include>
     <!--teleop joy-->
 	<node name="nubot_teleop" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/>
+    
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="30.0" />
+    </node>
+
+    <!-- RViz -->
+    
 </launch>

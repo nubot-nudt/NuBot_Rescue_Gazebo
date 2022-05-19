@@ -39,7 +39,25 @@ namespace gazebo
 
       // Get the first joint. We are making an assumption about the model
       // having one joint that is the rotational joint.
-      this->joint = _model->GetJoints()[0];
+      // this->joint = _model->GetJoints()[0];
+      if (_sdf->HasElement("lidar_revolute_joint"))
+      {
+        const auto sdf_joint_name = _sdf->GetElement("lidar_revolute_joint")
+                ->Get<std::string>();
+        const auto model_joint_name = _model->GetScopedName()+"::"+sdf_joint_name;//
+        const auto lidar_joint = _model->GetJoint(model_joint_name);
+        if (lidar_joint == nullptr)
+        {
+          gzerr << "velodyne_Plugin: <lidar_joint> joint '"
+                << sdf_joint_name << "' does not exist." << std::endl;
+        }
+        else
+        {
+          this->joint = lidar_joint;
+          gzmsg << "velodyne_Plugin: Successfully added joint '"
+            << sdf_joint_name << "'" << std::endl;
+        }
+      }
 
       // Setup a P-controller, with a gain of 0.1.
       this->pid = common::PID(0.1, 0, 0);
