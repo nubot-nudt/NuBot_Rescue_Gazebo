@@ -14,7 +14,7 @@
     <param name="robot_description"
          command="$(find xacro)/xacro $(find gazebo_description)/models/NuBot_Pumbaa_v2/model_v2.urdf.xacro
                   --inorder" />
-    <node pkg="gazebo_ros" type="spawn_model" name="spawn_model" args="-urdf -param /robot_description -model example"/>
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_model" args="-urdf -param /robot_description -model pumbaa_v2"/>
 
     <!--teleop joy-->
 	<node name="nubot_teleop" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/>

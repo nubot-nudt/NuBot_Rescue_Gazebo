@@ -94,6 +94,7 @@
 
 #include "nubot_msgs/base_info.h"
 #include "nubot_msgs/base_drive_cmd.h"
+#include "nubot_msgs/base_auto_cmd.h"
 #include "math.h"
 
 // This contact.h must be include, it is ralated to the ode
@@ -152,7 +153,8 @@ namespace gazebo
       sdf::ElementPtr             robot_sdf_;         // Pointer to the robot sdf file
 
       ros::NodeHandle*            rosnode_;           // A pointer to the ROS node.
-      ros::Subscriber             PumbaaCmd_sub_;      // listen to the Tracks & Flippers command
+      ros::Subscriber             DriveCmd_sub_;      // listen to the Tracks & Flippers command
+      ros::Subscriber             DriveAutoCmd_sub_;      // listen to the Tracks & Flippers command
       ros::Publisher              debug_pub_;
       ros::Publisher              RobotState_pub_;   // Publish the pose of the robot
       ros::Publisher              RobotPose_pub_;   // Publish the pose of the robot
@@ -298,6 +300,7 @@ namespace gazebo
       /// \brief PumbaaCmd message CallBack function
       /// \param[in] _msg shared pointer that is used to set the Tracks velocity & Flippers angle
       void Drive_Cmd_CB(const nubot_msgs::base_drive_cmd::ConstPtr &_msg);
+      void Drive_Auto_Cmd_CB(const geometry_msgs::Twist::ConstPtr &_msg);
 
       /// \brief ROS Custom message callback queue thread
       void message_queue_thread();

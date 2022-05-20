@@ -191,6 +191,8 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Load the "body" link
   body_ = robot_model_->GetLink(
           robot_sdf_->GetElement("body")->Get<std::string>());
+  // gzmsg << "NuBotPumbaaGazebo_Plugin: sdf body "
+  //       << robot_sdf_->GetElement("body")->Get<std::string>() << std::endl;
   if (body_ == nullptr)
   {
     gzerr << "NuBotPumbaaGazebo_Plugin: <body> link does not exist."
@@ -210,6 +212,8 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Load the "left_track" Link
   trackLink_[Tracks::LEFT] = robot_model_->GetLink(
           robot_sdf_->GetElement("left_track")->Get<std::string>());
+  // gzmsg << "NuBotPumbaaGazebo_Plugin: sdf left_track "
+  //       << robot_sdf_->GetElement("left_track")->Get<std::string>() << std::endl;
   gtracks[Tracks::LEFT].push_back(trackLink_[Tracks::LEFT]);
   if (gtracks[Tracks::LEFT].at(0) == nullptr)
   {
@@ -431,10 +435,19 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   //            ros::VoidPtr(), &message_queue_);
   //ModelStates_sub_ = rosnode_->subscribe(so1);
 
+  // ros::SubscribeOptions so2 = ros::SubscribeOptions::create<nubot_msgs::base_auto_cmd>(
+  //           "/nubot_drive/base_auto_cmd", 100, boost::bind(&NuBotPumbaaGazebo::Drive_Auto_Cmd_CB,this,_1),
+  //           ros::VoidPtr(), &message_queue_);
+  // DriveAutoCmd_sub_ = rosnode_->subscribe(so2);
+  ros::SubscribeOptions so2 = ros::SubscribeOptions::create<geometry_msgs::Twist>(
+            "/nubot_drive/base_auto_cmd", 100, boost::bind(&NuBotPumbaaGazebo::Drive_Auto_Cmd_CB,this,_1),
+            ros::VoidPtr(), &message_queue_);
+  DriveAutoCmd_sub_ = rosnode_->subscribe(so2);
+
   ros::SubscribeOptions so3 = ros::SubscribeOptions::create<nubot_msgs::base_drive_cmd>(
             "/nubot_drive/base_drive_cmd", 100, boost::bind(&NuBotPumbaaGazebo::Drive_Cmd_CB,this,_1),
             ros::VoidPtr(), &message_queue_);
-  PumbaaCmd_sub_ = rosnode_->subscribe(so3);
+  DriveCmd_sub_ = rosnode_->subscribe(so3);
 
   // Service Servers & clients
   // dribbleId_client_ = rosnode_->serviceClient<nubot_common::DribbleId>("/DribbleId");
@@ -1242,6 +1255,30 @@ void NuBotPumbaaGazebo::Drive_Cmd_CB(const nubot_msgs::base_drive_cmd::ConstPtr 
       }
   }
   SetTrackVelocity(Speed_cmd[0],Speed_cmd[1]);
+  msgCB_lock_.unlock();
+}
+
+void NuBotPumbaaGazebo::Drive_Auto_Cmd_CB(const geometry_msgs::Twist::ConstPtr &_msg)
+{
+  // gzmsg << "NubotPumbaaGazebo_Plugin: Drive_Auto_Cmd_CB " << "ContactCount=" <<
+  //       std::to_string(contactManager->GetContactCount()) << std::endl;
+//  gzmsg << "NubotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.X:"
+//        << std::to_string(body_->WorldPose().Pos().X()) << std::endl;
+//  gzmsg << "NubotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.Y:"
+//        << std::to_string(body_->WorldPose().Pos().Y()) << std::endl;
+//  gzmsg << "NubotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.Z:"
+//        << std::to_string(body_->WorldPose().Pos().Z()) << std::endl;
+  msgCB_lock_.lock();
+  double MsglinearSpeed = _msg->linear.x;
+  double MsgangularSpeed = _msg->angular.z;
+
+  double MsgFL = M_PI/2;
+  double MsgFR = M_PI/2;
+  double MsgRL = M_PI;
+  double MsgRR = M_PI;
+
+  SetBodyVelocity(MsglinearSpeed,MsgangularSpeed);
+  SetFlipAngle(-MsgFL,-MsgFR,MsgRL,MsgRR);
   msgCB_lock_.unlock();
 }
 

@@ -77,18 +77,37 @@ for LiDAR RS-Helios & IMU in .sdf format, run:
 `roslaunch src/launch/pumbaa_lidar_sdf.launch`
 
 ## Control the Robot
-Control the robot with PS4 joy or sending message to rostopic:"/nubot_msgs/drive_base_cmd".  
+rostopic:"/nubot_msgs/base_drive_cmd".  
+rostopic:"/nubot_msgs/base_auto_cmd".  
+#### DualShock4 (PS4 joystick)
 ```c++
 rosrun joy joy_node
+rosrun nubot_teleop teleop_base2_gazebo_joy.py
 ```
-
-The robot pose in Gazebo are published through rostopic "/gazebo_state/pumbaa_pose"  
-The robot state in Gazebo are published through rostopic "/nubot_drive/base_info"  
-"/nubot_msgs/drive_base_cmd" & "/nubot_drive/base_info" are self defined message types.  
+with rostopic:"/nubot_msgs/base_drive_cmd".  
+#### TODO:Keyboard (message type: self-defined)  
+```c++
+rosrun nubot_teleop teleop_keyboard.py
+```
+with rostopic:"/nubot_msgs/base_drive_cmd".  
+#### Keyboard (message type: "geometry_msgs::Twist")  
+```c++
+rosrun nubot_teleop teleop_twist_keyboard.py
+```
+with rostopic:"/nubot_msgs/base_auto_cmd".  
+This topic is in "geometry_msgs::Twist" type, which can be used in auto navigation.  
 
 ## Read sensor data
-LiDAR PointCloud2 in rostopic "/lidar_points"
-For LiDAR in .sdf format, need to change "Fixed Frame" in Rviz to `rs_helios`, and add rostopic "/lidar_points".
+#### Robot pose
+rostopic "/gazebo_state/pumbaa_pose"  
+#### Robot state (flipper angle, speed...)
+rostopic "/nubot_drive/base_info"  
+"/nubot_msgs/drive_base_cmd" & "/nubot_drive/base_info" are self defined message types.  
+
+#### LiDAR PointCloud2 
+in rostopic "/lidar_points"  
+For LiDAR in .sdf format, need to change "Fixed Frame" in Rviz to `rs_helios`, and add rostopic "/lidar_points".  
+
 
 ## Parameter Adjustment
 You can adjust most robot & sensors & environment parameters by modifying the ".sdf" & ".world" files.  

@@ -28,31 +28,31 @@
                  izz="0.319921" />
       </inertial>
 
-      <collision name='base_link_collision_1'>
+      <collision name='base_collision_1'>
         <origin xyz="${track_length/2} 0 0" rpy="${PI/2} 0 0" />
         <geometry>
           <cylinder radius="0.07" length="0.11"/>
         </geometry>
       </collision>
-      <collision name='base_link_collision_2'>
+      <collision name='base_collision_2'>
         <origin xyz="${-1*track_length/2} 0 0" rpy="${PI/2} 0 0" />
         <geometry>
           <cylinder radius="0.07" length="0.11"/>
         </geometry>
       </collision>
-      <collision name='base_link_collision'>
+      <collision name='base_collision'>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <box size="${track_length} 0.11 0.14" />
         </geometry>
       </collision>
-      <visual name='base_link_visual'>
+      <visual name='base_visual'>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <mesh filename="model://NuBot_Pumbaa_v2/meshes/base_link.STL" />
         </geometry>
       </visual>
-      <visual name='base_link_vive_link_visual'>
+      <visual name='base_vive_link_visual'>
         <origin xyz="0.16175 0 0.138" rpy="0 0 0" />
         <geometry>
           <mesh filename="model://NuBot_Pumbaa_v2/meshes/vive_link.STL" />
@@ -61,14 +61,16 @@
     </link>
 
     <gazebo reference="base_link">
-      <self_collide>false</self_collide>
+      <selfCollide>false</selfCollide>
       <mu1>1</mu1>
       <mu2>1</mu2>
       <fdir1 value="0 1 0" />
       <gravity>1</gravity>
-      <kinematic>0</kinematic>
-      <enable_wind>0</enable_wind>
-      <max_contacts>10</max_contacts>
+      <maxContacts>10</maxContacts>
+      <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
+        <!--The link tags of tracks-->
+        <!-- <body>base_link</body> -->
+      </plugin>
     </gazebo>
 
     <!--left_track-->
@@ -109,14 +111,16 @@
       </collision>
 
       <gazebo reference="left_track_link">
-        <self_collide>false</self_collide>
+        <selfCollide>false</selfCollide>
         <mu1>0.7</mu1>
         <mu2>150</mu2>
         <fdir1 value="0 1 0" />
         <gravity>1</gravity>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <max_contacts>10</max_contacts>
+        <maxContacts>10</maxContacts>
+        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
+          <!--The link tags of tracks-->
+          <!-- <left_track>left_track_link</left_track> -->
+        </plugin>
       </gazebo>
     </link>
 
@@ -158,14 +162,16 @@
       </collision>
 
       <gazebo reference="right_track_link">
-        <self_collide>false</self_collide>
+        <selfCollide>false</selfCollide>
         <mu1>0.7</mu1>
         <mu2>150</mu2>
         <fdir1 value="0 1 0" />
         <gravity>1</gravity>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <max_contacts>10</max_contacts>
+        <maxContacts>10</maxContacts>
+        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
+          <!--The link tags of tracks-->
+          <!-- <right_track>right_track_link</right_track> -->
+        </plugin>
       </gazebo>
     </link>
 
@@ -217,14 +223,16 @@
       </collision>
 
       <gazebo reference="rear_left_flipper_link">
-        <self_collide>false</self_collide>
+        <selfCollide>false</selfCollide>
         <mu1>0.7</mu1>
         <mu2>150</mu2>
         <fdir1 value="0 1 0" />
         <gravity>1</gravity>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <max_contacts>10</max_contacts>
+        <maxContacts>10</maxContacts>
+        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
+          <!--The link tags of tracks-->
+          <!-- <left_flipper>rear_left_flipper_link</left_flipper> -->
+        </plugin>
       </gazebo>
     </link>
 
@@ -274,14 +282,16 @@
       </collision>
 
       <gazebo reference="rear_right_flipper_link">
-        <self_collide>false</self_collide>
+        <selfCollide>false</selfCollide>
         <mu1>0.7</mu1>
         <mu2>150</mu2>
         <fdir1 value="0 1 0" />
         <gravity>1</gravity>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <max_contacts>10</max_contacts>
+        <maxContacts>10</maxContacts>
+        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
+          <!--The link tags of tracks-->
+          <!-- <right_flipper>rear_right_flipper_link</right_flipper> -->
+        </plugin>
       </gazebo>
     </link>
 
@@ -331,14 +341,16 @@
       </collision>
 
       <gazebo reference="front_left_flipper_link">
-        <self_collide>false</self_collide>
+        <selfCollide>false</selfCollide>
         <mu1>0.7</mu1>
         <mu2>150</mu2>
         <fdir1 value="0 1 0" />
         <gravity>1</gravity>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <max_contacts>10</max_contacts>
+        <maxContacts>10</maxContacts>
+        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
+          <!--The link tags of tracks-->
+          <!-- <left_flipper>front_left_flipper_link</left_flipper> -->
+        </plugin>
       </gazebo>
     </link>
     
@@ -388,14 +400,16 @@
       </collision>
 
       <gazebo reference="front_right_flipper_link">
-        <self_collide>false</self_collide>
+        <selfCollide>false</selfCollide>
         <mu1>0.7</mu1>
         <mu2>150</mu2>
         <fdir1 value="0 1 0" />
         <gravity>1</gravity>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <max_contacts>10</max_contacts>
+        <maxContacts>10</maxContacts>
+        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
+          <!--The link tags of tracks-->
+          <!-- <right_flipper>front_right_flipper_link</right_flipper> -->
+        </plugin>
       </gazebo>
     </link>
 

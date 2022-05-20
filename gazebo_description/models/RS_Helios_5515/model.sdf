@@ -5,7 +5,7 @@
     <link name='base_link'>
       <pose frame=''>0 0 0 0 0 0</pose>
       <inertial>
-        <pose frame=''>0 0 0.03 0 0 0</pose>
+        <pose frame=''>0 0 0 0 0 0</pose>
         <mass>0.84</mass>
         <inertia>
           <ixx>0.000908193</ixx>
@@ -16,26 +16,26 @@
           <izz>0.00110506</izz>
         </inertia>
       </inertial>
-      <collision name='velodyne_collision'>
-        <pose frame=''>0 0 0.03 0 -0 0</pose>
+      <collision name='collision'>
+        <pose frame=''>0 0 -0.02 0 0 0</pose>
         <geometry>
           <cylinder>
-            <length>0.0717</length>
-            <radius>0.0516</radius>
+            <length>0.11</length>
+            <radius>0.05</radius>
           </cylinder>
         </geometry>
         <max_contacts>10</max_contacts>
       </collision>
-      <visual name='velodyne_visual'>
-        <pose frame=''>0 0 0.03 0 0 0</pose>
+      <visual name='visual'>
+        <pose frame=''>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://RS_Helios_5515/meshes/VLP16_base_1.dae</uri>
+            <uri>model://RS_Helios_5515/meshes/RS_Helios_frame.STL</uri>
           </mesh>
         </geometry>
       </visual>
-      <visual name='velodyne_visual_1'>
+      <!-- <visual name='velodyne_visual_1'>
         <pose frame=''>0 0 0.03 0 0 0</pose>
         <geometry>
           <mesh>
@@ -52,7 +52,7 @@
             <uri>model://RS_Helios_5515/meshes/VLP16_scan.dae</uri>
           </mesh>
         </geometry>
-      </visual>
+      </visual> -->
 
       <gravity>1</gravity>
       <velocity_decay/>
@@ -62,7 +62,7 @@
 
       <sensor name='RS_Helios' type='ray'>
         <visualize>false</visualize>
-        <pose frame=''>0 0 0.03 0 -0 0</pose>
+        <pose frame=''>0 0 0 0 0 0</pose>
         <update_rate>10</update_rate>
         <ray>
           <scan>

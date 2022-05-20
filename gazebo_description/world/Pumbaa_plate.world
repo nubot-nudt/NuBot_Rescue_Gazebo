@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-    <world name="NuBot_Pumbaa_test_plate">
+    <world name="NuBot_Pumbaa_plate">
         <!--A demo world for tracked vehicles.-->
 
         <include>

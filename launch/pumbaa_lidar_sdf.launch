@@ -10,12 +10,12 @@
         <arg name="debug" value="false"/>
         <arg name="verbose" value="true"/>
     </include>
-    <!--teleop joy-->
-	<node name="nubot_teleop" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/>
     
-    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
-        <param name="publish_frequency" type="double" value="30.0" />
-    </node>
+    <!--teleop joy-->
+	<!-- <node name="nubot_teleop" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/> -->
+    <!--teleop keyboard-->
+	<!-- <node name="nubot_teleop" pkg="nubot_teleop" type="teleop_keyboard.py" output="screen"/> -->
+    <node name="teleop_twist_keyboard" pkg="nubot_teleop" type="teleop_twist_keyboard.py" output="screen"/>
 
     <!-- RViz -->
     
