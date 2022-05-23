@@ -103,6 +103,10 @@ rostopic "/gazebo_state/pumbaa_pose"
 #### Robot state (flipper angle, speed...)
 rostopic "/nubot_drive/base_info"  
 "/nubot_msgs/drive_base_cmd" & "/nubot_drive/base_info" are self defined message types.  
+#### IMU
+rostopic "/imu/data"  
+this is based on rospkg "hector_gazebo_ros_imu"  
+need `sudo apt install ros-melodic-hector-gazebo-plugins`  
 
 #### LiDAR PointCloud2 
 in rostopic "/lidar_points"  

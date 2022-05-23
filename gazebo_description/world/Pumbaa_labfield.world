@@ -31,9 +31,9 @@
             </include>
         </model>
 
-	<plugin name="ElevationMapGroundTruthPlugin" filename="libhector_elevation_map_ground_truth_plugin.so"/>
+	<!-- <plugin name="ElevationMapGroundTruthPlugin" filename="libhector_elevation_map_ground_truth_plugin.so"/> -->
 
-	<plugin name="ContactPointPublisherPlugin" filename="libhector_contact_points_publisher_plugin.so"/>
+	<!-- <plugin name="ContactPointPublisherPlugin" filename="libhector_contact_points_publisher_plugin.so"/> -->
 
     </world>
 </sdf>

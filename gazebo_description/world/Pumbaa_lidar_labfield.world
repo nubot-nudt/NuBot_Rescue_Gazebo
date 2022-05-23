@@ -29,18 +29,31 @@
             <include>
                 <uri>model://NuBot_Pumbaa_v2</uri>
             </include>
+
             <include>
                 <uri>model://RS_Helios_5515</uri>
-                <pose>-0.21175 0 0.224 0 0 3.1416</pose> <!--0.138+0.086=0.224-->
+                <pose>-0.21175 0 0.224 0 0 3.1416</pose> 
             </include>
-            <include>
-                <uri>model://IMU</uri>
-                <pose>-0.21175 0 0.14 0 0 3.1416</pose>
-            </include>
+            <!--0.16175+0.05=0.21175 0.138+0.086=0.224-->
             <joint name='lidar_joint' type='fixed'>
                 <parent>NuBot_Pumbaa_v2::base_link</parent>
                 <child>RS_Helios_5515::base_link</child>
             </joint>
+
+            <!-- <include>
+                <uri>model://RS_Bpearl</uri>
+                <pose>-0.31175 0 0.218 0 1.5708 0</pose> 
+            </include> -->
+            <!--0.16175+0.15=0.21175 0.138+0.08=0.218-->
+            <!-- <joint name='lidar_joint' type='fixed'>
+                <parent>NuBot_Pumbaa_v2::base_link</parent>
+                <child>RS_Bpearl::base_link</child>
+            </joint> -->
+
+            <include>
+                <uri>model://IMU</uri>
+                <pose>-0.21175 0 0.14 0 0 3.1416</pose>
+            </include>
             <joint name='imu_joint' type='fixed'>
                 <parent>NuBot_Pumbaa_v2::base_link</parent>
                 <child>IMU::base_link</child>

@@ -21,20 +21,32 @@
                 </box>
             </geometry>
             </collision>
-            <sensor name='imu_sensor' type='imu'>
-        <always_on>true</always_on>
-        <update_rate>50</update_rate>
-        <visualize>true</visualize>
-        <plugin filename='libgazebo_ros_imu_sensor.so' name='imu_plugin'>
-            <topicName>imu</topicName>
-            <updateRateHZ>100.0</updateRateHZ>
-            <gaussianNoise>0.0</gaussianNoise>
-            <xyzOffset>0 0 0</xyzOffset>
-            <rpyOffset>0 0 0</rpyOffset>
-            <frameName>imu</frameName>
-        </plugin>
-        <pose>0 0 0 0 0 0</pose>
-        </sensor>
+            <!-- <sensor name='imu_sensor' type='imu'>
+                <always_on>true</always_on>
+                <update_rate>50</update_rate>
+                <visualize>true</visualize>
+                <plugin filename='libgazebo_ros_imu_sensor.so' name='imu_plugin'>
+                    <topicName>imu</topicName>
+                    <updateRateHZ>100.0</updateRateHZ>
+                    <gaussianNoise>0.0</gaussianNoise>
+                    <xyzOffset>0 0 0</xyzOffset>
+                    <rpyOffset>0 0 0</rpyOffset>
+                    <frameName>imu</frameName>
+                </plugin>
+                <pose>0 0 0 0 0 0</pose>
+            </sensor> -->
         </link>
+        <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+            <robotNamespace>/</robotNamespace>
+            <updateRate>400.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <topicName>imu/data</topicName>
+            <accelDrift>0.005 0.005 0.005</accelDrift>
+            <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+            <rateDrift>0.005 0.005 0.005 </rateDrift>
+            <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+            <headingDrift>0.005</headingDrift>
+            <headingGaussianNoise>0.005</headingGaussianNoise>
+        </plugin>
     </model>
 </sdf>

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="RS_Helios_5515">
+    <link name='base_link'>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="0.9"/>
+        <inertia>
+        <inertia ixx="0.0025413" ixy="0" ixz="0"
+                  iyy="0.0016941" iyz="0"
+                  izz="0.0024448"/>
+        </inertia>
+      </inertial>
+      <collision name='collision'>
+        <origin xyz="0 0 -0.02"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.11"/>
+        </geometry>
+        <max_contacts>10</max_contacts>
+      </collision>
+      <visual name='visual'>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="model://RS_Helios_5515/meshes/RS_Helios_frame.STL" />
+        </geometry>
+      </visual>
+    </link>
+
+    <!-- Gazebo requires the velodyne_gazebo_plugins package -->
+    <gazebo reference="base_link">
+      <sensor name='RS_Helios' type='gpu_ray'>
+        <visualize>false</visualize>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>900</samples>
+              <resolution>1</resolution>
+              <min_angle>-1.5708</min_angle>
+              <max_angle>1.5708</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>32</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.959931089</min_angle>
+              <max_angle>0.261799</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.2</min>
+            <max>70</max>
+            <resolution>0.001</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0</stddev>
+          </noise>
+        </ray>
+        <plugin name='gazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_gpu_laser.so'>
+          <topicName>/lidar_points</topicName>
+          <robotNamespace>/</robotNamespace>
+          <frameName>rs_helios</frameName>
+          <organize_cloud>false</organize_cloud>
+          <min_range>0.2</min_range>
+          <max_range>70.0</max_range>
+          <gaussianNoise>0.008</gaussianNoise>
+        </plugin>
+      </sensor>
+    </gazebo>
+</robot>
