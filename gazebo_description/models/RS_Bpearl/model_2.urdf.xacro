@@ -47,7 +47,7 @@
       <xacro:if value="${gpu}">
         <sensor type="gpu_ray" name="${name}-RS_Bpearl">
           <pose>0 0 0 0 0 0</pose>
-          <visualize>true</visualize>
+          <visualize>false</visualize>
           <update_rate>${hz}</update_rate>
           <ray>
             <scan>

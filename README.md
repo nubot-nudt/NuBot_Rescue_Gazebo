@@ -35,8 +35,10 @@ This is a folder contains the original code of Martin Peica's work.
 
 This is a library pakage that may be needed during compilation. Just install it to the system. 
 （copy /boost/threadpool.hpp & threadpool/ to /usr/include/boost/ or /usr/local/include/boost/)  
-`sudo cp boost/threadpool.hpp /usr/include/boost/threadpool.hpp`
-`sudo cp -r boost/threadpool/ /usr/include/boost/threadpool/`
+```c++
+sudo cp boost/threadpool.hpp /usr/include/boost/threadpool.hpp
+sudo cp -r boost/threadpool/ /usr/include/boost/threadpool/
+```
 
 >/gazebo_description
 
@@ -53,6 +55,18 @@ The self defined ROS message for Pumbaa control.
 >/nubot_teleop
 
 The joy teleop code of NuBot_Pumbaa in Python3.
+
+>/launch
+
+The roslaunch files.
+
+>/velodyne_simolator
+
+The LiDAR sensor simolator for Gazebo.
+
+>/hector_gazebo-melodic-devel
+
+The hector_gazebo sensor sensor pkg.
 
 ## Compilation Note
 
@@ -79,19 +93,22 @@ for robot, LiDAR RS-Helios, IMU in <strong>.sdf</strong> format, run:
 `roslaunch src/launch/pumbaa_lidar_sdf.launch`
 
 ## Control the Robot
-rostopic:"/nubot_msgs/base_drive_cmd".  
-rostopic:"/nubot_msgs/base_auto_cmd".  
+Change teleop_node in `.launch` file.
+Control rostopic:"/nubot_msgs/base_drive_cmd", "/nubot_msgs/base_auto_cmd".  
+
 #### DualShock4 (PS4 joystick)
 ```c++
 rosrun joy joy_node
 rosrun nubot_teleop teleop_base2_gazebo_joy.py
 ```
 with rostopic:"/nubot_msgs/base_drive_cmd".  
-#### TODO:Keyboard (message type: self-defined)  
+
+#### Keyboard (message type: base_drive_cmd.msg)  
 ```c++
 rosrun nubot_teleop teleop_keyboard.py
 ```
 with rostopic:"/nubot_msgs/base_drive_cmd".  
+
 #### Keyboard (message type: "geometry_msgs::Twist")  
 ```c++
 rosrun nubot_teleop teleop_twist_keyboard.py
@@ -100,11 +117,13 @@ with rostopic:"/nubot_msgs/base_auto_cmd".
 This topic is in "geometry_msgs::Twist" type, which can be used in auto navigation.  
 
 ## Read sensor data
-#### Robot pose
+
+#### Robot pose in Gazebo
 rostopic "/gazebo_state/pumbaa_pose"  
+
 #### Robot state (flipper angle, speed...)
-rostopic "/nubot_drive/base_info"  
-"/nubot_msgs/drive_base_cmd" & "/nubot_drive/base_info" are self defined message types.  
+rostopic "/nubot_drive/base_info" (message type: base_info.msg)
+
 #### IMU
 rostopic "/imu/data"  
 this is based on rospkg "hector_gazebo_ros_imu"  
@@ -114,36 +133,38 @@ need `sudo apt install ros-melodic-hector-gazebo-plugins`
 rostopic "/lidar_points"  
 For LiDAR in <strong>.sdf</strong> format, need to change "Fixed Frame" in Rviz to `rs_helios`, and add rostopic "/lidar_points".  
 
-GPU acceleration ([with a modern Gazebo build]), check details in rospkg "velodyne_simulator".
+GPU acceleration ([with a modern Gazebo build]), check details in rospkg "velodyne_simulator".  
 * The GPU fix was added to ```gazebo7``` in version 7.14.0
 * The GPU fix was added to ```gazebo9``` in version 9.4.0
 
-Use up-to-date packages from the OSRF Gazebo apt repository
+Use up-to-date packages from the OSRF Gazebo apt repository  
 ```
 sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/gazebo-stable.list'
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D2486D2DD83DB69272AFE98867170598AF249743
 sudo apt update
 sudo apt upgrade
-```
-Sadly, the GPU mode for lidar has awful point cloud for now.
+```  
+Sadly, the GPU mode for lidar has awful point cloud for now.  
 https://bitbucket.org/DataspeedInc/velodyne_simulator/issues/15/gpu-mode-very-roughly-resoluted-scans-in
 
 ## Parameter Adjustment
-You can adjust most robot & sensors & environment parameters by modifying the ".sdf" & ".world" files.  
+You can adjust most robot & sensors & environment parameters by modifying the ".sdf", ".world", & ".xacro" files.  
 Robot:  
-
 >/gazebo_description/models/NuBot_Pumbaa/model.sdf
 >/gazebo_description/models/NuBot_Pumbaa_v2/model.sdf
 >/gazebo_description/models/NuBot_Pumbaa_v2/model.urdf.xacro
 
-LiDAR:
+LiDAR:  
 >/gazebo_description/models/RS_Helios_5515/model.sdf
 >/gazebo_description/models/RS_Helios_5515/model_2.urdf.xacro
+>/gazebo_description/models/RS_Bpearl/model.sdf
+>/gazebo_description/models/RS_Bpearl/model_2.urdf.xacro
 
-Installation of sensors in .sdf format:
+Installation of sensors in .sdf format:  
 >/gazebo_description/world/Pumbaa_lidar_labfield.world
 
-robot in '.xacro' format is under development.
+Installation of sensors in .xacro format:  
+>/gazebo_description/models/NuBot_Pumbaa_v2/model.urdf.xacro
 
 you can change mechanical parameters of robot, including friction, flippers PID and so on.  
 

@@ -50,7 +50,6 @@ find_package(catkin REQUIRED COMPONENTS
     FILES
     base_drive_cmd.msg
     base_info.msg
-    base_auto_cmd.msg
     link_msg.msg
   )
 
