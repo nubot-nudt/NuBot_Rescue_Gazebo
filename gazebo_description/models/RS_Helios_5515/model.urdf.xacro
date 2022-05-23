@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="RS_Helios_5515">
     <link name='base_link'>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
       <inertial>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <mass value="0.9"/>

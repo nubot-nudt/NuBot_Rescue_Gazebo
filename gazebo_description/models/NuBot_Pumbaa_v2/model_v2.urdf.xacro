@@ -10,446 +10,470 @@
   <xacro:property name="track_radius" value="0.09" />
   <xacro:property name="track_width" value="0.18" />
   <xacro:property name="track_length" value="0.552" />
-  <xacro:property name="track_distance" value="0.14" />
+  <xacro:property name="track_distance" value="0.145" />
 
   <xacro:property name="flipper_radius" value="0.09" />
   <xacro:property name="flipper_width" value="0.038" />
   <xacro:property name="flipper_length" value="0.336" />
   <xacro:property name="flipper_distance" value="0.266" />
+  <xacro:property name="flipper_visual_bias" value="0.016" />
 
-    <!--base_link-->
-    <link name='base_link'>
+  <link name="base_link"></link>
+  <joint name="base_link_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="chassis_link" />
+  </joint>
+  <!--chassis_link-->
+  <link name='chassis_link'>
+    <inertial>
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <mass value="${base_mass}" />
-        <inertia ixx="0.203664" ixy="0" ixz="0"
-                 iyy="0.136197" iyz="0"
-                 izz="0.319921" />
-      </inertial>
+      <mass value="${base_mass}" />
+      <inertia ixx="0.203664" ixy="0" ixz="0"
+                iyy="0.136197" iyz="0"
+                izz="0.319921" />
+    </inertial>
 
-      <collision name='base_collision_1'>
-        <origin xyz="${track_length/2} 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="0.07" length="0.11"/>
-        </geometry>
-      </collision>
-      <collision name='base_collision_2'>
-        <origin xyz="${-1*track_length/2} 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="0.07" length="0.11"/>
-        </geometry>
-      </collision>
-      <collision name='base_collision'>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <box size="${track_length} 0.11 0.14" />
-        </geometry>
-      </collision>
-      <visual name='base_visual'>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <mesh filename="model://NuBot_Pumbaa_v2/meshes/base_link.STL" />
-        </geometry>
-      </visual>
-      <visual name='base_vive_link_visual'>
-        <origin xyz="0.16175 0 0.138" rpy="0 0 0" />
-        <geometry>
-          <mesh filename="model://NuBot_Pumbaa_v2/meshes/vive_link.STL" />
-        </geometry>
-      </visual>
-    </link>
+    <collision name='base_collision_1'>
+      <origin xyz="${track_length/2} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="0.07" length="0.10"/>
+      </geometry>
+    </collision>
+    <collision name='base_collision_2'>
+      <origin xyz="${-1*track_length/2} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="0.07" length="0.10"/>
+      </geometry>
+    </collision>
+    <collision name='base_collision'>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${track_length} 0.10 0.14" />
+      </geometry>
+    </collision>
+    <visual name='base_visual'>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="model://NuBot_Pumbaa_v2/meshes/base_link.STL" />
+      </geometry>
+    </visual>
+    <visual name='base_vive_link_visual'>
+      <origin xyz="0.16175 0 0.138" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="model://NuBot_Pumbaa_v2/meshes/vive_link.STL" />
+      </geometry>
+    </visual>
+  </link>
 
-    <gazebo reference="base_link">
-      <selfCollide>false</selfCollide>
-      <mu1>1</mu1>
-      <mu2>1</mu2>
-      <fdir1 value="0 1 0" />
-      <gravity>1</gravity>
-      <maxContacts>10</maxContacts>
-      <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
-        <!--The link tags of tracks-->
-        <!-- <body>base_link</body> -->
-      </plugin>
-    </gazebo>
+  <gazebo reference="chassis_link">
+    <selfCollide>false</selfCollide>
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <fdir1 value="0 1 0" />
+    <gravity>1</gravity>
+    <maxContacts>10</maxContacts>
+  </gazebo>
 
-    <!--left_track-->
-    <link name='left_track_link'>
-      <origin xyz="0 ${track_distance} 0" rpy="0 0 0" />
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <mass value="${track_mass}" />
-        <inertia ixx="0.15" ixy="0" ixz="0"
-                 iyy="0.9" iyz="0"
-                 izz="0.9" />
-      </inertial>
+  <!--left_track-->
+  <link name='left_track_link'>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="${track_mass}" />
+      <inertia ixx="0.15" ixy="0" ixz="0"
+                iyy="0.9" iyz="0"
+                izz="0.9" />
+    </inertial>
 
-      <visual name='left_track_visual'>
-        <origin xyz="0 ${-1*track_distance} 0" rpy="0 0 0" />
-        <geometry>
-          <mesh filename="model://NuBot_Pumbaa_v2/meshes/left_track_link.STL" />
-        </geometry>>
-      </visual>
-
-      <collision name='left_track_collision_1'>
-        <origin xyz="${track_length/2} 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${track_radius}" length="${track_width}"/>
-        </geometry>
-      </collision>
-      <collision name='left_track_collision_2'>
-        <origin xyz="${-1*track_length/2} 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${track_radius}" length="${track_width}"/>
-        </geometry>
-      </collision>
-      <collision name='left_track_collision'>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <box size="${track_length} ${track_width} ${track_radius*2}" />
-        </geometry>
-      </collision>
-
-      <gazebo reference="left_track_link">
-        <selfCollide>false</selfCollide>
-        <mu1>0.7</mu1>
-        <mu2>150</mu2>
-        <fdir1 value="0 1 0" />
-        <gravity>1</gravity>
-        <maxContacts>10</maxContacts>
-        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
-          <!--The link tags of tracks-->
-          <!-- <left_track>left_track_link</left_track> -->
-        </plugin>
-      </gazebo>
-    </link>
-
-    <!--right_track-->
-    <link name='right_track_link'>
+    <visual name='left_track_visual'>
       <origin xyz="0 ${-1*track_distance} 0" rpy="0 0 0" />
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <mass value="${track_mass}" />
-        <inertia ixx="0.15" ixy="0" ixz="0"
-                 iyy="0.9" iyz="0"
-                 izz="0.9" />
-      </inertial>
+      <geometry>
+        <mesh filename="model://NuBot_Pumbaa_v2/meshes/left_track_link.STL" />
+      </geometry>
+    </visual>
 
-      <visual name='right_track_visual'>
-        <origin xyz="0 ${track_distance} 0" rpy="0 0 0" />
-        <geometry>
-          <mesh filename="model://NuBot_Pumbaa_v2/meshes/right_track_link.STL" />
-        </geometry>>
-      </visual>
-
-      <collision name='right_track_collision_1'>
-        <origin xyz="${track_length/2} 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${track_radius}" length="${track_width}"/>
-        </geometry>
-      </collision>
-      <collision name='right_track_collision_2'>
-        <origin xyz="${-1*track_length/2} 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${track_radius}" length="${track_width}"/>
-        </geometry>
-      </collision>
-      <collision name='right_track_collision'>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <box size="${track_length} ${track_width} ${track_radius*2}" />
-        </geometry>
-      </collision>
-
-      <gazebo reference="right_track_link">
-        <selfCollide>false</selfCollide>
-        <mu1>0.7</mu1>
-        <mu2>150</mu2>
-        <fdir1 value="0 1 0" />
-        <gravity>1</gravity>
-        <maxContacts>10</maxContacts>
-        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
-          <!--The link tags of tracks-->
-          <!-- <right_track>right_track_link</right_track> -->
-        </plugin>
-      </gazebo>
-    </link>
-
-    <!--main_track joints-->
-    <joint name='left_track_joint' type='fixed'>
-      <parent link="base_link" />
-      <child link="left_track_link" />
-    </joint>
-    <joint name='right_track_joint' type='fixed'>
-      <parent link="base_link" />
-      <child link="right_track_link" />
-    </joint>
-    
-    <!--rear_left_flipper-->
-    <link name='rear_left_flipper_link'>
-      <origin xyz="${-1*track_length/2} ${flipper_distance} 0" rpy="0 0 0" />
-      <inertial>
-        <origin xyz="${-1*flipper_length/2} 0 0" rpy="0 0 0" />
-        <mass value="${flipper_mass}" />
-        <inertia ixx="0.0025" ixy="0" ixz="0"
-                 iyy="0.022" iyz="0"
-                 izz="0.02" />
-      </inertial>
-
-      <visual name='rear_left_flipper_visual'>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <mesh filename="model://NuBot_Pumbaa_v2/meshes/back_left_fin_link.STL" />
-        </geometry>>
-      </visual>
-
-      <collision name='rear_left_flipper_collision_large_wheel_collision'>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
-        </geometry>
-      </collision>
-      <collision name='rear_left_flipper_collision_small_wheel_collision'>
-        <origin xyz="${-1*flipper_length} 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
-        </geometry>
-      </collision>
-      <collision name='rear_left_flipper_collision_middle_bar_collision'>
-        <origin xyz="${-1*flipper_length/2} 0 0" rpy="0 0 0" />
-        <geometry>
-          <box size="${flipper_length} ${flipper_width} ${flipper_radius*2}" />
-        </geometry>
-      </collision>
-
-      <gazebo reference="rear_left_flipper_link">
-        <selfCollide>false</selfCollide>
-        <mu1>0.7</mu1>
-        <mu2>150</mu2>
-        <fdir1 value="0 1 0" />
-        <gravity>1</gravity>
-        <maxContacts>10</maxContacts>
-        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
-          <!--The link tags of tracks-->
-          <!-- <left_flipper>rear_left_flipper_link</left_flipper> -->
-        </plugin>
-      </gazebo>
-    </link>
-
-    <joint name='rear_left_flipper_joint' type='revolute'>
-      <child link="rear_left_flipper_link" />
-      <parent link="base_link" />
+    <collision name='left_track_collision_1'>
+      <origin xyz="${track_length/2} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${track_radius}" length="${track_width}"/>
+      </geometry>
+    </collision>
+    <collision name='left_track_collision_2'>
+      <origin xyz="${-1*track_length/2} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${track_radius}" length="${track_width}"/>
+      </geometry>
+    </collision>
+    <collision name='left_track_collision'>
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <axis xyz="0 1 0" />
-      <limit lower="-3" upper="3" effort="-1" velocity="0.3" />
-    </joint>
+      <geometry>
+        <box size="${track_length} ${track_width} ${track_radius*2}" />
+      </geometry>
+    </collision>
+  </link>
 
-    <!--rear_right_flipper-->
-    <link name='rear_right_flipper_link'>
-      <origin xyz="${-1*track_length/2} ${-1*flipper_distance} 0" rpy="0 0 0" />
-      <inertial>
-        <origin xyz="${-1*flipper_length/2} 0 0" rpy="0 0 0" />
-        <mass value="${flipper_mass}" />
-        <inertia ixx="0.0025" ixy="0" ixz="0"
-                 iyy="0.022" iyz="0"
-                 izz="0.02" />
-      </inertial>
+  <gazebo reference="left_track_link">
+    <selfCollide>false</selfCollide>
+    <mu1>0.7</mu1>
+    <mu2>150</mu2>
+    <fdir1 value="0 1 0" />
+    <gravity>1</gravity>
+    <maxContacts>10</maxContacts>
+  </gazebo>
 
-      <visual name='rear_right_flipper_visual'>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <mesh filename="model://NuBot_Pumbaa_v2/meshes/back_right_fin_link.STL" />
-        </geometry>>
-      </visual>
+  <!--left_track joints-->
+  <joint name='left_track_joint' type='revolute'><!-- fixed -->
+    <origin xyz="0 ${track_distance} 0" rpy="0 0 0" />
+    <child link="left_track_link" />
+    <parent link="chassis_link" />
+    <limit lower="-1e-16" upper="1e-16" effort="10000" velocity="10000"/>
+    <axis xyz="0 0 0"/>
+    <dynamics damping="10000" friction="10000"/>
+  </joint>
 
-      <collision name='rear_right_flipper_collision_large_wheel_collision'>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
-        </geometry>
-      </collision>
-      <collision name='rear_right_flipper_collision_small_wheel_collision'>
-        <origin xyz="${-1*flipper_length} 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
-        </geometry>
-      </collision>
-      <collision name='rear_right_flipper_collision_middle_bar_collision'>
-        <origin xyz="${-1*flipper_length/2} 0 0" rpy="0 0 ${PI}" />
-        <geometry>
-          <box size="${flipper_length} ${flipper_width} ${flipper_radius*2}" />
-        </geometry>
-      </collision>
-
-      <gazebo reference="rear_right_flipper_link">
-        <selfCollide>false</selfCollide>
-        <mu1>0.7</mu1>
-        <mu2>150</mu2>
-        <fdir1 value="0 1 0" />
-        <gravity>1</gravity>
-        <maxContacts>10</maxContacts>
-        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
-          <!--The link tags of tracks-->
-          <!-- <right_flipper>rear_right_flipper_link</right_flipper> -->
-        </plugin>
-      </gazebo>
-    </link>
-
-    <joint name='rear_right_flipper_joint' type='revolute'>
-      <child link="rear_right_flipper_link" />
-      <parent link="base_link" />
+  <!--right_track-->
+  <link name='right_track_link'>
+    <inertial>
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <axis xyz="0 1 0" />
-      <limit lower="-3" upper="3" effort="-1" velocity="0.3" />
-    </joint>
+      <mass value="${track_mass}" />
+      <inertia ixx="0.15" ixy="0" ixz="0"
+                iyy="0.9" iyz="0"
+                izz="0.9" />
+    </inertial>
 
-    <!--front_left_flipper-->
-    <link name='front_left_flipper_link'>
-      <origin xyz="${track_length/2} ${flipper_distance} 0" rpy="0 0 0" />
-      <inertial>
-        <origin xyz="${flipper_length/2} 0 0" rpy="0 0 0" />
-        <mass value="${flipper_mass}" />
-        <inertia ixx="0.0025" ixy="0" ixz="0"
-                 iyy="0.022" iyz="0"
-                 izz="0.02" />
-      </inertial>
+    <visual name='right_track_visual'>
+      <origin xyz="0 ${track_distance} 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="model://NuBot_Pumbaa_v2/meshes/right_track_link.STL" />
+      </geometry>
+    </visual>
 
-      <visual name='front_left_flipper_visual'>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <mesh filename="model://NuBot_Pumbaa_v2/meshes/front_left_fin_link.STL" />
-        </geometry>>
-      </visual>
-
-      <collision name='front_left_flipper_collision_large_wheel_collision'>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
-        </geometry>
-      </collision>
-      <collision name='front_left_flipper_collision_small_wheel_collision'>
-        <origin xyz="${flipper_length} 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
-        </geometry>
-      </collision>
-      <collision name='front_left_flipper_collision_middle_bar_collision'>
-        <origin xyz="${flipper_length/2} 0 0" rpy="0 0 0" />
-        <geometry>
-          <box size="${flipper_length} ${flipper_width} ${flipper_radius*2}" />
-        </geometry>
-      </collision>
-
-      <gazebo reference="front_left_flipper_link">
-        <selfCollide>false</selfCollide>
-        <mu1>0.7</mu1>
-        <mu2>150</mu2>
-        <fdir1 value="0 1 0" />
-        <gravity>1</gravity>
-        <maxContacts>10</maxContacts>
-        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
-          <!--The link tags of tracks-->
-          <!-- <left_flipper>front_left_flipper_link</left_flipper> -->
-        </plugin>
-      </gazebo>
-    </link>
-    
-    <joint name='front_left_flipper_joint' type='revolute'>
-      <child link="front_left_flipper_link" />
-      <parent link="base_link" />
+    <collision name='right_track_collision_1'>
+      <origin xyz="${track_length/2} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${track_radius}" length="${track_width}"/>
+      </geometry>
+    </collision>
+    <collision name='right_track_collision_2'>
+      <origin xyz="${-1*track_length/2} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${track_radius}" length="${track_width}"/>
+      </geometry>
+    </collision>
+    <collision name='right_track_collision'>
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <axis xyz="0 1 0" />
-      <limit lower="-3" upper="3" effort="-1" velocity="0.3" />
-    </joint>
+      <geometry>
+        <box size="${track_length} ${track_width} ${track_radius*2}" />
+      </geometry>
+    </collision>
+  </link>
 
-    <!--front_right_flipper-->
-    <link name='front_right_flipper_link'>
-      <origin xyz="${track_length/2} ${-1*flipper_distance} 0" rpy="0 0 0" />
-      <inertial>
-        <origin xyz="${flipper_length/2} 0 0" rpy="0 0 0" />
-        <mass value="${flipper_mass}" />
-        <inertia ixx="0.0025" ixy="0" ixz="0"
-                 iyy="0.022" iyz="0"
-                 izz="0.02" />
-      </inertial>
+  <gazebo reference="right_track_link">
+    <selfCollide>false</selfCollide>
+    <mu1>0.7</mu1>
+    <mu2>150</mu2>
+    <fdir1 value="0 1 0" />
+    <gravity>1</gravity>
+    <maxContacts>10</maxContacts>
+  </gazebo>
 
-      <visual name='front_right_flipper_link_visual'>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <mesh filename="model://NuBot_Pumbaa_v2/meshes/front_right_fin_link.STL" />
-        </geometry>>
-      </visual>
+  <!--right_track joints-->
+  <joint name='right_track_joint' type='revolute'><!-- fixed -->
+    <origin xyz="0 ${-1*track_distance} 0" rpy="0 0 0" />
+    <parent link="chassis_link" />
+    <child link="right_track_link" />
+    <limit lower="-1e-16" upper="1e-16" effort="10000" velocity="10000"/>
+    <axis xyz="0 0 0"/>
+    <dynamics damping="10000" friction="10000"/>
+  </joint>
+  
+  <!--rear_left_flipper-->
+  <link name='rear_left_flipper_link'>
+    <inertial>
+      <origin xyz="${-1*flipper_length/2} 0 0" rpy="0 0 0" />
+      <mass value="${flipper_mass}" />
+      <inertia ixx="0.0025" ixy="0" ixz="0"
+                iyy="0.022" iyz="0"
+                izz="0.02" />
+    </inertial>
 
-      <collision name='front_right_flipper_collision_large_wheel_collision'>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
-        </geometry>
-      </collision>
-      <collision name='front_right_flipper_collision_small_wheel_collision'>
-        <origin xyz="${flipper_length} 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-          <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
-        </geometry>
-      </collision>
-      <collision name='front_right_flipper_collision_middle_bar_collision'>
-        <origin xyz="${flipper_length/2} 0 0" rpy="0 0 ${PI}" />
-        <geometry>
-          <box size="${flipper_length} ${flipper_width} ${flipper_radius*2}" />
-        </geometry>
-      </collision>
+    <visual name='rear_left_flipper_visual'>
+      <origin xyz="0 ${-1*flipper_visual_bias} 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="model://NuBot_Pumbaa_v2/meshes/back_left_fin_link.STL" />
+      </geometry>
+    </visual>
 
-      <gazebo reference="front_right_flipper_link">
-        <selfCollide>false</selfCollide>
-        <mu1>0.7</mu1>
-        <mu2>150</mu2>
-        <fdir1 value="0 1 0" />
-        <gravity>1</gravity>
-        <maxContacts>10</maxContacts>
-        <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
-          <!--The link tags of tracks-->
-          <!-- <right_flipper>front_right_flipper_link</right_flipper> -->
-        </plugin>
-      </gazebo>
-    </link>
+    <collision name='rear_left_flipper_collision_large_wheel_collision'>
+      <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
+      </geometry>
+    </collision>
+    <collision name='rear_left_flipper_collision_small_wheel_collision'>
+      <origin xyz="${-1*flipper_length} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
+      </geometry>
+    </collision>
+    <collision name='rear_left_flipper_collision_middle_bar_collision'>
+      <origin xyz="${-1*flipper_length/2} 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${flipper_length} ${flipper_width} ${flipper_radius*2}" />
+      </geometry>
+    </collision>
+  </link>
 
-    <joint name='front_right_flipper_joint' type='revolute'>
-      <child link="front_right_flipper_link" />
-      <parent link="base_link" />
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <axis xyz="0 1 0" />
-      <limit lower="-3" upper="3" effort="-1" velocity="0.3" />
-    </joint>
+  <gazebo reference="rear_left_flipper_link">
+    <selfCollide>false</selfCollide>
+    <mu1>0.7</mu1>
+    <mu2>150</mu2>
+    <fdir1 value="0 1 0" />
+    <gravity>1</gravity>
+    <maxContacts>10</maxContacts>
+  </gazebo>
 
-    <gazebo>
-      <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
-        <!--The link tags of tracks-->
-        <body>base_link</body>
-        <left_track>left_track_link</left_track>
-        <right_track>right_track_link</right_track>
-        <left_flipper>front_left_flipper_link</left_flipper>
-        <left_flipper>rear_left_flipper_link</left_flipper>
-        <right_flipper>front_right_flipper_link</right_flipper>
-        <right_flipper>rear_right_flipper_link</right_flipper>
-        <!--The flippers' joint tag-->
-        <front_left_flipper_j>front_left_flipper_joint</front_left_flipper_j>
-        <rear_left_flipper_j>rear_left_flipper_joint</rear_left_flipper_j>
-        <front_right_flipper_j>front_right_flipper_joint</front_right_flipper_j>
-        <rear_right_flipper_j>rear_right_flipper_joint</rear_right_flipper_j>
-        <!--The Mu/Mu2 of tracks, which influnce the simulating performance-->
-        <track_mu>2</track_mu>
-        <track_mu2>0.5</track_mu2>
-        <!--The PID parameter of flippers position controll & initial position 1.5708 -->
-        <flip_p>1500</flip_p>
-        <flip_i>100</flip_i>
-        <flip_d>0</flip_d>
-        <flip_initial>1.5708</flip_initial>
-        <!--The parameters of tracks-->
-        <tracksSeparation>0.285</tracksSeparation>
-        <steeringEfficiency>0.5</steeringEfficiency>
-        <maxLinearSpeed>2.0</maxLinearSpeed>
-        <maxAngularSpeed>1.5</maxAngularSpeed>
-      </plugin>
-    </gazebo>
+  <joint name='rear_left_flipper_joint' type='revolute'>
+    <origin xyz="${-1*track_length/2} ${flipper_distance} 0" rpy="0 0 0" />
+    <child link="rear_left_flipper_link" />
+    <parent link="chassis_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-3" upper="3" effort="-1" velocity="0.3" />
+  </joint>
 
+  <!--rear_right_flipper-->
+  <link name='rear_right_flipper_link'>
+    <inertial>
+      <origin xyz="${-1*flipper_length/2} 0 0" rpy="0 0 0" />
+      <mass value="${flipper_mass}" />
+      <inertia ixx="0.0025" ixy="0" ixz="0"
+                iyy="0.022" iyz="0"
+                izz="0.02" />
+    </inertial>
+
+    <visual name='rear_right_flipper_visual'>
+      <origin xyz="0 ${flipper_visual_bias} 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="model://NuBot_Pumbaa_v2/meshes/back_right_fin_link.STL" />
+      </geometry>
+    </visual>
+
+    <collision name='rear_right_flipper_collision_large_wheel_collision'>
+      <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
+      </geometry>
+    </collision>
+    <collision name='rear_right_flipper_collision_small_wheel_collision'>
+      <origin xyz="${-1*flipper_length} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
+      </geometry>
+    </collision>
+    <collision name='rear_right_flipper_collision_middle_bar_collision'>
+      <origin xyz="${-1*flipper_length/2} 0 0" rpy="0 0 ${PI}" />
+      <geometry>
+        <box size="${flipper_length} ${flipper_width} ${flipper_radius*2}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="rear_right_flipper_link">
+    <selfCollide>false</selfCollide>
+    <mu1>0.7</mu1>
+    <mu2>150</mu2>
+    <fdir1 value="0 1 0" />
+    <gravity>1</gravity>
+    <maxContacts>10</maxContacts>
+  </gazebo>
+
+  <joint name='rear_right_flipper_joint' type='revolute'>
+    <origin xyz="${-1*track_length/2} ${-1*flipper_distance} 0" rpy="0 0 0" />
+    <child link="rear_right_flipper_link" />
+    <parent link="chassis_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-3" upper="3" effort="-1" velocity="0.3" />
+  </joint>
+
+  <!--front_left_flipper-->
+  <link name='front_left_flipper_link'>
+    <inertial>
+      <origin xyz="${flipper_length/2} 0 0" rpy="0 0 0" />
+      <mass value="${flipper_mass}" />
+      <inertia ixx="0.0025" ixy="0" ixz="0"
+                iyy="0.022" iyz="0"
+                izz="0.02" />
+    </inertial>
+
+    <visual name='front_left_flipper_visual'>
+      <origin xyz="0 ${-1*flipper_visual_bias} 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="model://NuBot_Pumbaa_v2/meshes/front_left_fin_link.STL" />
+      </geometry>
+    </visual>
+
+    <collision name='front_left_flipper_collision_large_wheel_collision'>
+      <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
+      </geometry>
+    </collision>
+    <collision name='front_left_flipper_collision_small_wheel_collision'>
+      <origin xyz="${flipper_length} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
+      </geometry>
+    </collision>
+    <collision name='front_left_flipper_collision_middle_bar_collision'>
+      <origin xyz="${flipper_length/2} 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${flipper_length} ${flipper_width} ${flipper_radius*2}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="front_left_flipper_link">
+    <selfCollide>false</selfCollide>
+    <mu1>0.7</mu1>
+    <mu2>150</mu2>
+    <fdir1 value="0 1 0" />
+    <gravity>1</gravity>
+    <maxContacts>10</maxContacts>
+  </gazebo>
+
+  <joint name='front_left_flipper_joint' type='revolute'>
+    <origin xyz="${track_length/2} ${flipper_distance} 0" rpy="0 0 0" />
+    <child link="front_left_flipper_link" />
+    <parent link="chassis_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-3" upper="3" effort="-1" velocity="0.3" />
+  </joint>
+
+  <!--front_right_flipper-->
+  <link name='front_right_flipper_link'>
+    <inertial>
+      <origin xyz="${flipper_length/2} 0 0" rpy="0 0 0" />
+      <mass value="${flipper_mass}" />
+      <inertia ixx="0.0025" ixy="0" ixz="0"
+                iyy="0.022" iyz="0"
+                izz="0.02" />
+    </inertial>
+
+    <visual name='front_right_flipper_link_visual'>
+      <origin xyz="0 ${flipper_visual_bias} 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="model://NuBot_Pumbaa_v2/meshes/front_right_fin_link.STL" />
+      </geometry>
+    </visual>
+
+    <collision name='front_right_flipper_collision_large_wheel_collision'>
+      <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
+      </geometry>
+    </collision>
+    <collision name='front_right_flipper_collision_small_wheel_collision'>
+      <origin xyz="${flipper_length} 0 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="${flipper_radius}" length="${flipper_width}"/>
+      </geometry>
+    </collision>
+    <collision name='front_right_flipper_collision_middle_bar_collision'>
+      <origin xyz="${flipper_length/2} 0 0" rpy="0 0 ${PI}" />
+      <geometry>
+        <box size="${flipper_length} ${flipper_width} ${flipper_radius*2}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="front_right_flipper_link">
+    <selfCollide>false</selfCollide>
+    <mu1>0.7</mu1>
+    <mu2>150</mu2>
+    <fdir1 value="0 1 0" />
+    <gravity>1</gravity>
+    <maxContacts>10</maxContacts>
+  </gazebo>
+
+  <joint name='front_right_flipper_joint' type='revolute'>
+    <origin xyz="${track_length/2} ${-1*flipper_distance} 0" rpy="0 0 0" />
+    <child link="front_right_flipper_link" />
+    <parent link="chassis_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-3" upper="3" effort="-1" velocity="0.3" />
+  </joint>
+
+  <gazebo>
+    <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
+      <!--The link tags of tracks-->
+      <body>base_link</body>
+      <left_track>left_track_link</left_track>
+      <right_track>right_track_link</right_track>
+      <left_flipper>front_left_flipper_link</left_flipper>
+      <left_flipper>rear_left_flipper_link</left_flipper>
+      <right_flipper>front_right_flipper_link</right_flipper>
+      <right_flipper>rear_right_flipper_link</right_flipper>
+      <!--The flippers joint tag-->
+      <front_left_flipper_j>front_left_flipper_joint</front_left_flipper_j>
+      <rear_left_flipper_j>rear_left_flipper_joint</rear_left_flipper_j>
+      <front_right_flipper_j>front_right_flipper_joint</front_right_flipper_j>
+      <rear_right_flipper_j>rear_right_flipper_joint</rear_right_flipper_j>
+      <!--The Mu/Mu2 of tracks, which influnce the simulating performance-->
+      <track_mu>2</track_mu>
+      <track_mu2>0.5</track_mu2>
+      <!--The PID parameter of flippers position controll & initial position 1.5708 -->
+      <flip_p>1500</flip_p>
+      <flip_i>100</flip_i>
+      <flip_d>0</flip_d>
+      <flip_initial>1.5708</flip_initial>
+      <!--The parameters of tracks-->
+      <tracksSeparation>0.285</tracksSeparation>
+      <steeringEfficiency>0.5</steeringEfficiency>
+      <maxLinearSpeed>2.0</maxLinearSpeed>
+      <maxAngularSpeed>1.5</maxAngularSpeed>
+    </plugin>
+  </gazebo>
+
+  <!-- IMU -->
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.1"/>
+    </inertial>
+    <visual name='imu_visual'>
+      <geometry>
+        <box size="0.05 0.04 0.03" />
+      </geometry>
+    </visual>
+    <collision name='imu_collision'>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.04 0.03" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="imu_link_joint" type="fixed">
+    <origin xyz="-0.16175 0 0.14" rpy="0 0 ${PI}" />
+    <parent link="chassis_link"/>
+    <child link="imu_link" />
+  </joint>
+  <gazebo>
+    <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+      <robotNamespace>/</robotNamespace>
+      <updateRate>400.0</updateRate>
+      <bodyName>imu_link</bodyName>
+      <topicName>imu/data</topicName>
+      <accelDrift>0.005 0.005 0.005</accelDrift>
+      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+      <rateDrift>0.005 0.005 0.005 </rateDrift>
+      <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+      <headingDrift>0.005</headingDrift>
+      <headingGaussianNoise>0.005</headingGaussianNoise>
+    </plugin>
+  </gazebo>
+
+  <!-- RS-Helios includes -->
+  <xacro:include filename="$(find gazebo_description)/models/RS_Helios_5515/model_2.urdf.xacro"/>
+  <xacro:RS_Helios_5515 parent="chassis_link" name="re_helios" topic="/lidar_points" hz="10" samples="1800" min_angle="-${PI/2}" max_angle="${PI/2}" min_range ="0.2" max_range="50.0" gpu="false">
+    <origin xyz="-0.21175 0 0.224" rpy="0 0 ${PI}" />
+  </xacro:RS_Helios_5515>
 </robot>

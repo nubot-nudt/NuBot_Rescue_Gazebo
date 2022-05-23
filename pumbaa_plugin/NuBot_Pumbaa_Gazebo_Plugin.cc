@@ -191,8 +191,6 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Load the "body" link
   body_ = robot_model_->GetLink(
           robot_sdf_->GetElement("body")->Get<std::string>());
-  // gzmsg << "NuBotPumbaaGazebo_Plugin: sdf body "
-  //       << robot_sdf_->GetElement("body")->Get<std::string>() << std::endl;
   if (body_ == nullptr)
   {
     gzerr << "NuBotPumbaaGazebo_Plugin: <body> link does not exist."
@@ -212,8 +210,6 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Load the "left_track" Link
   trackLink_[Tracks::LEFT] = robot_model_->GetLink(
           robot_sdf_->GetElement("left_track")->Get<std::string>());
-  // gzmsg << "NuBotPumbaaGazebo_Plugin: sdf left_track "
-  //       << robot_sdf_->GetElement("left_track")->Get<std::string>() << std::endl;
   gtracks[Tracks::LEFT].push_back(trackLink_[Tracks::LEFT]);
   if (gtracks[Tracks::LEFT].at(0) == nullptr)
   {

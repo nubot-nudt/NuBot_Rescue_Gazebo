@@ -73,7 +73,9 @@ roscore
 source devel/setup.bash
 roslaunch src/launch/pumbaa_lab.launch
 ```
-for LiDAR RS-Helios & IMU in .sdf format, run:
+for robot, LiDAR RS-Helios, IMU in <strong>.xacro</strong> format, run:
+`roslaunch src/launch/pumbaa_lidar_xacro.launch`
+for robot, LiDAR RS-Helios, IMU in <strong>.sdf</strong> format, run:
 `roslaunch src/launch/pumbaa_lidar_sdf.launch`
 
 ## Control the Robot
@@ -109,9 +111,20 @@ this is based on rospkg "hector_gazebo_ros_imu"
 need `sudo apt install ros-melodic-hector-gazebo-plugins`  
 
 #### LiDAR PointCloud2 
-in rostopic "/lidar_points"  
-For LiDAR in .sdf format, need to change "Fixed Frame" in Rviz to `rs_helios`, and add rostopic "/lidar_points".  
+rostopic "/lidar_points"  
+For LiDAR in <strong>.sdf</strong> format, need to change "Fixed Frame" in Rviz to `rs_helios`, and add rostopic "/lidar_points".  
 
+GPU acceleration ([with a modern Gazebo build]), check details in rospkg "velodyne_simulator".
+* The GPU fix was added to ```gazebo7``` in version 7.14.0
+* The GPU fix was added to ```gazebo9``` in version 9.4.0
+
+Use up-to-date packages from the OSRF Gazebo apt repository
+```
+sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/gazebo-stable.list'
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D2486D2DD83DB69272AFE98867170598AF249743
+sudo apt update
+sudo apt upgrade
+```
 
 ## Parameter Adjustment
 You can adjust most robot & sensors & environment parameters by modifying the ".sdf" & ".world" files.  
@@ -119,11 +132,13 @@ Robot:
 
 >/gazebo_description/models/NuBot_Pumbaa/model.sdf
 >/gazebo_description/models/NuBot_Pumbaa_v2/model.sdf
+>/gazebo_description/models/NuBot_Pumbaa_v2/model.urdf.xacro
 
 LiDAR:
 >/gazebo_description/models/RS_Helios_5515/model.sdf
+>/gazebo_description/models/RS_Helios_5515/model_2.urdf.xacro
 
-Installation of sensors:
+Installation of sensors in .sdf format:
 >/gazebo_description/world/Pumbaa_lidar_labfield.world
 
 robot in '.xacro' format is under development.
@@ -132,5 +147,5 @@ you can change mechanical parameters of robot, including friction, flippers PID 
 
 ## TODO
 1.Add RGBD camera.  
-2.Transfer the robot model .sdf -> .xacro.  
-3.Make the simulation more real.  
+2.Make the simulation more real.  
+3.Fix bug of .xacro sensor visual disappear.

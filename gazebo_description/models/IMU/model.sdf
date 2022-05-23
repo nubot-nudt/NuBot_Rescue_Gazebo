@@ -4,7 +4,7 @@
         <static>false</static>
         <link name='base_link'>
             <inertial>
-            <mass>0.1</mass>
+                <mass>0.1</mass>
             </inertial>
             <visual name='visual'>
             <geometry>
