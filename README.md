@@ -125,6 +125,8 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D2486D2DD83DB69272
 sudo apt update
 sudo apt upgrade
 ```
+Sadly, the GPU mode for lidar has awful point cloud for now.
+https://bitbucket.org/DataspeedInc/velodyne_simulator/issues/15/gpu-mode-very-roughly-resoluted-scans-in
 
 ## Parameter Adjustment
 You can adjust most robot & sensors & environment parameters by modifying the ".sdf" & ".world" files.  
@@ -148,4 +150,3 @@ you can change mechanical parameters of robot, including friction, flippers PID 
 ## TODO
 1.Add RGBD camera.  
 2.Make the simulation more real.  
-3.Fix bug of .xacro sensor visual disappear.

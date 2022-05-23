@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="RS_Helios_5515">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="RS_Bpearl">
   <xacro:property name="M_PI" value="3.1415926535897931" />
-  <xacro:macro name="RS_Helios_5515" params="*origin parent:=base_link name:=rs_helios topic:=/lidar_points organize_cloud:=false hz:=10 lasers:=32 samples:=2187 collision_range:=0.2 min_range:=0.2 max_range:=100.0 noise:=0.008 min_angle:=-${M_PI} max_angle:=${M_PI} gpu:=false">
+  <xacro:macro name="RS_Bpearl" params="*origin parent:=base_link name:=rs_bpearl topic:=/lidar_points organize_cloud:=false hz:=10 lasers:=32 samples:=2187 collision_range:=0.1 min_range:=0.1 max_range:=100.0 noise:=0.008 min_angle:=-${M_PI} max_angle:=${M_PI} gpu:=false">
 
     <joint name="${name}_base_mount_joint" type="fixed">
       <xacro:insert_block name="origin" /> 
@@ -9,18 +9,18 @@
       <child link="${name}_base_link"/>
     </joint>
 
-    <link name="${name}_base_link">
+    <link name='${name}_base_link'>
       <!-- <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <mass value="0.9"/>
+        <origin xyz="0 -0.00079641 0.026317" rpy="0 0 0"/>
+        <mass value="0.92"/>
         <inertia>
-        <inertia ixx="0.0025413" ixy="0" ixz="0"
-                  iyy="0.0016941" iyz="0"
-                  izz="0.0024448"/>
+        <inertia ixx="0.0015364" ixy="0" ixz="0"
+                  iyy="0.0014894" iyz="0"
+                  izz="0.0016331"/>
         </inertia>
       </inertial> -->
       <collision name='collision'>
-        <origin xyz="0 0 -0.02" rpy="0 0 0"/>
+        <origin xyz="0 0 0.04" rpy="0 0 0"/>
         <geometry>
           <cylinder radius="0.05" length="0.11"/>
         </geometry>
@@ -29,7 +29,7 @@
       <visual name='visual'>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="model://RS_Helios_5515/meshes/RS_Helios_frame.STL" />
+          <mesh filename="model://RS_Bpearl/meshes/RS_Bpearl_frame.STL" />
         </geometry>
       </visual>
     </link>
@@ -45,9 +45,9 @@
     <!-- Gazebo requires the velodyne_gazebo_plugins package -->
     <gazebo reference="${name}">
       <xacro:if value="${gpu}">
-        <sensor type="gpu_ray" name="${name}-RS_Helios_5515">
+        <sensor type="gpu_ray" name="${name}-RS_Bpearl">
           <pose>0 0 0 0 0 0</pose>
-          <visualize>false</visualize>
+          <visualize>true</visualize>
           <update_rate>${hz}</update_rate>
           <ray>
             <scan>
@@ -60,8 +60,8 @@
               <vertical>
                 <samples>${lasers}</samples>
                 <resolution>1</resolution>
-                <min_angle>-${55*M_PI/180.0}</min_angle>
-                <max_angle> ${15*M_PI/180.0}</max_angle>
+                <min_angle>-${84*M_PI/180.0}</min_angle>
+                <max_angle>-${2.3125*M_PI/180.0}</max_angle>
               </vertical>
             </scan>
             <range>
@@ -86,7 +86,7 @@
         </sensor>
       </xacro:if>
       <xacro:unless value="${gpu}">
-        <sensor type="ray" name="${name}-RS_Helios_5515">
+        <sensor type="ray" name="${name}-RS_Bpearl">
           <pose>0 0 0 0 0 0</pose>
           <visualize>false</visualize>
           <update_rate>${hz}</update_rate>
@@ -101,8 +101,8 @@
               <vertical>
                 <samples>${lasers}</samples>
                 <resolution>1</resolution>
-                <min_angle>-${55*M_PI/180.0}</min_angle>
-                <max_angle> ${15*M_PI/180.0}</max_angle>
+                <min_angle>-${89.5*M_PI/180.0}</min_angle>
+                <max_angle>-${2.3125*M_PI/180.0}</max_angle>
               </vertical>
             </scan>
             <range>
