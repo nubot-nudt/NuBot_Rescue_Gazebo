@@ -3,13 +3,13 @@
   <xacro:property name="M_PI" value="3.1415926535897931" />
   <xacro:macro name="RS_Helios_5515" params="*origin parent:=base_link name:=rs_helios topic:=/lidar_points organize_cloud:=false hz:=10 lasers:=32 samples:=2187 collision_range:=0.2 min_range:=0.2 max_range:=100.0 noise:=0.008 min_angle:=-${M_PI} max_angle:=${M_PI} gpu:=false">
 
-    <joint name="${name}_base_mount_joint" type="fixed">
+    <joint name="${name}_mount_joint" type="fixed">
       <xacro:insert_block name="origin" /> 
       <parent link="${parent}"/>
-      <child link="${name}_base_link"/>
+      <child link="${name}_link"/>
     </joint>
 
-    <link name="${name}_base_link">
+    <link name="${name}_link">
       <!-- <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="0.9"/>
@@ -34,16 +34,8 @@
       </visual>
     </link>
 
-    <joint name="${name}_base_scan_joint" type="fixed" >
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <parent link="${name}_base_link" />
-      <child link="${name}"/>
-    </joint>
-
-    <link name="${name}"/>
-
     <!-- Gazebo requires the velodyne_gazebo_plugins package -->
-    <gazebo reference="${name}">
+    <gazebo reference="${name}_link">
       <xacro:if value="${gpu}">
         <sensor type="gpu_ray" name="${name}-RS_Helios_5515">
           <pose>0 0 0 0 0 0</pose>
@@ -77,7 +69,7 @@
           </ray>
           <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_velodyne_gpu_laser.so">
             <topicName>${topic}</topicName>
-            <frameName>${name}</frameName>
+            <frameName>${name}_link</frameName>
             <organize_cloud>${organize_cloud}</organize_cloud>
             <min_range>${min_range}</min_range>
             <max_range>${max_range}</max_range>
@@ -118,7 +110,7 @@
           </ray>
           <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_velodyne_laser.so">
             <topicName>${topic}</topicName>
-            <frameName>${name}</frameName>
+            <frameName>${name}_link</frameName>
             <organize_cloud>${organize_cloud}</organize_cloud>
             <min_range>${min_range}</min_range>
             <max_range>${max_range}</max_range>
