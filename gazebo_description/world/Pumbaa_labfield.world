@@ -11,10 +11,10 @@
             <uri>model://ground_plane</uri>
         </include>
 
-        <model name="103-601-field">
+        <model name="103-601-field-room">
             <pose frame=''>1.5 0 0 0 0 0</pose>
             <include>
-                <uri>model://103-601-field</uri>
+                <uri>model://103-601-field-room</uri>
             </include>
         </model>        
         
