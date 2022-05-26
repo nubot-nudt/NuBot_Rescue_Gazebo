@@ -11,10 +11,10 @@
             <uri>model://ground_plane</uri>
         </include>
 
-        <model name="103-601-field">
+        <model name="103-601-field-room">
             <pose frame=''>1.5 0 0 0 0 0</pose>
             <include>
-                <uri>model://103-601-field</uri>
+                <uri>model://103-601-field-room</uri>
             </include>
         </model>        
         
@@ -30,34 +30,42 @@
                 <uri>model://NuBot_Pumbaa_v2</uri>
             </include>
 
+            <!-- LiDAR:RS_Helios_5515 + IMU -->
             <include>
                 <uri>model://RS_Helios_5515</uri>
-                <pose>-0.21175 0 0.224 0 0 3.1416</pose> 
+                <pose>-0.221 0 0.2545 0 0 3.1416</pose> 
             </include>
-            <!--0.16175+0.05=0.21175 0.138+0.086=0.224-->
             <joint name='lidar_joint' type='fixed'>
                 <parent>NuBot_Pumbaa_v2::base_link</parent>
                 <child>RS_Helios_5515::base_link</child>
             </joint>
-
-            <!-- <include>
-                <uri>model://RS_Bpearl</uri>
-                <pose>-0.31175 0 0.218 0 1.5708 0</pose> 
-            </include> -->
-            <!--0.16175+0.15=0.21175 0.138+0.08=0.218-->
-            <!-- <joint name='lidar_joint' type='fixed'>
-                <parent>NuBot_Pumbaa_v2::base_link</parent>
-                <child>RS_Bpearl::base_link</child>
-            </joint> -->
-
             <include>
                 <uri>model://IMU</uri>
-                <pose>-0.21175 0 0.14 0 0 3.1416</pose>
+                <pose>-0.221 0 0.131 0 0 3.1416</pose>
             </include>
             <joint name='imu_joint' type='fixed'>
                 <parent>NuBot_Pumbaa_v2::base_link</parent>
                 <child>IMU::base_link</child>
             </joint>
+
+            <!-- LiDAR:RS_Bpearl + IMU -->
+            <!-- <include>
+                <uri>model://RS_Bpearl</uri>
+                <pose>-0.36277 0 0.2115 0 1.5708 0</pose> 
+            </include>
+            <joint name='lidar_joint' type='fixed'>
+                <parent>NuBot_Pumbaa_v2::base_link</parent>
+                <child>RS_Bpearl::base_link</child>
+            </joint>
+            <include>
+                <uri>model://IMU</uri>
+                <pose>-0.3185 0 0.133 0 0 3.1416</pose>
+            </include>
+            <joint name='imu_joint' type='fixed'>
+                <parent>NuBot_Pumbaa_v2::base_link</parent>
+                <child>IMU::base_link</child>
+            </joint> -->
+
         </model>
 
 	<!-- <plugin name="ElevationMapGroundTruthPlugin" filename="libhector_elevation_map_ground_truth_plugin.so"/>

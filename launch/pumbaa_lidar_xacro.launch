@@ -15,9 +15,9 @@
     <node pkg="gazebo_ros" type="spawn_model" name="spawn_model" args="-urdf -param /robot_description -model pumbaa_v2"/>
 
     <!--teleop joy-->
-	<node name="nubot_teleop" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/>
+	<node name="nubot_teleop_joy" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/>
     <!--teleop keyboard-->
-	<!-- <node name="nubot_teleop" pkg="nubot_teleop" type="teleop_keyboard.py" output="screen"/> -->
+	<!-- <node name="nubot_teleop_keyboard" pkg="nubot_teleop" type="teleop_keyboard.py" output="screen"/> -->
     <!--teleop twist keyboard-->
     <!-- <node name="teleop_twist_keyboard" pkg="nubot_teleop" type="teleop_twist_keyboard.py" output="screen"/> -->
     

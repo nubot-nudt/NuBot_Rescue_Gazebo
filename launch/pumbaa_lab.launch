@@ -9,9 +9,10 @@
         <arg name="debug" value="false"/>
         <arg name="verbose" value="true"/>
     </include>
-    <!-- teleop joy -->
-	<!-- <node name="nubot_teleop" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/> -->
+    <!--teleop joy-->
+	<!-- <node name="nubot_teleop_joy" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/> -->
     <!--teleop keyboard-->
-	<!-- <node name="nubot_teleop" pkg="nubot_teleop" type="teleop_keyboard.py" output="screen"/> -->
+	<!-- <node name="nubot_teleop_keyboard" pkg="nubot_teleop" type="teleop_keyboard.py" output="screen"/> -->
+    <!--teleop twist keyboard-->
     <node name="teleop_twist_keyboard" pkg="nubot_teleop" type="teleop_twist_keyboard.py" output="screen"/>
 </launch>
