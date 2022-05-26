@@ -94,7 +94,6 @@
 
 #include "nubot_msgs/base_info.h"
 #include "nubot_msgs/base_drive_cmd.h"
-#include "nubot_msgs/base_auto_cmd.h"
 #include "math.h"
 
 // This contact.h must be include, it is ralated to the ode

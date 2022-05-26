@@ -494,9 +494,9 @@ void NuBotPumbaaGazebo::SetBodyVelocity(
     maxAngularSpeed);
 
   // Compute track velocities using the tracked vehicle kinematics model.
-  const auto leftVelocity = linearSpeed + angularSpeed *
+  const auto leftVelocity = linearSpeed - angularSpeed *
     tracksSeparation / 2 / steeringEfficiency;
-  const auto rightVelocity = linearSpeed - angularSpeed *
+  const auto rightVelocity = linearSpeed + angularSpeed *
     tracksSeparation / 2 / steeringEfficiency;
 
   // Call the track velocity handler (which does the actual vehicle control).
@@ -1265,8 +1265,8 @@ void NuBotPumbaaGazebo::Drive_Auto_Cmd_CB(const geometry_msgs::Twist::ConstPtr &
 //  gzmsg << "NubotPumbaaGazebo_Plugin: Track_Cmd_CB body_->WorldPose Pos.Z:"
 //        << std::to_string(body_->WorldPose().Pos().Z()) << std::endl;
   msgCB_lock_.lock();
-  double MsglinearSpeed = -1*_msg->linear.x;
-  double MsgangularSpeed = -1*_msg->angular.z;
+  double MsglinearSpeed = _msg->linear.x;
+  double MsgangularSpeed = _msg->angular.z;
 
   double MsgFL = M_PI/2;
   double MsgFR = M_PI/2;

@@ -5,9 +5,9 @@
         <joint name="${name}_mount_joint" type='fixed'>
             <xacro:insert_block name="origin" /> 
             <parent link="${parent}"/>
-            <child link="${name}_link" />
+            <child link="${name}" />
         </joint>
-        <link name='${name}_link'>
+        <link name='${name}'>
             <!-- <inertial>
                 <mass value="0.1"/>
             </inertial> -->
@@ -43,7 +43,7 @@
             <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
                 <robotNamespace>/</robotNamespace>
                 <updateRate>${hz}</updateRate>
-                <bodyName>${name}_link</bodyName>
+                <bodyName>${name}</bodyName>
                 <topicName>${topic}</topicName>
                 <accelDrift>0.005 0.005 0.005</accelDrift>
                 <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
