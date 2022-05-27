@@ -17,7 +17,7 @@
         </inertia>
       </inertial>
       <collision name='collision'>
-        <pose frame=''>0 0 0.04 0 0 0</pose>
+        <pose frame=''>0 0 -0.04 0 0 0</pose>
         <geometry>
           <cylinder>
             <length>0.11</length>
@@ -27,7 +27,7 @@
         <max_contacts>10</max_contacts>
       </collision>
       <visual name='visual'>
-        <pose frame=''>0 0 0 0 0 0</pose>
+        <pose frame=''>0 0 0 3.1416 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -57,8 +57,8 @@
             <vertical>
               <samples>32</samples>
               <resolution>1</resolution>
-              <min_angle>-0.04036</min_angle>
-              <max_angle>-1.56207</max_angle>
+              <min_angle>0.04036</min_angle>
+              <max_angle>1.56207</max_angle>
             </vertical>
           </scan>
           <range>
@@ -72,7 +72,7 @@
             <stddev>0</stddev>
           </noise>
         </ray>
-        <plugin name='gazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_gpu_laser.so'>
+        <plugin name='gazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_laser.so'>
         <!--libgazebo_ros_velodyne_gpu_laser-->
           <topicName>/lidar_points</topicName>
           <robotNamespace>/</robotNamespace>

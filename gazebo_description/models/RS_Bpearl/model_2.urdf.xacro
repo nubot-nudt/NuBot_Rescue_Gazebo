@@ -20,14 +20,14 @@
         </inertia>
       </inertial> -->
       <collision name='collision'>
-        <origin xyz="0 0 0.04" rpy="0 0 0"/>
+        <origin xyz="0 0 -0.04" rpy="0 0 0"/>
         <geometry>
           <cylinder radius="0.05" length="0.11"/>
         </geometry>
         <max_contacts>10</max_contacts>
       </collision>
       <visual name='visual'>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="${M_PI} 0 0"/>
         <geometry>
           <mesh filename="model://RS_Bpearl/meshes/RS_Bpearl_frame.STL" />
         </geometry>
@@ -52,8 +52,8 @@
               <vertical>
                 <samples>${lasers}</samples>
                 <resolution>1</resolution>
-                <min_angle>-${84.9*M_PI/180.0}</min_angle>
-                <max_angle>-${2.3125*M_PI/180.0}</max_angle>
+                <min_angle>${2.3125*M_PI/180.0}</min_angle>
+                <max_angle>${84.9*M_PI/180.0}</max_angle>
               </vertical>
             </scan>
             <range>
@@ -93,8 +93,8 @@
               <vertical>
                 <samples>${lasers}</samples>
                 <resolution>1</resolution>
-                <min_angle>-${89.5*M_PI/180.0}</min_angle>
-                <max_angle>-${2.3125*M_PI/180.0}</max_angle>
+                <min_angle>${2.3125*M_PI/180.0}</min_angle>
+                <max_angle>${89.5*M_PI/180.0}</max_angle>
               </vertical>
             </scan>
             <range>

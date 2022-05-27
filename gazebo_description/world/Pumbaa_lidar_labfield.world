@@ -51,7 +51,7 @@
             <!-- LiDAR:RS_Bpearl + IMU -->
             <!-- <include>
                 <uri>model://RS_Bpearl</uri>
-                <pose>-0.36277 0 0.2115 0 1.5708 0</pose> 
+                <pose>-0.36277 0 0.2115 3.1416 1.5708 0</pose> 
             </include>
             <joint name='lidar_joint' type='fixed'>
                 <parent>NuBot_Pumbaa_v2::base_link</parent>
