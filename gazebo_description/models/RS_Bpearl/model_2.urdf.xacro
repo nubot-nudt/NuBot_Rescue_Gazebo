@@ -27,7 +27,7 @@
         <max_contacts>10</max_contacts>
       </collision>
       <visual name='visual'>
-        <origin xyz="0 0 0" rpy="${M_PI} 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="model://RS_Bpearl/meshes/RS_Bpearl_frame.STL" />
         </geometry>

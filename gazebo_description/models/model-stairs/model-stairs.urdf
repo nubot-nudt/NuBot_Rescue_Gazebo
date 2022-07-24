@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="model-stairs">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.550882352941177 0.468 0.358823529411765"
+        rpy="0 0 0" />
+      <mass
+        value="95.88" />
+      <inertia
+        ixx="18.5105352941176"
+        ixy="6.5396548277259E-15"
+        ixz="4.72565647058824"
+        iyy="20.0436006470588"
+        iyz="-7.38527864885824E-15"
+        izz="20.3894653529411" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://model-stairs/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://model-stairs/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

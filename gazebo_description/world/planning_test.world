@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+    <world name="planning_test">
+        <!--A demo world for tracked vehicles.-->
+
+        <include>
+            <uri>model://sun</uri>
+        </include>
+
+        <include>
+            <uri>model://ground_plane</uri>
+        </include>
+
+        <model name="wall-room">
+            <pose frame=''>0.0 0 0 0 0 0</pose>
+            <include>
+                <uri>model://walls/wall-room</uri>
+            </include>
+        </model>
+
+        <model name="model-stairs">
+            <pose frame=''>-3.00 0.45 0 0 0 -3.14159</pose>
+            <include>
+                <uri>model://model-stairs</uri>
+            </include>
+        </model>
+
+        <model name="model-highplate-1_2">
+            <pose frame=''>-1.8 0.6 0 0 0 0</pose>
+            <include>
+                <uri>model://model-highplate-1_2</uri>
+            </include>
+        </model>
+
+        <model name="model-slope">
+            <pose frame=''>-1.8 0.6 0 0 0 0</pose>
+            <include>
+                <uri>model://model-slope</uri>
+            </include>
+        </model>
+
+
+        <model name="model-stepfield">
+            <pose frame=''>4.0 0 0 0 0 -0.7853975</pose>
+            <include>
+                <uri>model://model-stepfield</uri>
+            </include>
+        </model>
+        
+    </world>
+</sdf>

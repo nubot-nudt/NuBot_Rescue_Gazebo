@@ -1,0 +1,1430 @@
+<?xml version="1.0" ?>
+<sdf version='1.6'>
+  <world name='paper_1'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics name='default_physics' default='0' type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='model-stepfield'>
+      <link name='base_link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0.14702 0 -0 0</pose>
+          <mass>904.37</mass>
+          <inertia>
+            <ixx>42.723</ixx>
+            <ixy>-1.8513e-13</ixy>
+            <ixz>7.2218e-15</ixz>
+            <iyy>18.401</iyy>
+            <iyz>4.3559e-14</iyz>
+            <izz>41.622</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://model-stepfield/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://model-stepfield/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose frame=''>-1.3285 -1.16443 0 0 -0 0</pose>
+    </model>
+    <model name='model-slope'>
+      <link name='base_link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>1.2463 -0.6 0.47751 0 -0 0</pose>
+          <mass>143.39</mass>
+          <inertia>
+            <ixx>45.301</ixx>
+            <ixy>-1.6662e-14</ixy>
+            <ixz>20.247</ixz>
+            <iyy>84.673</iyy>
+            <iyz>2.0075e-14</iyz>
+            <izz>91.354</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://model-slope/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://model-slope/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose frame=''>0.576641 3.01844 0 0 -0 0</pose>
+    </model>
+    <model name='model-highplate-1_2'>
+      <link name='base_link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>-0.6 -0.6 0.821154 0 -0 0</pose>
+          <mass>82.485</mass>
+          <inertia>
+            <ixx>30.1124</ixx>
+            <ixy>9.42714e-15</ixy>
+            <ixz>2.10969e-14</ixz>
+            <iyy>30.1124</iyy>
+            <iyz>1.13072e-14</iyz>
+            <izz>35.1196</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://model-highplate-1_2/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://model-highplate-1_2/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose frame=''>0.531957 3.04398 0 0 -0 0</pose>
+    </model>
+    <model name='model-stairs'>
+      <link name='base_link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.550882 0.468 0.358824 0 -0 0</pose>
+          <mass>95.88</mass>
+          <inertia>
+            <ixx>18.5105</ixx>
+            <ixy>6.53965e-15</ixy>
+            <ixz>4.72566</ixz>
+            <iyy>20.0436</iyy>
+            <iyz>-7.38528e-15</iyz>
+            <izz>20.3895</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://model-stairs/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://model-stairs/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose frame=''>-2.03771 1.98895 0 0 -0 0</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>137 2000000</sim_time>
+      <real_time>17 799134392</real_time>
+      <wall_time>1655826811 412398415</wall_time>
+      <iterations>15987</iterations>
+      <model name='NuBot_Pumbaa_v2'>
+        <pose frame=''>-4.62774 -0.027265 0.089999 0 -1e-06 -0.002151</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose frame=''>-4.62774 -0.027265 0.089999 0 -1e-06 -0.002151</pose>
+          <velocity>-2.1e-05 4.9e-05 6.8e-05 -0.00043 6.5e-05 -2e-05</velocity>
+          <acceleration>-0.044267 0.183558 0.109553 -0.827644 0.213587 -0.282151</acceleration>
+          <wrench>-0.885339 3.67117 2.19105 0 -0 0</wrench>
+        </link>
+        <link name='front_left_flipper_link'>
+          <pose frame=''>-4.35121 0.22214 0.089999 -5e-06 -1.04602 -0.002149</pose>
+          <velocity>0.000552 -0.000192 -0.000229 -7.1e-05 -0.000681 0.000488</velocity>
+          <acceleration>0.577592 0.255993 -0.135555 2.02388 0.459341 1.40535</acceleration>
+          <wrench>1.44398 0.639981 -0.338887 0 -0 0</wrench>
+        </link>
+        <link name='front_right_flipper_link'>
+          <pose frame=''>-4.35228 -0.277858 0.089999 -1e-06 -1.04602 -0.002152</pose>
+          <velocity>-0.009073 -0.000856 0.005392 -0.000906 0.010261 0.000195</velocity>
+          <acceleration>0.373203 0.321681 -0.004311 1.25231 -0.147847 -0.055074</acceleration>
+          <wrench>0.933009 0.804201 -0.010777 0 -0 0</wrench>
+        </link>
+        <link name='left_track_link'>
+          <pose frame=''>-4.62744 0.112735 0.089999 0 -1e-06 -0.002151</pose>
+          <velocity>0 3.2e-05 -2.5e-05 -0.000352 7e-06 4e-06</velocity>
+          <acceleration>0.000502 0.142869 -0.058203 -0.80059 0.080715 -0.237268</acceleration>
+          <wrench>0.005023 1.42869 -0.582027 0 -0 0</wrench>
+        </link>
+        <link name='rear_left_flipper_link'>
+          <pose frame=''>-4.9032 0.223324 0.089999 -7e-05 1.04613 -0.002194</pose>
+          <velocity>0.00155 -0.000205 0.001003 -0.000492 -0.001928 0.000314</velocity>
+          <acceleration>-0.095958 0.489916 -0.012436 -2.10475 -0.444825 -1.89108</acceleration>
+          <wrench>-0.239895 1.22479 -0.031091 0 -0 0</wrench>
+        </link>
+        <link name='rear_right_flipper_link'>
+          <pose frame=''>-4.90428 -0.276671 0.089999 -5e-06 1.04607 -0.002153</pose>
+          <velocity>0.004318 -0.00011 0.002649 -3e-06 -0.004792 -0.000407</velocity>
+          <acceleration>-0.652293 0.497902 -0.110832 1.81845 0.373517 -0.330262</acceleration>
+          <wrench>-1.63073 1.24476 -0.27708 0 -0 0</wrench>
+        </link>
+        <link name='right_track_link'>
+          <pose frame=''>-4.62804 -0.167265 0.089999 0 -1e-06 -0.002151</pose>
+          <velocity>-2.7e-05 2e-05 0.000107 -0.000228 -0.000305 3e-06</velocity>
+          <acceleration>-0.066864 0.080032 0.212444 -0.980504 -0.809347 -0.042107</acceleration>
+          <wrench>-0.668638 0.800323 2.12444 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='model-highplate-1_2'>
+        <pose frame=''>-0.855032 0.621602 -1e-06 0 -2e-06 6.6e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose frame=''>-0.855032 0.621602 -1e-06 0 -2e-06 6.6e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>7.20242 -1.11165 5.87796 -1.68445 0.636508 -3.01368</acceleration>
+          <wrench>594.091 -91.6942 484.843 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='model-stepfield'>
+        <pose frame=''>5.08001 -0.005121 -0.000213 -2.2e-05 3e-05 -0.791021</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose frame=''>5.08001 -0.005121 -0.000213 -2.2e-05 3e-05 -0.791021</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.019944 -1.38818 -8.41182 -1.84284 1.06321 3.05323</acceleration>
+          <wrench>18.0364 -1255.43 -7607.4 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='model-slope'>
+        <pose frame=''>-0.841042 0.611674 -0 0 -0 0.000543</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose frame=''>-0.841042 0.611674 -0 0 -0 0.000543</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>3.29009 -3.27736 2.77153 0.485121 -0.354481 -1.02356</acceleration>
+          <wrench>471.766 -469.94 397.409 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='model-stairs'>
+        <pose frame=''>-2.0721 0.449162 -8e-06 0 6e-06 -3.14159</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose frame=''>-2.0721 0.449162 -8e-06 0 6e-06 -3.14159</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-8.68666 -0.000393 5.04495 0.001364 0.924254 0.000512</acceleration>
+          <wrench>-832.876 -0.037688 483.709 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='wall-1'>
+        <pose frame=''>0.855284 -0.09215 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='Wall_5'>
+          <pose frame=''>0.855284 2.33285 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose frame=''>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <model name='NuBot_Pumbaa_v2'>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='base_link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>0.203664</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.136197</iyy>
+            <iyz>0</iyz>
+            <izz>0.319921</izz>
+          </inertia>
+        </inertial>
+        <self_collide>0</self_collide>
+        <gravity>1</gravity>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <collision name='base_link_collision_1'>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0.276 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.07</radius>
+              <length>0.11</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='base_link_collision_2'>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>-0.276 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.07</radius>
+              <length>0.11</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='base_link_collision'>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0 1.5708 -0 1.5708</pose>
+          <geometry>
+            <box>
+              <size>0.11 0.14 0.552</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://NuBot_Pumbaa_v2/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_vive_link_visual'>
+          <pose frame=''>0.16175 0 0.138 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://NuBot_Pumbaa_v2/meshes/vive_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <link name='left_track_link'>
+        <pose frame=''>0 0.14 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>10</mass>
+          <inertia>
+            <ixx>0.15</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.9</iyy>
+            <iyz>0</iyz>
+            <izz>0.9</izz>
+          </inertia>
+        </inertial>
+        <gravity>1</gravity>
+        <kinematic>0</kinematic>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <visual name='left_track_visual'>
+          <pose frame=''>0 -0.14 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://NuBot_Pumbaa_v2/meshes/left_track_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='left_track_collision_1'>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0.276 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='left_track_collision_2'>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>-0.276 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='left_track_collision'>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0 1.5708 -0 1.5708</pose>
+          <geometry>
+            <box>
+              <size>0.18 0.18 0.552</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+      </link>
+      <link name='right_track_link'>
+        <pose frame=''>0 -0.14 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>10</mass>
+          <inertia>
+            <ixx>0.15</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.9</iyy>
+            <iyz>0</iyz>
+            <izz>0.9</izz>
+          </inertia>
+        </inertial>
+        <gravity>1</gravity>
+        <kinematic>0</kinematic>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <visual name='right_track_visual'>
+          <pose frame=''>0 0.14 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://NuBot_Pumbaa_v2/meshes/right_track_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='right_track_collision_1'>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0.276 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='right_track_collision'>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0 1.5708 -0 1.5708</pose>
+          <geometry>
+            <box>
+              <size>0.18 0.18 0.552</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='right_track_collision_2'>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>-0.276 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+      </link>
+      <joint name='left_track_joint' type='fixed'>
+        <parent>base_link</parent>
+        <child>left_track_link</child>
+      </joint>
+      <joint name='right_track_joint' type='fixed'>
+        <parent>base_link</parent>
+        <child>right_track_link</child>
+      </joint>
+      <link name='rear_left_flipper_link'>
+        <pose frame=''>-0.276 0.25 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>-0.16867 0.015987 0 0 -0 0</pose>
+          <mass>2.5</mass>
+          <inertia>
+            <ixx>0.002449</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.02168</iyy>
+            <iyz>0</iyz>
+            <izz>0.019288</izz>
+          </inertia>
+        </inertial>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <collision name='rear_left_flipper_collision_large_wheel_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>0 0.016 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.038</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='rear_left_flipper_collision_small_wheel_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>-0.336 0.016 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.038</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='rear_left_flipper_collision_middle_bar_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>-0.168 0.016 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.336 0.038 0.18</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <visual name='rear_left_flipper_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://NuBot_Pumbaa_v2/meshes/back_left_fin_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='rear_left_flipper_joint' type='revolute'>
+        <child>rear_left_flipper_link</child>
+        <parent>base_link</parent>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-3</lower>
+            <upper>3</upper>
+            <effort>-1</effort>
+            <velocity>0.3</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>10</damping>
+            <friction>0</friction>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='rear_right_flipper_link'>
+        <pose frame=''>-0.276 -0.25 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>-0.16867 -0.015987 0 0 -0 0</pose>
+          <mass>2.5</mass>
+          <inertia>
+            <ixx>0.002449</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.02168</iyy>
+            <iyz>0</iyz>
+            <izz>0.019288</izz>
+          </inertia>
+        </inertial>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <collision name='rear_right_flipper_collision_large_wheel_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>0 -0.016 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.038</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='rear_right_flipper_collision_small_wheel_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>-0.336 -0.016 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.038</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='rear_right_flipper_collision_middle_bar_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>-0.168 -0.016 0 0 -0 3.14159</pose>
+          <geometry>
+            <box>
+              <size>0.336 0.038 0.18</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <visual name='rear_right_flipper_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://NuBot_Pumbaa_v2/meshes/back_right_fin_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='rear_right_flipper_joint' type='revolute'>
+        <child>rear_right_flipper_link</child>
+        <parent>base_link</parent>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-3</lower>
+            <upper>3</upper>
+            <effort>-1</effort>
+            <velocity>0.3</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>10</damping>
+            <friction>0</friction>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='front_left_flipper_link'>
+        <pose frame=''>0.276 0.25 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.16867 0.015987 0 0 -0 0</pose>
+          <mass>2.5</mass>
+          <inertia>
+            <ixx>0.002449</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.02168</iyy>
+            <iyz>0</iyz>
+            <izz>0.019288</izz>
+          </inertia>
+        </inertial>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <collision name='front_left_flipper_collision_large_wheel_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>0 0.016 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.038</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='front_left_flipper_collision_small_wheel_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>0.336 0.016 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.038</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='front_left_flipper_collision_middle_bar_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>0.168 0.016 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.336 0.038 0.18</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <visual name='front_left_flipper_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://NuBot_Pumbaa_v2/meshes/front_left_fin_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='front_left_flipper_joint' type='revolute'>
+        <child>front_left_flipper_link</child>
+        <parent>base_link</parent>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-3</lower>
+            <upper>3</upper>
+            <effort>-1</effort>
+            <velocity>0.3</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>10</damping>
+            <friction>0</friction>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='front_right_flipper_link'>
+        <pose frame=''>0.276 -0.25 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.16867 -0.015987 0 0 -0 0</pose>
+          <mass>2.5</mass>
+          <inertia>
+            <ixx>0.002449</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.02168</iyy>
+            <iyz>0</iyz>
+            <izz>0.019288</izz>
+          </inertia>
+        </inertial>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <collision name='front_right_flipper_collision_large_wheel_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>0 -0.016 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.038</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='front_right_flipper_collision_small_wheel_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>0.336 -0.016 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.09</radius>
+              <length>0.038</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <collision name='front_right_flipper_collision_middle_bar_collision'>
+          <max_contacts>20</max_contacts>
+          <pose frame=''>0.168 -0.016 0 0 -0 3.14159</pose>
+          <geometry>
+            <box>
+              <size>0.336 0.038 0.18</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.7</mu>
+                <mu2>150</mu2>
+                <fdir1>0 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <visual name='front_right_flipper_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://NuBot_Pumbaa_v2/meshes/front_right_fin_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name='front_right_flipper_joint' type='revolute'>
+        <child>front_right_flipper_link</child>
+        <parent>base_link</parent>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-3</lower>
+            <upper>3</upper>
+            <effort>-1</effort>
+            <velocity>0.3</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>10</damping>
+            <friction>0</friction>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <plugin name='NuBot_Pumbaa_Gazebo_Plugin' filename='libnubot_pumbaa_plugin.so'>
+        <body>base_link</body>
+        <left_track>left_track_link</left_track>
+        <right_track>right_track_link</right_track>
+        <left_flipper>front_left_flipper_link</left_flipper>
+        <left_flipper>rear_left_flipper_link</left_flipper>
+        <right_flipper>front_right_flipper_link</right_flipper>
+        <right_flipper>rear_right_flipper_link</right_flipper>
+        <front_left_flipper_j>front_left_flipper_joint</front_left_flipper_j>
+        <rear_left_flipper_j>rear_left_flipper_joint</rear_left_flipper_j>
+        <front_right_flipper_j>front_right_flipper_joint</front_right_flipper_j>
+        <rear_right_flipper_j>rear_right_flipper_joint</rear_right_flipper_j>
+        <track_mu>2</track_mu>
+        <track_mu2>0.5</track_mu2>
+        <flip_p>1500</flip_p>
+        <flip_i>100</flip_i>
+        <flip_d>0</flip_d>
+        <flip_initial>1.0472</flip_initial>
+        <tracksSeparation>0.285</tracksSeparation>
+        <steeringEfficiency>0.5</steeringEfficiency>
+        <maxLinearSpeed>2.0</maxLinearSpeed>
+        <maxAngularSpeed>1.5</maxAngularSpeed>
+      </plugin>
+      <pose frame=''>-3.30828 -1.07399 0 0 -0 0</pose>
+    </model>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>0.956571 -10.2804 8.28501 0 0.611643 1.5682</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <model name='wall-1'>
+      <link name='Wall_5'>
+        <pose frame=''>0 2.425 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+        <inertial>
+          <mass>1</mass>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <visual name='Wall_5_Visual'>
+          <pose frame=''>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>20 0.15 5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+            <shader type='pixel'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='Wall_5_Collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>20 0.15 5</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose frame=''>0.855284 -0.09215 0 0 -0 0</pose>
+    </model>
+  </world>
+</sdf>

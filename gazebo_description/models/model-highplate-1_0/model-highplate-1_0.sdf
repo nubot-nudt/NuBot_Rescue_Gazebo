@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='model-highplate-1_0'>
+    <static>true</static>
+    <link name='base_link'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>-0.6 0.618 0.703571 0 -0 0</pose>
+        <mass>74.025</mass>
+        <inertia>
+          <ixx>22.834</ixx>
+          <ixy>7.54171e-15</ixy>
+          <ixz>1.55348e-14</ixz>
+          <iyy>22.834</iyy>
+          <iyz>1.20889e-14</iyz>
+          <izz>30.4243</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://model-highplate-1_0/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://model-highplate-1_0/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

@@ -58,6 +58,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <eigen3/Eigen/Eigen>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/optional.hpp>
@@ -87,6 +88,7 @@
 #include <std_msgs/Float32.h>
 #include <std_msgs/Float64MultiArray.h>
 #include <geometry_msgs/Pose.h>
+#include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Twist.h>
 #include <dynamic_reconfigure/server.h>
 
@@ -157,6 +159,7 @@ namespace gazebo
       ros::Publisher              debug_pub_;
       ros::Publisher              RobotState_pub_;   // Publish the pose of the robot
       ros::Publisher              RobotPose_pub_;   // Publish the pose of the robot
+      ros::Publisher              LidarPose_pub_;   // Publish the pose of the lidar
 
       boost::thread               message_callback_queue_thread_;     // Thead object for the Ros running callback Thread.
       boost::thread               service_callback_queue_thread_;
@@ -185,6 +188,12 @@ namespace gazebo
       const float main_velocity_trans = 0.1*2*3.1416/25/60;  // 2pi/减速机减速比/60
       const float fin_rate_trans = 2*3.1416/(64*40/30)/60;  // 2pi/减速机减速比/60
       const float angle2radian = 3.1416/180; // pi/180
+
+      Eigen::Quaterniond base_quaternion, lidar_quaternion;
+      Eigen::Vector3d base_position, lidar_position;
+      Eigen::Matrix4d base_matrix = Eigen::Matrix4d::Identity();
+      Eigen::Matrix4d lidar_matrix = Eigen::Matrix4d::Identity();
+      Eigen::Matrix4d base_lidar_matrix = Eigen::Matrix4d::Identity();
 
       /// \brief Friction coefficient in the first friction direction.
       sdf::ParamPtr               trackMu;

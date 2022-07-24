@@ -411,6 +411,9 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // set the desired friction to tracks (override the values set in the SDF model)
   UpdateTrackSurface();
 
+  base_lidar_matrix.block<3,1>(0,3) = Eigen::Vector3d(-0.36277, 0.0, 0.2115);
+  base_lidar_matrix.block<3,3>(0,0) = Eigen::Quaterniond(0.0, 0.0, 0.0, 1.0).toRotationMatrix();
+
   // Make sure the ROS node for Gazebo has already been initialized
   if (!ros::isInitialized())
   {
@@ -422,8 +425,9 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   rosnode_ = new ros::NodeHandle(robot_name_);
 
   // Publishers
-  RobotPose_pub_ = rosnode_->advertise<geometry_msgs::Pose>("/gazebo_state/pumbaa_pose",10);
+  RobotPose_pub_ = rosnode_->advertise<geometry_msgs::PoseStamped>("/gazebo_state/pumbaa_pose",10);
   RobotState_pub_ = rosnode_->advertise<nubot_msgs::base_info>("/nubot_drive/base_info",10);
+  LidarPose_pub_ = rosnode_->advertise<geometry_msgs::PoseStamped>("/gazebo_state/lidar_pose",10);
 
   // Subscribers.
   //ros::SubscribeOptions so1 = ros::SubscribeOptions::create<gazebo_msgs::ModelStates>(
@@ -1134,7 +1138,7 @@ void NuBotPumbaaGazebo::update_child()
       //nubot_be_control();
       //nubot_test();
   this->DriveTracks();
-  message_publish();
+  // message_publish();
   //this->SetFlipAngle(0,front_right_j_speed,0,0);
   //gzmsg << "NuBotPumbaaGazebo_Plugin: update_child is running" << std::endl;
 
@@ -1146,17 +1150,46 @@ void NuBotPumbaaGazebo::update_child()
 
 void NuBotPumbaaGazebo::message_publish(void)
 {
-  geometry_msgs::Pose RobotPose;
-  RobotPose.position.x = body_->WorldPose().Pos().X();
-  RobotPose.position.y = body_->WorldPose().Pos().Y();
-  RobotPose.position.z = body_->WorldPose().Pos().Z();
-  RobotPose.orientation.x = body_->WorldPose().Rot().X();
-  RobotPose.orientation.y = body_->WorldPose().Rot().Y();
-  RobotPose.orientation.z = body_->WorldPose().Rot().Z();
-  RobotPose.orientation.w = body_->WorldPose().Rot().W();
+  base_position.x() = body_->WorldPose().Pos().X();
+  base_position.y() = body_->WorldPose().Pos().Y();
+  base_position.z() = body_->WorldPose().Pos().Z();
+  base_quaternion.w() = body_->WorldPose().Rot().W();
+  base_quaternion.x() = body_->WorldPose().Rot().X();
+  base_quaternion.y() = body_->WorldPose().Rot().Y();
+  base_quaternion.z() = body_->WorldPose().Rot().Z();
+  base_matrix.block<3,3>(0,0) = base_quaternion.toRotationMatrix();//旋转部分赋值
+  base_matrix.block<3,1>(0,3) = base_position; //平移部分赋值 
+  lidar_matrix = base_matrix * base_lidar_matrix;//计算base_link位置
+  lidar_quaternion = lidar_matrix.block<3,3>(0,0);
+  lidar_position = lidar_matrix.block<3,1>(0,3);
+
+  geometry_msgs::PoseStamped RobotPose;
+  RobotPose.header.stamp = ros::Time::now();
+  RobotPose.header.frame_id = "robot_pose";
+  RobotPose.pose.position.x = base_position.x();
+  RobotPose.pose.position.y = base_position.y();
+  RobotPose.pose.position.z = base_position.z();
+  RobotPose.pose.orientation.x = base_quaternion.x();
+  RobotPose.pose.orientation.y = base_quaternion.y();
+  RobotPose.pose.orientation.z = base_quaternion.z();
+  RobotPose.pose.orientation.w = base_quaternion.w();
   RobotPose_pub_.publish(RobotPose);
 
+  geometry_msgs::PoseStamped LidarPose;
+  LidarPose.header.stamp = RobotPose.header.stamp;
+  LidarPose.header.frame_id = "lidar_pose";
+  LidarPose.pose.position.x = lidar_position.x();
+  LidarPose.pose.position.y = lidar_position.y();
+  LidarPose.pose.position.z = lidar_position.z();
+  LidarPose.pose.orientation.x = lidar_quaternion.x();
+  LidarPose.pose.orientation.y = lidar_quaternion.y();
+  LidarPose.pose.orientation.z = lidar_quaternion.z();
+  LidarPose.pose.orientation.w = lidar_quaternion.w();
+  LidarPose_pub_.publish(LidarPose);
+
   nubot_msgs::base_info RobotState;
+  RobotState.header.stamp = RobotPose.header.stamp;
+  RobotState.header.frame_id = "robot_state";
   RobotState.velocity[0] = (int)(   trackVelocity_[Tracks::LEFT]/main_velocity_trans);
   RobotState.velocity[1] = (int)(   trackVelocity_[Tracks::RIGHT]/main_velocity_trans);
   RobotState.velocity[2] = (int)(-1*front_left_j->GetVelocity(0)/fin_rate_trans);
@@ -1280,7 +1313,8 @@ void NuBotPumbaaGazebo::Drive_Auto_Cmd_CB(const geometry_msgs::Twist::ConstPtr &
 
 void NuBotPumbaaGazebo::message_queue_thread()
 {
-  static const double timeout = 0.01;
+  static const double timeout = 0.005;
+  ros::Rate(100);
   while (rosnode_->ok())
   {
     // Invoke all callbacks currently in the queue. If a callback was not ready to be called,
@@ -1288,5 +1322,7 @@ void NuBotPumbaaGazebo::message_queue_thread()
     // the amount of time to wait for a callback to be available before returning.
     message_queue_.callAvailable(ros::WallDuration(timeout));
     // gzmsg << "NuBotPumbaaGazebo_Plugin: message_queue_thread is running" << std::endl;
+
+    message_publish();
   }
 }

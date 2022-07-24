@@ -323,6 +323,7 @@ void GazeboRosIMU::Update()
 #endif
   if (dt > 0.0) accel = rot.RotateVectorReverse((temp - velocity) / dt - gravity);
   velocity = temp;
+  // accel = link->WorldLinearAccel() - gravity;
 
   // calculate angular velocity from delta quaternion
   // note: link->GetRelativeAngularVel() sometimes return nan?

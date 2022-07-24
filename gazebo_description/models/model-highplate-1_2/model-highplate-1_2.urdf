@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="model-highplate-1_2">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.599999999999998 -0.599999999999999 0.821153846153847"
+        rpy="0 0 0" />
+      <mass
+        value="82.4850000000001" />
+      <inertia
+        ixx="30.1124141826923"
+        ixy="9.4271378897615E-15"
+        ixz="2.10968740540731E-14"
+        iyy="30.1124141826924"
+        iyz="1.13071975260457E-14"
+        izz="35.1195750000001" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://model-highplate-1_2/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://model-highplate-1_2/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>
