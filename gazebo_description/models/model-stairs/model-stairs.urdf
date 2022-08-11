@@ -44,4 +44,14 @@
       </geometry>
     </collision>
   </link>
+  <gazebo reference="base_link">
+    <selfCollide>false</selfCollide>
+    <mu1>100</mu1>
+    <mu2>50</mu2>
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <fdir1 value="0 1 0" />
+    <gravity>1</gravity>
+    <maxContacts>10</maxContacts>
+  </gazebo>
 </robot>

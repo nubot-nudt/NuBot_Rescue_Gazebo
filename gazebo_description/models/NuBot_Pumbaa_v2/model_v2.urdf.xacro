@@ -116,8 +116,8 @@
 
   <gazebo reference="left_track_link">
     <selfCollide>false</selfCollide>
-    <mu1>0.7</mu1>
-    <mu2>150</mu2>
+    <mu1>10</mu1>
+    <mu2>10</mu2>
     <kp value="10000000.0" />
     <kd value="1.0" />
     <fdir1 value="0 1 0" />
@@ -174,8 +174,8 @@
 
   <gazebo reference="right_track_link">
     <selfCollide>false</selfCollide>
-    <mu1>0.7</mu1>
-    <mu2>150</mu2>
+    <mu1>10</mu1>
+    <mu2>10</mu2>
     <kp value="10000000.0" />
     <kd value="1.0" />
     <fdir1 value="0 1 0" />
@@ -232,8 +232,8 @@
 
   <gazebo reference="rear_left_flipper_link">
     <selfCollide>false</selfCollide>
-    <mu1>0.7</mu1>
-    <mu2>150</mu2>
+    <mu1>10</mu1>
+    <mu2>10</mu2>
     <kp value="10000000.0" />
     <kd value="1.0" />
     <fdir1 value="0 1 0" />
@@ -288,8 +288,8 @@
 
   <gazebo reference="rear_right_flipper_link">
     <selfCollide>false</selfCollide>
-    <mu1>0.7</mu1>
-    <mu2>150</mu2>
+    <mu1>10</mu1>
+    <mu2>10</mu2>
     <kp value="10000000.0" />
     <kd value="1.0" />
     <fdir1 value="0 1 0" />
@@ -344,8 +344,8 @@
 
   <gazebo reference="front_left_flipper_link">
     <selfCollide>false</selfCollide>
-    <mu1>0.7</mu1>
-    <mu2>150</mu2>
+    <mu1>10</mu1>
+    <mu2>10</mu2>
     <kp value="10000000.0" />
     <kd value="1.0" />
     <fdir1 value="0 1 0" />
@@ -400,8 +400,8 @@
 
   <gazebo reference="front_right_flipper_link">
     <selfCollide>false</selfCollide>
-    <mu1>0.7</mu1>
-    <mu2>150</mu2>
+    <mu1>10</mu1>
+    <mu2>10</mu2>
     <kp value="10000000.0" />
     <kd value="1.0" />
     <fdir1 value="0 1 0" />
@@ -433,11 +433,11 @@
       <front_right_flipper_j>front_right_flipper_joint</front_right_flipper_j>
       <rear_right_flipper_j>rear_right_flipper_joint</rear_right_flipper_j>
       <!--The Mu/Mu2 of tracks, which influnce the simulating performance-->
-      <track_mu>2</track_mu>
+      <track_mu>4</track_mu>
       <track_mu2>0.5</track_mu2>
       <!--The PID parameter of flippers position controll & initial position 1.5708 -->
       <flip_p>1500</flip_p>
-      <flip_i>100</flip_i>
+      <flip_i>500</flip_i>
       <flip_d>0</flip_d>
       <flip_initial>1.0472</flip_initial>
       <!--The parameters of tracks-->

@@ -1159,7 +1159,7 @@ void NuBotPumbaaGazebo::message_publish(void)
   base_quaternion.z() = body_->WorldPose().Rot().Z();
   base_matrix.block<3,3>(0,0) = base_quaternion.toRotationMatrix();//旋转部分赋值
   base_matrix.block<3,1>(0,3) = base_position; //平移部分赋值 
-  lidar_matrix = base_matrix * base_lidar_matrix;//计算base_link位置
+  lidar_matrix = base_matrix * base_lidar_matrix;//计算lidar位置
   lidar_quaternion = lidar_matrix.block<3,3>(0,0);
   lidar_position = lidar_matrix.block<3,1>(0,3);
 

@@ -24,6 +24,22 @@
             <uri>model://model-stepfield/meshes/base_link.STL</uri>
           </mesh>
         </geometry>
+        <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
       </collision>
       <visual name='base_link_visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
