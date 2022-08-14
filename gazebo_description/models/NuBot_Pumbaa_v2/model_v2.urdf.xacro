@@ -7,7 +7,7 @@
   <xacro:property name="track_mass" value="10" />
   <xacro:property name="flipper_mass" value="2.5" />
 
-  <xacro:property name="track_radius" value="0.09" />
+  <xacro:property name="track_radius" value="0.091" />
   <xacro:property name="track_width" value="0.18" />
   <xacro:property name="track_length" value="0.552" />
   <xacro:property name="track_distance" value="0.145" />
@@ -436,9 +436,9 @@
       <track_mu>4</track_mu>
       <track_mu2>0.5</track_mu2>
       <!--The PID parameter of flippers position controll & initial position 1.5708 -->
-      <flip_p>1500</flip_p>
+      <flip_p>2000</flip_p>
       <flip_i>500</flip_i>
-      <flip_d>0</flip_d>
+      <flip_d>10</flip_d>
       <flip_initial>1.0472</flip_initial>
       <!--The parameters of tracks-->
       <tracksSeparation>0.29</tracksSeparation>

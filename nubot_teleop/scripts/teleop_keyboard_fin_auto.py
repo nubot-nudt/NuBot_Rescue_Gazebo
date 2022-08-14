@@ -26,7 +26,7 @@ Moving around:
 q/e : decrease/increase speeds
 z/c : change moving direction
 
-Flipper control: (unsupport, semi-auto mode)
+Flipper control: (semi-auto mode, only u j i k)
    u ↑ front o ↑
    j ↓       l ↓
         i ↑
@@ -45,7 +45,7 @@ class Callbacks:
         self.speed_gears = [200, 600, 1000, 1500, 2000, 2500, 3000]
         self.gears = 0
         self.velocity = [0,0,0,0,0,0]
-        self.drive_direction = 1 #前进方向 1正向 0反向
+        self.drive_direction = 0 #前进方向 1正向 0反向
 
         self.fin_pos_reset = 0
         self.fin_angle_mode = 1 #Gazebo摆臂速度控制模式不太好用，直接角度控制
@@ -100,6 +100,18 @@ class Callbacks:
         ###### 倒车模式 ######
         try:
             key = self.getKey(self.settings)
+
+            if self.drive_direction == 1:
+                self.fin_expect_pub[0] = self.fin_angle_real[0]
+                self.fin_expect_pub[1] = self.fin_angle_real[1]
+                self.fin_expect_pub[2] = self.fin_angle_real[2]
+                self.fin_expect_pub[3] = self.fin_angle_real[3]
+            else:
+                self.fin_expect_pub[0] = self.fin_angle_real[3]
+                self.fin_expect_pub[1] = self.fin_angle_real[2]
+                self.fin_expect_pub[2] = self.fin_angle_real[1]
+                self.fin_expect_pub[3] = self.fin_angle_real[0]
+
             ###by bailiang 2022.04.08 更改按键
             if key == 'z': #按键按下，倒车模式
                 if self.flag_dir == 0: #判断按键是否和上一循环一样，避免重复触发
