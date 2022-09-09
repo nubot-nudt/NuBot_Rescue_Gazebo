@@ -42,7 +42,7 @@ class Callbacks:
     def __init__(self):
         self.speed = 200
         self.speed_fin = 600     #摆臂速度by chenghao 2019.3.13
-        self.speed_gears = [200, 600, 1000, 1500, 2000, 2500, 3000]
+        self.speed_gears = [200, 400, 600, 1000, 1500, 2000, 2500, 3000]
         self.gears = 0
         self.velocity = [0,0,0,0,0,0]
         self.drive_direction = 0 #前进方向 1正向 0反向

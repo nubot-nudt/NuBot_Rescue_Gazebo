@@ -11,10 +11,16 @@
             <uri>model://ground_plane</uri>
         </include>
 
-        <model name="wall-room">
+        <!-- <model name="wall-room">
             <pose frame=''>0.0 0 0 0 0 0</pose>
             <include>
                 <uri>model://walls/wall-room</uri>
+            </include>
+        </model> -->
+        <model name="wall-outdoor">
+            <pose frame=''>0.0 0 0 0 0 0</pose>
+            <include>
+                <uri>model://walls/wall-outdoor</uri>
             </include>
         </model>
 
