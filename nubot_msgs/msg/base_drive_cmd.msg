@@ -31,3 +31,6 @@ int8 fin_angle_mode
 
 float64[4] fin_expect
 #摆臂角度控制 期望角度 单位：角度
+
+int8 emcy
+# 是否急停

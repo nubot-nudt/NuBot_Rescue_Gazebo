@@ -24,7 +24,7 @@ Moving Fins:
 
    Delta↑ X↓    Delta↑ X↓
 ---------------------------
-Share/Option : increase/decrease motor speeds by 10%
+Share/Option : increase/decrease motor speeds
 anything else : force stop
 
 CTRL-C to quit
@@ -35,14 +35,14 @@ CTRL-C to quit
 #         self.fin_plan = [0,0,0,0]
 #         try:
 #             # load plan from file
-#             with open("/home/nubot-1941/workspace/2D-Real/src/teleop/scripts/plan_realexp.pickle", "rb") as f:# 
+#             with open("/home/nubot-1941/workspace/2D-Real/src/nubot_teleop/scripts/plan_realexp.pickle", "rb") as f:# 
 #                 self.P_x, self.MinPath, self.MinCost = pickle.load(f)
 #             self.plan_isvalid = True
 #         except FileNotFoundError:
 #             self.plan_isvalid = False
 #             print("plan is not valid")
 #         try:
-#             with open("/home/nubot-1941/workspace/2D-Real/src/teleop/scripts/direct_realexp_result.pickle", "rb") as f:#phi_h_touch_FR
+#             with open("/home/nubot-1941/workspace/2D-Real/src/nubot_teleop/scripts/direct_realexp_result.pickle", "rb") as f:#phi_h_touch_FR
 #                 self.phi_map, self.h_map, self.touch_map, self.time_map, self.theta_B, self.theta_F  = pickle.load(f)
 #         except FileNotFoundError:
 #             print("predict result is not valid")
@@ -96,14 +96,17 @@ class Callbacks:
         self.gears = 0
         self.velocity = [0,0,0,0,0,0]
         self.drive_direction = 1 #前进方向 1正向 0反向
+        self.drive_direction_auto = -1
+        self.joy_emcy = 0
 
         self.fin_pos_reset = 0
-        self.fin_angle_mode = 1 #Gazebo摆臂速度控制模式不太好用，直接角度控制
+        self.fin_angle_mode = 0
         self.fin_auto_mode = 0
         self.fin_add = [0,0,0,0]
-        self.fin_add_delta = 0.7 #摆臂转速调整
+        self.fin_add_delta = 0.5
         self.fin_expect_pub = [0,0,0,0]
         self.fin_angle_real = [0,0,0,0]
+        self.fin_angle_auto = [0,0,0,0]
         self.driver_emcy = 0
         # self.vive_set_zero = 0
         # self.vive_pos_count = 0
@@ -117,6 +120,7 @@ class Callbacks:
         self.flag_gear_up = 0
         
         # self.flag_set_zero = 0
+        self.flag_joy_emcy = 0
         self.flag_auto_mode = 0
         self.now_control = 0
 
@@ -137,17 +141,12 @@ class Callbacks:
         self.fin_angle_real[2] = base_info.fin_angle[2]
         self.fin_angle_real[3] = base_info.fin_angle[3]
 
-    # def vive_callback(self, vive_pose):
-    #     vive_pose_matrix = tf.transformations.quaternion_matrix(
-    #         [vive_pose.orientation.x,vive_pose.orientation.y,vive_pose.orientation.z,vive_pose.orientation.w])
-    #     for i in range(0,3):
-    #         for j in range(0,3):
-    #             self.vive_matrix[i][j] = vive_pose_matrix[i][j]
-    #     self.vive_matrix[0][3] = vive_pose.position.x
-    #     self.vive_matrix[1][3] = vive_pose.position.y
-    #     self.vive_matrix[2][3] = vive_pose.position.z
-    #     self.base_matrix = np.dot(self.vive_matrix, self.vive_base_matrix)
-    #     self.robot_position = self.base_matrix[0][3]-self.vive_pos_bias
+    def fin_auto_callback(self, fin_auto_msg):
+        self.fin_angle_auto[0] = fin_auto_msg.fin_expect[0]
+        self.fin_angle_auto[1] = fin_auto_msg.fin_expect[1]
+        self.fin_angle_auto[2] = fin_auto_msg.fin_expect[2]
+        self.fin_angle_auto[3] = fin_auto_msg.fin_expect[3]
+        self.drive_direction_auto = fin_auto_msg.drive_direction
     
     # def vive_set_zero_fun(self):
     #     if self.vive_pos_count < 20:
@@ -166,7 +165,7 @@ class Callbacks:
             ###by bailiang 2022.04.08 更改按键
             if joy.axes[6] != self.flag_dir: #判断按键是否和上一循环一样，避免重复触发
                 if joy.axes[6] == 1: #按键按下，倒车模式
-                    self.drive_direction = 0
+                    self.drive_direction = -1
                     if self.fin_angle_mode == 1:
                         self.fin_expect_pub[0] = self.fin_angle_real[3]
                         self.fin_expect_pub[1] = self.fin_angle_real[2]
@@ -202,6 +201,18 @@ class Callbacks:
                 else:
                     self.flag_fin_reset = 0 #按键松开，状态归零
 
+            ###### 机器人遥控急停 ######
+            ###by bailiang 2022.09.13
+            if joy.buttons[1] != self.flag_joy_emcy: #判断按键是否和上一循环一样，避免重复触发
+                if joy.buttons[1] == 1: #按键按下
+                    if self.joy_emcy == 0: #开始置零位
+                        self.joy_emcy = 1
+                    else:
+                        self.joy_emcy = 0
+                    self.flag_joy_emcy = 1 #按键按下，状态置1。记忆本次循环按键状态
+                else:
+                    self.flag_joy_emcy = 0 #按键松开，状态归零
+
             ###### 摆臂角度控制模式 ######
             ###by bailiang 2022.04.08 
             if joy.buttons[10] != 0:
@@ -231,24 +242,25 @@ class Callbacks:
                     if joy.buttons[3] == 1: #按键按下
                         if self.fin_auto_mode == 0: #改变摆臂控制模式
                             self.fin_auto_mode = 1
-                            self.drive_direction == 1
+                            self.drive_direction = self.drive_direction_auto
                         else:
                             self.fin_auto_mode = 0
+                            self.drive_direction = self.drive_direction_auto
                         self.flag_auto_mode = 1 #按键按下，状态置1。记忆本次循环按键状态
                     else:
                         self.flag_auto_mode = 0 #按键松开，状态归零
 
                 ###### 机器人归零位 ######
                 ###by bailiang 2022.04.09
-                if joy.buttons[1] != self.flag_set_zero: #判断按键是否和上一循环一样，避免重复触发
-                    if joy.buttons[1] == 1: #按键按下
-                        if self.vive_set_zero == 0: #开始置零位
-                            self.vive_set_zero = 1
-                        # else:
-                        #     self.set_zero = 0
-                        self.flag_set_zero = 1 #按键按下，状态置1。记忆本次循环按键状态
-                    else:
-                        self.flag_set_zero = 0 #按键松开，状态归零
+                # if joy.buttons[1] != self.flag_set_zero: #判断按键是否和上一循环一样，避免重复触发
+                #     if joy.buttons[1] == 1: #按键按下
+                #         if self.vive_set_zero == 0: #开始置零位
+                #             self.vive_set_zero = 1
+                #         # else:
+                #         #     self.set_zero = 0
+                #         self.flag_set_zero = 1 #按键按下，状态置1。记忆本次循环按键状态
+                #     else:
+                #         self.flag_set_zero = 0 #按键松开，状态归零
 
             ###### 电机编号示意图 ######
             # CAN-ID对应+1
@@ -287,10 +299,13 @@ class Callbacks:
                     #front left
                     if joy.buttons[4] == 1: #ps4手柄 L1
                         self.velocity[2] = self.speed_fin #上抬
+                        # self.velocity[4] = self.speed_fin #上抬
                     elif joy.axes[2] == -1: #ps4手柄 L2
                         self.velocity[2] = -self.speed_fin #下压
+                        # self.velocity[4] = -self.speed_fin #下压
                     else:
                         self.velocity[2] = 0
+                        # self.velocity[4] = 0
 
                     #front right
                     if joy.buttons[5] == 1: #ps4手柄 R1
@@ -304,15 +319,15 @@ class Callbacks:
                     if joy.buttons[2] == 1: #ps4手柄 三角
                         self.velocity[3] = self.speed_fin #上抬
                         self.velocity[5] = self.speed_fin #上抬
-                    elif joy.buttons[0] ==  1: #ps4手柄 叉
+                    elif joy.buttons[0] == 1: #ps4手柄 叉
                         self.velocity[3] = -self.speed_fin #下压
                         self.velocity[5] = -self.speed_fin #下压
                     else:
                         self.velocity[3] = 0
                         self.velocity[5] = 0
 
-                    # #rear right 后摆臂分开控制
-                    # #rear left
+                    #rear right 后摆臂分开控制
+                    #rear left
                     # if joy.buttons[3] == 1: #ps4手柄 方框
                     #     self.velocity[3] = self.speed_fin #上抬
                     # elif joy.buttons[0] ==  1: #ps4手柄 叉
@@ -348,7 +363,7 @@ class Callbacks:
                     if joy.buttons[2] == 1: #ps4手柄 三角
                         self.fin_add[1] = self.fin_add_delta #上抬
                         self.fin_add[3] = self.fin_add_delta #上抬
-                    elif joy.buttons[0] ==  1: #ps4手柄 叉
+                    elif joy.buttons[0] == 1: #ps4手柄 叉
                         self.fin_add[1] = -self.fin_add_delta #下压
                         self.fin_add[3] = -self.fin_add_delta #下压
                     else:
@@ -363,7 +378,7 @@ class Callbacks:
                     if self.gears < 0:
                         self.gears = 0
                     self.speed = self.speed_gears[self.gears]
-                    print (self.speed)
+                    # print (self.speed)
                     self.flag_gear_down = 1
                 else:
                     self.flag_gear_down = 0
@@ -375,7 +390,7 @@ class Callbacks:
                     if self.gears > len(self.speed_gears)-1:
                         self.gears = len(self.speed_gears)-1
                     self.speed = self.speed_gears[self.gears]
-                    print (self.speed)
+                    # print (self.speed)
                     self.flag_gear_up = 1
                 else:
                     self.flag_gear_up = 0
@@ -383,7 +398,10 @@ class Callbacks:
     def timercallback(self, event):		
         cmd = base_drive_cmd()
         cmd.speed = self.velocity
-        cmd.drive_direction = self.drive_direction
+        if self.fin_auto_mode == 0:
+            cmd.drive_direction = self.drive_direction
+        else:
+            cmd.drive_direction = self.drive_direction_auto
         cmd.speed_level = self.gears + 1
         cmd.fin_pos_reset = self.fin_pos_reset
         self.fin_pos_reset = 0 #摆臂复位按键，发送一次之后置0，防止重复触发
@@ -391,7 +409,7 @@ class Callbacks:
         # if self.vive_set_zero == 1:
         #     self.vive_set_zero_fun()
 
-        if self.driver_emcy == 1: #急停开关拍下后，强制转为摆臂速度控制模式,并将期望角度置0
+        if self.driver_emcy == 1 or self.joy_emcy == 1: #急停开关拍下后，强制转为摆臂速度控制模式,并将期望角度置0
             self.fin_angle_mode = 0
             self.fin_auto_mode = 0
             self.fin_expect_pub[0] = 0
@@ -399,17 +417,22 @@ class Callbacks:
             self.fin_expect_pub[2] = 0
             self.fin_expect_pub[3] = 0
         if self.fin_angle_mode == 1:
-            # if self.fin_auto_mode == 1:
-            #     self.fin_expect_pub = self.control_alg.control(self.robot_position)
-            #     print('robot_position:',self.robot_position)
-            #     print('auto_fin_expect:',self.fin_expect_pub)
-            # else:
+            if self.fin_auto_mode == 1:
+                # self.fin_expect_pub = self.control_alg.control(self.robot_position)
+                self.fin_expect_pub[0] = self.fin_angle_auto[0]
+                self.fin_expect_pub[1] = self.fin_angle_auto[1]
+                self.fin_expect_pub[2] = self.fin_angle_auto[2]
+                self.fin_expect_pub[3] = self.fin_angle_auto[3]
+                # print('robot_position:',self.robot_position)
+                # print('auto_fin_expect:',self.fin_expect_pub)
+            else:
                 self.fin_expect_pub[0] += self.fin_add[0]
                 self.fin_expect_pub[1] += self.fin_add[1]
                 self.fin_expect_pub[2] += self.fin_add[2]
                 self.fin_expect_pub[3] += self.fin_add[3]
         cmd.fin_angle_mode = self.fin_angle_mode
         cmd.fin_expect = self.fin_expect_pub
+        cmd.emcy = self.joy_emcy
         cmd_pub.publish(cmd)
         # print('velocity gears:',self.velocity,self.gears)
 
@@ -419,7 +442,7 @@ if __name__=='__main__':
 
     joy_sub = rospy.Subscriber('/joy',Joy,callbacks.joycallback)
     base_info_sub = rospy.Subscriber('/nubot_drive/base_info',base_info,callbacks.base_info_callback)
-    # vive_sub = rospy.Subscriber('/vive/LHR_50EACBF2_pose',Pose,callbacks.vive_callback) #LHR_50EACBF2_pose LHR_FFADBD42_pose
+    fin_auto_sub = rospy.Subscriber('/nubot_drive/fin_auto_cmd',base_drive_cmd,callbacks.fin_auto_callback) 
     link_sub = rospy.Subscriber('/control_flag',link_msg,callbacks.link_callback)
 
     cmd_pub = rospy.Publisher('/nubot_drive/base_drive_cmd', base_drive_cmd, queue_size=10)

@@ -1,8 +1,8 @@
 <launch>
     <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <!-- <arg name="world_name" value="$(find gazebo_description)/world/labfield.world" /> -->
-        <arg name="world_name" value="$(find gazebo_description)/world/planning_test.world" />
+        <arg name="world_name" value="$(find gazebo_description)/world/labfield.world" />
+        <!-- <arg name="world_name" value="$(find gazebo_description)/world/planning_test.world" /> -->
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="true"/>
@@ -17,13 +17,15 @@
     <node pkg="gazebo_ros" type="spawn_model" name="spawn_model" args="-urdf -param /robot_description -model pumbaa_v2 -x -6.0 -y 0.0 -z 0.1 -R 0 -P 0 -Y 3.14159"/>
 
     <!--teleop joy-->
-	<!-- <node name="nubot_teleop_joy" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/> -->
+	<!-- <node pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" name="nubot_teleop_joy" output="screen"/> -->
+    <!--teleop joy fin_auto-->
+	<!-- <node pkg="nubot_teleop" type="teleop_base2_fin_auto_joy.py" name="nubot_teleop_joy" output="screen"/> -->
     <!--teleop keyboard-->
-	<!-- <node name="nubot_teleop_keyboard" pkg="nubot_teleop" type="teleop_keyboard.py" output="screen"/> -->
+	<!-- <node pkg="nubot_teleop" type="teleop_keyboard.py" name="nubot_teleop_keyboard" output="screen"/> -->
     <!--teleop keyboard fin_auto-->
-	<node name="nubot_teleop_keyboard" pkg="nubot_teleop" type="teleop_keyboard_fin_auto.py" output="screen"/>
+	<node pkg="nubot_teleop" type="teleop_keyboard_fin_auto.py" name="nubot_teleop_keyboard" output="screen"/>
     <!--teleop twist keyboard-->
-    <!-- <node name="teleop_twist_keyboard" pkg="nubot_teleop" type="teleop_twist_keyboard.py" output="screen"/> -->
+    <!-- <node pkg="nubot_teleop" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen"/> -->
     
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
         <param name="publish_frequency" type="double" value="30.0" />
