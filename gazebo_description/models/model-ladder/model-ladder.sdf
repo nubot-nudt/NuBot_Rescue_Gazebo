@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='model-ladder'>
+    <static>true</static>
+    <link name='base_link'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>-0.25602 -0 0.17877 0 -0 0</pose>
+        <mass>108.9</mass>
+        <inertia>
+          <ixx>18.754</ixx>
+          <ixy>-1.6782e-14</ixy>
+          <ixz>-3.1724</ixz>
+          <iyy>12.372</iyy>
+          <iyz>-3.7281e-15</iyz>
+          <izz>21.63</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://model-ladder/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>65535</collide_bitmask>
+            <ode/>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+            <torsional>
+              <ode/>
+            </torsional>
+          </friction>
+          <bounce/>
+        </surface>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://model-ladder/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

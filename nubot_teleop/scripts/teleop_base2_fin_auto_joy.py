@@ -9,6 +9,8 @@ from nubot_msgs.msg import base_drive_cmd
 from nubot_msgs.msg import base_info
 from nubot_msgs.msg import link_msg
 from sensor_msgs.msg import Joy
+from sensor_msgs.msg import JoyFeedbackArray
+from sensor_msgs.msg import JoyFeedback
 from geometry_msgs.msg import Pose
 # import tf
 
@@ -124,6 +126,8 @@ class Callbacks:
         self.flag_auto_mode = 0
         self.now_control = 0
 
+        self.flag_joy_feedback = 0
+
         # self.base_matrix = np.identity(4)
         # self.vive_matrix = np.eye(4,4)
         # self.vive_base_matrix = np.identity(4)
@@ -165,6 +169,7 @@ class Callbacks:
             ###by bailiang 2022.04.08 更改按键
             if joy.axes[6] != self.flag_dir: #判断按键是否和上一循环一样，避免重复触发
                 if joy.axes[6] == 1: #按键按下，倒车模式
+                    self.flag_joy_feedback = 1
                     self.drive_direction = -1
                     if self.fin_angle_mode == 1:
                         self.fin_expect_pub[0] = self.fin_angle_real[3]
@@ -173,6 +178,7 @@ class Callbacks:
                         self.fin_expect_pub[3] = self.fin_angle_real[0]
                     self.flag_dir = 1 #按键按下，状态置1。记忆本次循环按键状态
                 elif joy.axes[6] == -1: #按键按下，正常模式
+                    self.flag_joy_feedback = 1
                     self.drive_direction = 1
                     if self.fin_angle_mode == 1:
                         self.fin_expect_pub[0] = self.fin_angle_real[0]
@@ -186,12 +192,14 @@ class Callbacks:
                     #     self.drive_direction = 0
                     # self.flag_dir = 1 #按键按下，状态置1。记忆本次循环按键状态
                 else:
+                    self.flag_joy_feedback = 0
                     self.flag_dir = 0 #按键松开，状态归零
 
             ###### 摆臂位置重置 ######
             ###by bailiang 2022.03.08
             if joy.buttons[11] != self.flag_fin_reset: #判断按键是否和上一循环一样，避免重复触发
                 if joy.buttons[11] == 1: #按键按下
+                    self.flag_joy_feedback = 1
                     self.fin_pos_reset = 1
                     self.fin_expect_pub[0] = 0
                     self.fin_expect_pub[1] = 0
@@ -199,18 +207,21 @@ class Callbacks:
                     self.fin_expect_pub[3] = 0
                     self.flag_fin_reset = 1 #按键按下，状态置1。记忆本次循环按键状态
                 else:
+                    self.flag_joy_feedback = 0
                     self.flag_fin_reset = 0 #按键松开，状态归零
 
             ###### 机器人遥控急停 ######
             ###by bailiang 2022.09.13
             if joy.buttons[1] != self.flag_joy_emcy: #判断按键是否和上一循环一样，避免重复触发
                 if joy.buttons[1] == 1: #按键按下
+                    self.flag_joy_feedback = 1
                     if self.joy_emcy == 0: #开始置零位
                         self.joy_emcy = 1
                     else:
                         self.joy_emcy = 0
                     self.flag_joy_emcy = 1 #按键按下，状态置1。记忆本次循环按键状态
                 else:
+                    self.flag_joy_feedback = 0
                     self.flag_joy_emcy = 0 #按键松开，状态归零
 
             ###### 摆臂角度控制模式 ######
@@ -218,6 +229,7 @@ class Callbacks:
             if joy.buttons[10] != 0:
                 if joy.buttons[12] != self.flag_angle_mode: #判断按键是否和上一循环一样，避免重复触发
                     if joy.buttons[12] == 1: #按键按下
+                        self.flag_joy_feedback = 1
                         if self.fin_angle_mode == 0: #改变摆臂角度控制模式
                             self.fin_angle_mode = 1
                             if self.drive_direction == 1:
@@ -234,12 +246,14 @@ class Callbacks:
                             self.fin_angle_mode = 0
                         self.flag_angle_mode = 1 #按键按下，状态置1。记忆本次循环按键状态
                     else:
+                        self.flag_joy_feedback = 0
                         self.flag_angle_mode = 0 #按键松开，状态归零
 
                 ###### 摆臂角度自动控制模式 ######
                 ###by bailiang 2022.04.09
                 if joy.buttons[3] != self.flag_auto_mode: #判断按键是否和上一循环一样，避免重复触发
                     if joy.buttons[3] == 1: #按键按下
+                        self.flag_joy_feedback = 1
                         if self.fin_auto_mode == 0: #改变摆臂控制模式
                             self.fin_auto_mode = 1
                             self.drive_direction = self.drive_direction_auto
@@ -248,6 +262,7 @@ class Callbacks:
                             self.drive_direction = self.drive_direction_auto
                         self.flag_auto_mode = 1 #按键按下，状态置1。记忆本次循环按键状态
                     else:
+                        self.flag_joy_feedback = 0
                         self.flag_auto_mode = 0 #按键松开，状态归零
 
                 ###### 机器人归零位 ######
@@ -436,6 +451,19 @@ class Callbacks:
         cmd_pub.publish(cmd)
         # print('velocity gears:',self.velocity,self.gears)
 
+    def timercallback_1(self, event):		
+        joy_back_msg = JoyFeedbackArray()
+        rumble_msg = JoyFeedback()
+        rumble_msg.type = 1
+        rumble_msg.id = 0
+        if self.flag_joy_feedback == 1:
+            rumble_msg.intensity = 1.0
+        else:
+            rumble_msg.intensity = 0
+        joy_back_msg.array.append(rumble_msg)
+        joy_feedback_pub.publish(joy_back_msg)
+        
+
 if __name__=='__main__':
     callbacks = Callbacks()
     rospy.init_node('nubot_teleop',anonymous=True)
@@ -446,8 +474,10 @@ if __name__=='__main__':
     link_sub = rospy.Subscriber('/control_flag',link_msg,callbacks.link_callback)
 
     cmd_pub = rospy.Publisher('/nubot_drive/base_drive_cmd', base_drive_cmd, queue_size=10)
+    joy_feedback_pub = rospy.Publisher('/joy/set_feedback', JoyFeedbackArray, queue_size=10)
 
     timer = rospy.Timer(period = rospy.Duration(0.02), callback = callbacks.timercallback) #50Hz
+    timer_1 = rospy.Timer(period = rospy.Duration(0.005), callback = callbacks.timercallback_1) #200Hz
 
     # print (msg)
     rospy.spin()

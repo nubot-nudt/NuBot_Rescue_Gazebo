@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='model-step-600'>
+    <static>true</static>
+    <link name='base_link'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0.3 -0 0.3 0 -0 0</pose>
+        <mass>432</mass>
+        <inertia>
+          <ixx>16.907</ixx>
+          <ixy>-2.08</ixy>
+          <ixz>-2.8758e-15</ixz>
+          <iyy>25.44</iyy>
+          <iyz>1.3047e-15</iyz>
+          <izz>16.427</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://model-step-600/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>65535</collide_bitmask>
+            <ode/>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+            <torsional>
+              <ode/>
+            </torsional>
+          </friction>
+          <bounce/>
+        </surface>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://model-step-600/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

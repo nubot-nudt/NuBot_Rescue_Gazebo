@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="model-ladder">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.25602 -2.6645E-14 0.17877"
+        rpy="0 0 0" />
+      <mass
+        value="108.9" />
+      <inertia
+        ixx="18.754"
+        ixy="-1.6782E-14"
+        ixz="-3.1724"
+        iyy="12.372"
+        iyz="-3.7281E-15"
+        izz="21.63" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://model-ladder/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://model-ladder/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

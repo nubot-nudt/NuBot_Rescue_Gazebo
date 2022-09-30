@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="model-stepfield_2">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="1.1102E-16 -0.069293 0.20295"
+        rpy="0 0 0" />
+      <mass
+        value="577.78" />
+      <inertia
+        ixx="9.3651"
+        ixy="0"
+        ixz="-6.893E-18"
+        iyy="9.3651"
+        iyz="-1.1745E-18"
+        izz="0.93662" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://model-stepfield_2/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://model-stepfield_2/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>
