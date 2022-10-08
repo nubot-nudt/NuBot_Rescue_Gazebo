@@ -24,92 +24,99 @@
             </include>
         </model>
 
-        <model name="model-stairs">
+        <model name="terrain-stairs">
             <pose frame=''>-3.00 0.45 0 0 0 -3.14159</pose>
             <include>
-                <uri>model://model-stairs</uri>
+                <uri>model://terrain-stairs</uri>
             </include>
         </model>
 
-        <model name="model-highplate-1_2">
+        <model name="terrain-highplate_1_2">
             <pose frame=''>-1.8 0.6 0 0 0 0</pose>
             <include>
-                <uri>model://model-highplate-1_2</uri>
+                <uri>model://terrain-highplate_1_2</uri>
             </include>
         </model>
 
-        <!-- <model name="model-slope">
+        <!-- <model name="terrain-slope">
             <pose frame=''>-1.8 0.6 0 0 0 0</pose>
             <include>
-                <uri>model://model-slope</uri>
+                <uri>model://terrain-slope</uri>
             </include>
         </model> -->
-        <model name="model-stairs_1">
+        <model name="terrain-stairs_1">
             <pose frame=''>-1.8 -0.45 0 0 0 0</pose>
             <include>
-                <uri>model://model-stairs</uri>
+                <uri>model://terrain-stairs</uri>
             </include>
         </model>
 
-        <model name="model-stairs_2">
+        <model name="terrain-stairs_2">
             <pose frame=''>1.50 0.45 0 0 0 -3.14159</pose>
             <include>
-                <uri>model://model-stairs</uri>
+                <uri>model://terrain-stairs</uri>
             </include>
         </model>
 
-        <model name="model-highplate-1_2_1">
+        <model name="terrain-highplate_1_2-1">
             <pose frame=''>2.70 0.6 0 0 0 0</pose>
             <include>
-                <uri>model://model-highplate-1_2</uri>
+                <uri>model://terrain-highplate_1_2</uri>
             </include>
         </model>
 
-        <!-- <model name="model-slope_1">
+        <!-- <model name="terrain-slope_1">
             <pose frame=''>-1.8 0.6 0 0 0 0</pose>
             <include>
-                <uri>model://model-slope</uri>
+                <uri>model://terrain-slope</uri>
             </include>
         </model> -->
-        <model name="model-stairs_3">
+        <model name="terrain-stairs_3">
             <pose frame=''>2.70 -0.45 0 0 0 0</pose>
             <include>
-                <uri>model://model-stairs</uri>
+                <uri>model://terrain-stairs</uri>
             </include>
         </model>
 
-        <model name="model-stepfield">
+        <model name="terrain-stepfield">
             <pose frame=''>2.0 2.45 0 0 0 0</pose>
             <include>
-                <uri>model://model-stepfield_1</uri>
+                <uri>model://terrain-stepfield_1</uri>
             </include>
         </model>
 
-        <model name="model-ladder">
+        <model name="terrain-ladder">
             <pose frame=''>-2.60 2.45 0 0 0 0</pose>
             <include>
-                <uri>model://model-ladder</uri>
+                <uri>model://terrain-ladder</uri>
             </include>
         </model>
 
-        <model name="model-step-600">
+        <model name="terrain-step_600">
             <pose frame=''>-2.60 2.45 0 0 0 0</pose>
             <include>
-                <uri>model://model-step-600</uri>
+                <uri>model://terrain-step_600</uri>
             </include>
         </model>
 
-        <model name="model-ramps_1">
+        <model name="terrain-ramps_1">
             <pose frame=''>-1.40 2.45 0 0 0 0</pose>
             <include>
-                <uri>model://model-ramps_1</uri>
+                <uri>model://terrain-ramps_1</uri>
             </include>
         </model>
 
-        <model name="model-ramps_2">
+        <model name="terrain-ramps_2">
             <pose frame=''>-1.40 2.45 0 0 0 3.14159</pose>
             <include>
-                <uri>model://model-ramps_1</uri>
+                <uri>model://terrain-ramps_1</uri>
+            </include>
+        </model>
+
+        <model name="terrain-ramps_3">
+            <pose frame=''>-4.0 -4.0 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-ramps_2</uri>
             </include>
         </model>
         

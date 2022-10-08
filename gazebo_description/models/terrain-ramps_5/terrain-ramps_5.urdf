@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="terrain-ramps_5">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="3.6 1.218 0.34992"
+        rpy="0 0 0" />
+      <mass
+        value="1266.2" />
+      <inertia
+        ixx="122.43"
+        ixy="-1.4198E-13"
+        ixz="-1.9807E-13"
+        iyy="299.38"
+        iyz="-2.071E-14"
+        izz="306.21" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://terrain-ramps_5/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://terrain-ramps_5/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

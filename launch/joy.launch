@@ -11,14 +11,15 @@
         <arg name="debug" value="false"/>
         <arg name="verbose" value="true"/>
     </include> -->
-    <!--teleop joy-->
-	<!-- <node name="nubot_teleop_joy" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/> -->
     <!--teleop keyboard-->
 	<!-- <node name="nubot_teleop_keyboard" pkg="nubot_teleop" type="teleop_keyboard.py" output="screen"/> -->
     <!--teleop twist keyboard-->
     <!-- <node name="teleop_twist_keyboard" pkg="nubot_teleop" type="teleop_twist_keyboard.py" output="screen"/> -->
-    <!--teleop joy fin_auto-->
+    <!--joy node with feedback-->
     <param name = "~dev_ff" type = "string" value = "/dev/input/event24" />
     <node pkg="joy" type="joy_node" name="joy_node"/>
+    <!--teleop joy-->
+	<!-- <node name="nubot_teleop_joy" pkg="nubot_teleop" type="teleop_base2_gazebo_joy.py" output="screen"/> -->
+    <!--teleop joy fin_auto-->
 	<node pkg="nubot_teleop" type="teleop_base2_fin_auto_joy.py" name="nubot_teleop_joy" output="screen"/>
 </launch>

@@ -434,10 +434,10 @@
       <rear_right_flipper_j>rear_right_flipper_joint</rear_right_flipper_j>
       <!--The Mu/Mu2 of tracks, which influnce the simulating performance-->
       <track_mu>4</track_mu>
-      <track_mu2>0.5</track_mu2>
+      <track_mu2>0.8</track_mu2>
       <!--The PID parameter of flippers position controll & initial position 1.5708 -->
       <flip_p>2000</flip_p>
-      <flip_i>500</flip_i>
+      <flip_i>100</flip_i>
       <flip_d>10</flip_d>
       <flip_initial>1.0472</flip_initial>
       <!--The parameters of tracks-->
@@ -448,7 +448,7 @@
     </plugin>
   </gazebo>
 
-  <!-- RS-Helios includes -->
+  <!-- RS-Helios lidar includes -->
   <!-- <xacro:include filename="$(find gazebo_description)/models/RS_Helios_5515/model_2.urdf.xacro"/>
   <xacro:RS_Helios_5515 parent="chassis_link" name="rs_helios" topic="/lidar_points" hz="10" samples="1800" min_angle="-${PI}" max_angle="${PI}" min_range ="0.2" max_range="50.0" gpu="true">
     <origin xyz="-0.221 0 0.2545" rpy="0 0 ${PI}" />
@@ -459,9 +459,9 @@
     <origin xyz="-0.221 0 0.131" rpy="0 0 ${PI}" />
   </xacro:IMU> -->
 
-  <!-- RS-Bpearl includes -->
+  <!-- RS-Bpearl lidar includes -->
   <xacro:include filename="$(find gazebo_description)/models/RS_Bpearl/model_2.urdf.xacro"/>
-  <xacro:RS_Bpearl parent="chassis_link" name="rs_bpearl" topic="/velodyne_points" hz="10" lasers="32" samples="1800" min_angle="-${PI}" max_angle="${PI}" min_range ="0.1" max_range="50.0" gpu="true"> <!-- lidar_points -->
+  <xacro:RS_Bpearl parent="chassis_link" name="rs_bpearl" topic="/velodyne_points" hz="10" lasers="32" samples="1800" min_angle="-${PI}" max_angle="${PI}" min_range ="0.1" max_range="50.0" gpu="true">
     <origin xyz="-0.36277 0 0.2115" rpy="0 ${PI/2} ${PI}" />
   </xacro:RS_Bpearl>
   <!-- IMU includes (RS-Bpearl) -->

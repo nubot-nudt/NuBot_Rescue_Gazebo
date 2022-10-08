@@ -11,10 +11,10 @@
             <uri>model://ground_plane</uri>
         </include>
 
-        <model name="plate_obstacle">
+        <model name="terrain-plate">
             <pose frame=''>2.5 0 0 0 0 0</pose>
             <include>
-                <uri>model://plate_obstacle</uri>
+                <uri>model://terrain-plate</uri>
             </include>
         </model>        
         

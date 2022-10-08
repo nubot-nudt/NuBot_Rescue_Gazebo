@@ -83,7 +83,7 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
-    <model name='model-stepfield'>
+    <model name='terrain-stepfield'>
       <link name='base_link'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <inertial>
@@ -103,7 +103,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://model-stepfield/meshes/base_link.STL</uri>
+              <uri>model://terrain-stepfield/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -125,7 +125,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://model-stepfield/meshes/base_link.STL</uri>
+              <uri>model://terrain-stepfield/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
         </visual>
@@ -135,7 +135,7 @@
       </link>
       <pose frame=''>-1.3285 -1.16443 0 0 -0 0</pose>
     </model>
-    <model name='model-mhz_0'>
+    <model name='terrain-mhz_0'>
       <link name='base_link'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <inertial>
@@ -155,7 +155,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://model-stepfield/meshes/base_link.STL</uri>
+              <uri>model://terrain-stepfield/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -177,7 +177,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://model-stepfield/meshes/base_link.STL</uri>
+              <uri>model://terrain-stepfield/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
         </visual>
@@ -187,7 +187,7 @@
       </link>
       <pose frame=''>3.24913 -1.23536 0 0 -0 0</pose>
     </model>
-    <model name='model-slope'>
+    <model name='terrain-slope'>
       <link name='base_link'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <inertial>
@@ -207,7 +207,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://model-slope/meshes/base_link.STL</uri>
+              <uri>model://terrain-slope/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -229,7 +229,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://model-slope/meshes/base_link.STL</uri>
+              <uri>model://terrain-slope/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
         </visual>
@@ -239,7 +239,7 @@
       </link>
       <pose frame=''>0.576641 3.01844 0 0 -0 0</pose>
     </model>
-    <model name='model-highplate-1_2'>
+    <model name='terrain-highplate-1_2'>
       <link name='base_link'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <inertial>
@@ -259,7 +259,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://model-highplate-1_2/meshes/base_link.STL</uri>
+              <uri>model://terrain-highplate_1_2/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -281,7 +281,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://model-highplate-1_2/meshes/base_link.STL</uri>
+              <uri>model://terrain-highplate_1_2/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
         </visual>
@@ -291,7 +291,7 @@
       </link>
       <pose frame=''>0.531957 3.04398 0 0 -0 0</pose>
     </model>
-    <model name='model-stairs'>
+    <model name='terrain-stairs'>
       <link name='base_link'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <inertial>
@@ -311,7 +311,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://model-stairs/meshes/base_link.STL</uri>
+              <uri>model://terrain-stairs/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -333,7 +333,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://model-stairs/meshes/base_link.STL</uri>
+              <uri>model://terrain-stairs/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
         </visual>
@@ -404,7 +404,7 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='model-highplate-1_2'>
+      <model name='terrain-highplate-1_2'>
         <pose frame=''>0.544422 2.15775 -5e-06 0 4e-06 3.2e-05</pose>
         <scale>1 1 1</scale>
         <link name='base_link'>
@@ -414,7 +414,7 @@
           <wrench>134.986 103.665 -452.644 0 -0 0</wrench>
         </link>
       </model>
-      <model name='model-stepfield'>
+      <model name='terrain-stepfield'>
         <pose frame=''>-1.22047 -0.250038 -0 1.7e-05 6e-06 -0.00023</pose>
         <scale>1 1 1</scale>
         <link name='base_link'>
@@ -424,7 +424,7 @@
           <wrench>432.453 -1261.84 15849.6 0 -0 0</wrench>
         </link>
       </model>
-      <model name='model-mhz_0'>
+      <model name='terrain-mhz_0'>
         <pose frame=''>2.77939 -0.240897 -0 1.7e-05 6e-06 -0.000199</pose>
         <scale>1 1 1</scale>
         <link name='base_link'>
@@ -434,7 +434,7 @@
           <wrench>432.489 -1261.89 15849.5 0 -0 0</wrench>
         </link>
       </model>
-      <model name='model-slope'>
+      <model name='terrain-slope'>
         <pose frame=''>0.584802 2.18758 0 0 -0 5e-05</pose>
         <scale>1 1 1</scale>
         <link name='base_link'>
@@ -444,7 +444,7 @@
           <wrench>-385.621 -265.713 287.713 0 -0 0</wrench>
         </link>
       </model>
-      <model name='model-stairs'>
+      <model name='terrain-stairs'>
         <pose frame=''>-0.701934 1.87469 -2e-06 0 -2e-06 -3.14159</pose>
         <scale>1 1 1</scale>
         <link name='base_link'>

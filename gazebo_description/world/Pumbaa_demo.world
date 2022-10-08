@@ -12,15 +12,15 @@
         </include>
         
         <include>
-            <uri>model://stairs_very_simple</uri>
+            <uri>model://terrain-stairs_long</uri>
         </include>
 
         <include>
-            <uri>model://cylinder_obstacle</uri>
+            <uri>model://terrain-cylinder</uri>
         </include>
         
         <include>
-            <uri>model://box_obstacle</uri>
+            <uri>model://terrain-box</uri>
         </include>
         
         <model name="NuBot_Pumbaa">

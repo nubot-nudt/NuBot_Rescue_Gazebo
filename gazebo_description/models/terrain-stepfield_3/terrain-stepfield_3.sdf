@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='terrain-stepfield_3'>
+    <static>true</static>
+    <link name='base_link'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>3.601 1.2184 0.22209 0 -0 0</pose>
+        <mass>2727.7</mass>
+        <inertia>
+          <ixx>146.37</ixx>
+          <ixy>-6.7312e-13</ixy>
+          <ixz>9.4247e-15</ixz>
+          <iyy>129.82</iyy>
+          <iyz>3.3368e-15</iyz>
+          <izz>128.9</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://terrain-stepfield_3/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>65535</collide_bitmask>
+            <ode/>
+          </contact>
+          <friction>
+            <ode>
+              <mu>10</mu>
+              <mu2>10</mu2>
+            </ode>
+            <torsional>
+              <ode/>
+            </torsional>
+          </friction>
+          <bounce/>
+        </surface>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://terrain-stepfield_3/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

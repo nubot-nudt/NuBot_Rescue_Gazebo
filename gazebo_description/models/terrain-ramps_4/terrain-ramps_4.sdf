@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='terrain-ramps_4'>
+    <static>true</static>
+    <link name='base_link'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>3.5439 1.1993 0.19943 0 -0 0</pose>
+        <mass>3465.8</mass>
+        <inertia>
+          <ixx>169.48</ixx>
+          <ixy>-2.6097e-14</ixy>
+          <ixz>1.2832e-13</ixz>
+          <iyy>201.66</iyy>
+          <iyz>-1.2</iyz>
+          <izz>225.32</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://terrain-ramps_4/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>65535</collide_bitmask>
+            <ode/>
+          </contact>
+          <friction>
+            <ode>
+              <mu>10</mu>
+              <mu2>10</mu2>
+            </ode>
+            <torsional>
+              <ode/>
+            </torsional>
+          </friction>
+          <bounce/>
+        </surface>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://terrain-ramps_4/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

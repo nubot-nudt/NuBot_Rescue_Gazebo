@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+    <model name="terrain-plate">
+        <static>true</static>
+        <pose>0 0 0 0 0 0</pose>
+        <link name="box">
+            <collision name="plate_collision">
+                <pose frame="">0 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>2 2 0.60</size>
+                    </box>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>
+                        </ode>
+                    </friction>
+                </surface>
+            </collision>
+            <visual name="plate_visual">
+                <pose frame="">0 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>2 2 0.60</size>
+                    </box>
+                </geometry>
+            </visual>
+        </link>
+    </model>
+</sdf>
