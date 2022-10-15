@@ -49,7 +49,7 @@ class PublishThread(threading.Thread):
 
         self.speed = 200
         self.speed_fin = 600     #摆臂速度by chenghao 2019.3.13
-        self.speed_gears = [240, 480, 720, 960, 1200, 1600, 2000, 2500, 3000]
+        self.speed_gears = [240, 360, 480, 720, 960, 1200, 1600, 2000, 2500, 3000]
         self.gears = 0
         self.velocity = [0,0,0,0,0,0]
         self.drive_direction = 1 #前进方向 1正向 0反向
@@ -338,16 +338,16 @@ class PublishThread(threading.Thread):
                 self.velocity[1] = -1*self.speed
             #转弯
             elif key == 'a':
-                if self.gears >= 3 :
-                    self.velocity[0] = -self.speed_gears[3]
-                    self.velocity[1] =  self.speed_gears[3]
+                if self.gears >= 4 :
+                    self.velocity[0] = -self.speed_gears[4]
+                    self.velocity[1] =  self.speed_gears[4]
                 else:
                     self.velocity[0] = -1*self.speed
                     self.velocity[1] =    self.speed
             elif key == 'd':
-                if self.gears >= 3 :
-                    self.velocity[0] =  self.speed_gears[3]
-                    self.velocity[1] = -self.speed_gears[3]
+                if self.gears >= 4 :
+                    self.velocity[0] =  self.speed_gears[4]
+                    self.velocity[1] = -self.speed_gears[4]
                 else:
                     self.velocity[0] =    self.speed
                     self.velocity[1] = -1*self.speed

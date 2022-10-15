@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='terrain-RandomStep_plate_1'>
+    <static>true</static>
+    <link name='base_link'>
+      <pose frame=''>0 0 0 0 -3.14/2 0</pose>
+      <inertial>
+        <pose frame=''>1.2463 -0.6 0.47751 0 -3.14/2 0</pose>
+        <mass>143.39</mass>
+        <inertia>
+          <ixx>45.301</ixx>
+          <ixy>-1.6662e-14</ixy>
+          <ixz>20.247</ixz>
+          <iyy>84.673</iyy>
+          <iyz>2.0075e-14</iyz>
+          <izz>91.354</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose frame=''>0 0 0 0 -3.14/2 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1e-3 1e-3 1e-3</scale>
+            <uri>model://terrain-RandomStep_plate_1/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>10</mu>
+                <mu2>10</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose frame=''>0 0 0 0 -3.14/2 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1e-3 1e-3 1e-3</scale>
+            <uri>model://terrain-RandomStep_plate_1/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Wood</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

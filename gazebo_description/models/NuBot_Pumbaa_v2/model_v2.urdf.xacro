@@ -3,7 +3,7 @@
   
   <xacro:property name="PI" value="3.1415926535897931"/>
 
-  <xacro:property name="base_mass" value="20" />
+  <xacro:property name="base_mass" value="15" />
   <xacro:property name="track_mass" value="10" />
   <xacro:property name="flipper_mass" value="2.5" />
 
@@ -439,7 +439,7 @@
       <flip_p>2000</flip_p>
       <flip_i>100</flip_i>
       <flip_d>10</flip_d>
-      <flip_initial>1.0472</flip_initial>
+      <flip_initial>0</flip_initial><!--1.0472-->
       <!--The parameters of tracks-->
       <tracksSeparation>0.29</tracksSeparation>
       <steeringEfficiency>0.5</steeringEfficiency>
@@ -450,7 +450,7 @@
 
   <!-- RS-Helios lidar includes -->
   <!-- <xacro:include filename="$(find gazebo_description)/models/RS_Helios_5515/model_2.urdf.xacro"/>
-  <xacro:RS_Helios_5515 parent="chassis_link" name="rs_helios" topic="/lidar_points" hz="10" samples="1800" min_angle="-${PI}" max_angle="${PI}" min_range ="0.2" max_range="50.0" gpu="true">
+  <xacro:RS_Helios_5515 parent="chassis_link" name="rs_helios" topic="/velodyne_points" hz="10" samples="1800" min_angle="-${PI}" max_angle="${PI}" min_range ="0.2" max_range="50.0" gpu="true">
     <origin xyz="-0.221 0 0.2545" rpy="0 0 ${PI}" />
   </xacro:RS_Helios_5515> -->
   <!-- IMU includes (RS-Helios) -->
@@ -460,14 +460,25 @@
   </xacro:IMU> -->
 
   <!-- RS-Bpearl lidar includes -->
-  <xacro:include filename="$(find gazebo_description)/models/RS_Bpearl/model_2.urdf.xacro"/>
+  <!-- <xacro:include filename="$(find gazebo_description)/models/RS_Bpearl/model_2.urdf.xacro"/>
   <xacro:RS_Bpearl parent="chassis_link" name="rs_bpearl" topic="/velodyne_points" hz="10" lasers="32" samples="1800" min_angle="-${PI}" max_angle="${PI}" min_range ="0.1" max_range="50.0" gpu="true">
     <origin xyz="-0.36277 0 0.2115" rpy="0 ${PI/2} ${PI}" />
-  </xacro:RS_Bpearl>
+  </xacro:RS_Bpearl> -->
   <!-- IMU includes (RS-Bpearl) -->
   <xacro:include filename="$(find gazebo_description)/models/IMU/model.urdf.xacro"/>
   <xacro:IMU parent="chassis_link" name="imu" topic="/imu/data" hz="400">
     <origin xyz="-0.3185 0 0.133" rpy="0 0 ${PI}" />
   </xacro:IMU>
+
+  <!-- camera includes -->
+  <xacro:include filename="$(find gazebo_description)/models/camera_sensor/camera_sensor.urdf.xacro"/>
+  <xacro:usb_camera parent="chassis_link" name="usb_camera_back" topic="usb_camera_back" hz="30.0" fov="2.0" img_width="1080" img_height="720" >
+    <origin xyz="-0.32 0 0.1" rpy="0 0 ${PI}" />
+  </xacro:usb_camera>
+
+  <xacro:include filename="$(find gazebo_description)/models/camera_sensor/camera_sensor.urdf.xacro" />
+  <xacro:usb_camera parent="chassis_link" name="usb_camera_front" topic="usb_camera_front" hz="30" fov="2.0" img_width="1080" img_height="720" >
+    <origin xyz="0.32 0 0.1" rpy="0 0 0" />
+  </xacro:usb_camera>
 
 </robot>

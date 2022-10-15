@@ -46,7 +46,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://terrain-ramps_1/meshes/base_link.STL</uri>
+            <uri>model://terrain-ramps_1/meshes/base_link.dae</uri>
           </mesh>
         </geometry>
       </visual>

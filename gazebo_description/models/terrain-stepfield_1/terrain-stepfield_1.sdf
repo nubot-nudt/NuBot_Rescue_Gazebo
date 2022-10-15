@@ -5,15 +5,15 @@
     <link name='base_link'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
-        <pose frame=''>-0 0.070652 0.20087 0 -0 0</pose>
-        <mass>1171.5</mass>
+        <pose frame=''>0 -0.069293 0.20295 0 -0 0</pose>
+        <mass>577.78</mass>
         <inertia>
-          <ixx>18.756</ixx>
-          <ixy>-1.7764e-15</ixy>
-          <ixz>5.941e-18</ixz>
-          <iyy>18.756</iyy>
-          <iyz>3.2293e-17</iyz>
-          <izz>1.8991</izz>
+          <ixx>9.3651</ixx>
+          <ixy>0</ixy>
+          <ixz>-6.893e-18</ixz>
+          <iyy>9.3651</iyy>
+          <iyz>-1.1745e-18</iyz>
+          <izz>0.93662</izz>
         </inertia>
       </inertial>
       <collision name='base_link_collision'>
@@ -46,7 +46,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://terrain-stepfield_1/meshes/base_link.STL</uri>
+            <uri>model://terrain-stepfield_1/meshes/base_link.dae</uri>
           </mesh>
         </geometry>
       </visual>

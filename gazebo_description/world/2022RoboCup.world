@@ -1,0 +1,211 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+    <world name="2022RoboCup_China">
+        <!--A demo world for tracked vehicles.-->
+
+        <include>
+            <uri>model://sun</uri>
+        </include>
+
+        <include>
+            <uri>model://ground_plane</uri>
+        </include>
+
+        <model name="wall-room-nopillar">
+            <pose frame=''>0.0 0 0 0 0 0</pose>
+            <include>
+                <uri>model://walls/wall-room-nopillar</uri>
+            </include>
+        </model>
+        
+        <model name="2022RoboCup_wall">
+            <pose frame=''>-8.5 -4.4 1.2 1.57 3.14 3.14</pose>
+            <include>
+                <uri>model://2022RoboCup_wall</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-stairs">
+            <pose frame=''>-3.65 -2.25 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-stairs</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-highplate_1_0">
+            <pose frame=''>-3.65 -2.45 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-highplate_1_0</uri>
+            </include>
+        </model>
+
+	<model name="terrain-highplate_120_0">
+            <pose frame=''>-3.65 -1.25 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-highplate_120</uri>
+            </include>
+        </model>	
+        
+	<model name="terrain-highplate_120_1">
+            <pose frame=''>-2.45 -1.25 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-highplate_120</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-45slope">
+            <pose frame=''>-3.65 1.15 0 0 -1.57 1.57</pose>
+            <include>
+                <uri>model://terrain-45slope</uri>
+            </include>
+        </model>	
+
+	<model name="terrain-RandomStep_plate_1">
+            <pose frame=''>-6.05 -0.05 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-RandomStep_plate_1</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-RandomStep_linear_1">
+            <pose frame=''>-6.05 1.15 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-RandomStep_linear_1</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-RandomStep_plate_2">
+            <pose frame=''>-6.05 2.35 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-RandomStep_plate_2</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-RandomStep_corner_1">
+            <pose frame=''>-6.05 3.55 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-RandomStep_corner_1</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-RandomStep_linear_2">
+            <pose frame=''>-7.25 1.15 0 1.57 0 1.57</pose>
+            <include>
+                <uri>model://terrain-RandomStep_linear_2</uri>
+            </include>
+        </model>
+	
+	<model name="terrain-15single_slope_0">
+            <pose frame=''>-1.25 -3.65 0 1.57 0 3.14</pose>
+            <include>
+                <uri>model://terrain-15single_slope</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-15single_slope_1">
+            <pose frame=''>-2.45 -1.25 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-15single_slope</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-15double_slope_0">
+            <pose frame=''>-1.25 1.15 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-15double_slope_1">
+            <pose frame=''>-1.25 -1.25 0 1.57 0 1.57</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+
+	<model name="terrain-15double_slope_2">
+            <pose frame=''>-2.45 -0.05 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+
+	<model name="terrain-15double_slope_3">
+            <pose frame=''>-2.45 -0.05 0 1.57 0 1.57</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-15double_slope_4">
+            <pose frame=''>-3.65 -0.05 0 1.57 0 1.57</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+	
+	<model name="terrain-15double_slope_0_1">
+            <pose frame=''>-3.65 3.6 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-15double_slope_1_1">
+            <pose frame=''>-3.65 1.2 0 1.57 0 1.57</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+
+	<model name="terrain-15double_slope_2_1">
+            <pose frame=''>-4.85 2.4 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+
+	<model name="terrain-15double_slope_3-1">
+            <pose frame=''>-4.85 2.4 0 1.57 0 1.57</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-15double_slope_5">
+            <pose frame=''>-4.85 3.6 0 1.57 0 1.57</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-15double_slope_6">
+            <pose frame=''>-6.05 4.8 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-15double_slope_7">
+            <pose frame=''>-7.25 3.6 0 1.57 0 1.57</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-15double_slope_8">
+            <pose frame=''>-7.25 2.4 0 1.57 0 1.57</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+        
+        <model name="terrain-15double_slope_9">
+            <pose frame=''>-8.45 3.6 0 1.57 0 0</pose>
+            <include>
+                <uri>model://terrain-15double_slope</uri>
+            </include>
+        </model>
+	
+    </world>
+</sdf>

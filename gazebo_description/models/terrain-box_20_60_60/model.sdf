@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+    <model name="terrain-box_20_60_60">
+        <static>true</static>
+        <pose>0 0 0 0 0 0</pose>
+        <link name="box">
+            <collision name="box_20*60*60_collision">
+                <pose frame="">0 0 0.1 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.6 0.6 0.2</size>
+                    </box>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>100</mu>
+                        </ode>
+                    </friction>
+                </surface>
+            </collision>
+            <visual name="box_20*60*60_visual">
+                <pose frame="">0 0 0.1 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.6 0.6 0.2</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                        <name>Gazebo/Wood</name>
+                    </script>
+                    <ambient>1 1 1 1</ambient>
+                </material>
+            </visual>
+        </link>
+    </model>
+</sdf>

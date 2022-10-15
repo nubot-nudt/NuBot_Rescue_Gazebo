@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 3.3.1 commit date:2022-10-04, commit time:18:35, hash:b292cfe5a936</authoring_tool>
+    </contributor>
+    <created>2022-10-15T20:55:18</created>
+    <modified>2022-10-15T20:55:18</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="材质_004-effect">
+      <profile_COMMON>
+        <newparam sid="wood_OSB_1_jpg-surface">
+          <surface type="2D">
+            <init_from>wood_OSB_1_jpg</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="wood_OSB_1_jpg-sampler">
+          <sampler2D>
+            <source>wood_OSB_1_jpg-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0.25 0.25 0.25 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="wood_OSB_1_jpg-sampler" texcoord="UV 贴图"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="wood_OSB_1_jpg" name="wood_OSB_1_jpg">
+      <init_from>wood_OSB_1.jpg</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="材质_004-material" name="材质.004">
+      <instance_effect url="#材质_004-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="base_link_003-mesh" name="base_link.003">
+      <mesh>
+        <source id="base_link_003-mesh-positions">
+          <float_array id="base_link_003-mesh-positions-array" count="96">0 1.068 0.95 0 0.168 0.95 -0.15 1.068 0.95 -0.15 0.168 0.95 -1.2 1.068 0.95 -1.05 1.068 0.95 -1.2 0.168 0.95 -1.05 0.168 0.95 -0.15 0.01799994 0.95 -1.05 0.01799994 0.95 -0.15 1.218 0.95 -1.05 1.218 0.95 -0.15 0.01799994 0 0 0.01799994 0 0 0.01799994 1 -1.2 0.01799994 1 -1.05 0.01799994 0 -1.2 0.01799994 0 0 1.068 0 0 1.218 0 0 1.218 1 0 0.168 0 -1.05 1.218 0 -1.2 1.218 0 -1.2 1.218 1 -0.15 1.218 0 -1.2 0.168 0 -1.2 1.068 0 -0.15 0.168 0 -0.15 1.068 0 -1.05 1.068 0 -1.05 0.168 0</float_array>
+          <technique_common>
+            <accessor source="#base_link_003-mesh-positions-array" count="32" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="base_link_003-mesh-normals">
+          <float_array id="base_link_003-mesh-normals-array" count="24">0 0 -1 0 -1 0 0 -1 0 1 0 0 0 1 0 0 1 3.97364e-6 -1 0 0 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#base_link_003-mesh-normals-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="base_link_003-mesh-map-0">
+          <float_array id="base_link_003-mesh-map-0-array" count="360">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9166666 0.4375 0.9166666 0.5 0.5208333 0.4375 0.5208333 0.4375 0.9166666 0.5 0.5 0.5 0.5208333 0.4375 0.5 0.5 0.5208333 0.0625 0.5208333 0.0625 0.5 0.5 0.5 0 0.5208333 0.0625 0.5 0 0.9166666 0.0625 0.9166666 0.0625 0.5 0 0.9166666 0 0.4166666 0.9375001 0.4166666 1 0.02083331 0.9375001 0.02083331 0.9375001 0.4166666 1 0 1 0.02083331 0.9375001 0 1 0.02083331 0.5625001 0.02083331 0.5625001 0 1 0 0.5000001 0.02083331 0.5625001 0 0.5000001 0.4166666 0.5625001 0.4166666 0.5625001 0 0.5000001 0.4166666 0.5000001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0 0 0.5 0.5000001 0.5 0.5000001 0 0 0.5000001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6066942 0.5000001 0.6066942 0.5883885 0.5625001 0.5441943 0 0 0 0 0 0 0.4784019 0.5000001 0.4784019 0.9007372 0.4166666 0.8909896 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5625001 0.5625 0.5000001 0.5625 0.5625001 0.5 0 0 0 0 0 0</float_array>
+          <technique_common>
+            <accessor source="#base_link_003-mesh-map-0-array" count="180" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="base_link_003-mesh-vertices">
+          <input semantic="POSITION" source="#base_link_003-mesh-positions"/>
+        </vertices>
+        <triangles material="材质_004-material" count="60">
+          <input semantic="VERTEX" source="#base_link_003-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#base_link_003-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#base_link_003-mesh-map-0" offset="2" set="0"/>
+          <p>0 0 0 1 0 1 2 0 2 2 0 3 1 0 4 3 0 5 4 0 6 5 0 7 6 0 8 6 0 9 5 0 10 7 0 11 8 0 12 9 0 13 3 0 14 3 0 15 9 0 16 7 0 17 3 0 18 7 0 19 2 0 20 2 0 21 7 0 22 5 0 23 2 0 24 5 0 25 10 0 26 10 0 27 5 0 28 11 0 29 12 1 30 13 1 31 8 1 32 8 1 33 13 1 34 14 1 35 8 1 36 14 1 37 9 1 38 9 2 39 14 2 40 15 2 41 9 1 42 15 1 43 16 1 44 16 1 45 15 1 46 17 1 47 18 3 48 19 3 49 0 3 50 0 3 51 19 3 52 20 3 53 0 3 54 20 3 55 1 3 56 1 3 57 20 3 58 14 3 59 1 3 60 14 3 61 21 3 62 21 3 63 14 3 64 13 3 65 22 4 66 23 4 67 11 4 68 11 4 69 23 4 70 24 4 71 11 4 72 24 4 73 10 4 74 10 5 75 24 5 76 20 5 77 10 4 78 20 4 79 25 4 80 25 4 81 20 4 82 19 4 83 26 6 84 17 6 85 6 6 86 6 6 87 17 6 88 15 6 89 6 6 90 15 6 91 4 6 92 4 6 93 15 6 94 24 6 95 4 6 96 24 6 97 27 6 98 27 6 99 24 6 100 23 6 101 14 7 102 20 7 103 15 7 104 15 7 105 20 7 106 24 7 107 3 6 108 28 6 109 8 6 110 8 6 111 28 6 112 12 6 113 1 4 114 21 4 115 3 4 116 3 4 117 21 4 118 28 4 119 28 0 120 21 0 121 12 0 122 12 0 123 21 0 124 13 0 125 2 1 126 29 1 127 0 1 128 0 1 129 29 1 130 18 1 131 10 6 132 25 6 133 2 6 134 2 6 135 25 6 136 29 6 137 29 0 138 25 0 139 18 0 140 18 0 141 25 0 142 19 0 143 5 3 144 30 3 145 11 3 146 11 3 147 30 3 148 22 3 149 4 1 150 27 1 151 5 1 152 5 1 153 27 1 154 30 1 155 30 0 156 27 0 157 22 0 158 22 0 159 27 0 160 23 0 161 7 4 162 31 4 163 6 4 164 6 4 165 31 4 166 26 4 167 9 3 168 16 3 169 7 3 170 7 3 171 16 3 172 31 3 173 31 0 174 16 0 175 26 0 176 26 0 177 16 0 178 17 0 179</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="base_link" name="base_link" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#base_link_003-mesh" name="base_link">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="材质_004-material" target="#材质_004-material">
+                <bind_vertex_input semantic="UV 贴图" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
