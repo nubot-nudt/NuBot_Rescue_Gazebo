@@ -26,7 +26,7 @@
         <technique sid="common">
           <lambert>
             <emission>
-              <color sid="emission">0 0 0 1</color>
+              <color sid="emission">0.25 0.25 0.25 1</color>
             </emission>
             <diffuse>
               <texture texture="wood_OSB_1_jpg-sampler" texcoord="UV 贴图"/>

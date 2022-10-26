@@ -306,9 +306,11 @@ class PublishThread(threading.Thread):
                     if self.fin_auto_mode == 0: #改变摆臂控制模式
                         self.fin_auto_mode = 1
                         self.drive_direction = self.drive_direction_auto
+                        print ('auto_mode:',self.fin_auto_mode)
                     else:
                         self.fin_auto_mode = 0
                         self.drive_direction = self.drive_direction_auto
+                        print ('auto_mode:',self.fin_auto_mode)
                     self.flag_auto_mode = 1 #按键按下，状态置1。记忆本次循环按键状态
             else:
                 self.flag_auto_mode = 0 #按键松开，状态归零
@@ -440,7 +442,7 @@ class PublishThread(threading.Thread):
                     if self.gears < 0:
                         self.gears = 0
                     self.speed = self.speed_gears[self.gears]
-                    print (self.speed)
+                    print ('speed:',self.speed)
                     self.flag_gear_down = 1
             else:
                 self.flag_gear_down = 0
@@ -452,7 +454,7 @@ class PublishThread(threading.Thread):
                     if self.gears > len(self.speed_gears)-1:
                         self.gears = len(self.speed_gears)-1
                     self.speed = self.speed_gears[self.gears]
-                    print (self.speed)
+                    print ('speed:',self.speed)
                     self.flag_gear_up = 1
             else:
                 self.flag_gear_up = 0
@@ -530,4 +532,4 @@ if __name__=="__main__":
 
     finally:
         pub_thread.stop()
-        pub_thread.restoreTerminalSettings(pub_thread.settings)
+        # pub_thread.restoreTerminalSettings(pub_thread.settings)

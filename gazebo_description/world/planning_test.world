@@ -11,26 +11,28 @@
             <uri>model://ground_plane</uri>
         </include>
 
-        <!-- <model name="wall-room">
-            <pose frame=''>0.0 0 0 0 0 0</pose>
+        <model name="wall-room">
+            <pose frame=''>4.0 0 0 0 0 0</pose>
             <include>
                 <uri>model://walls/wall-room</uri>
             </include>
-        </model> -->
-        <model name="wall-outdoor">
+        </model>
+        <!-- <model name="wall-outdoor">
             <pose frame=''>0.0 0 0 0 0 0</pose>
             <include>
                 <uri>model://walls/wall-outdoor</uri>
             </include>
-        </model>
+        </model> -->
 
         <!-- lab-stairs -->
-        <model name="terrain-stairs_2">
-            <pose frame=''>-3.00 -0.6 0 0 0 0</pose>
+        <!-- exp-stairs-p 2.00 -0.6 0 0 0 0 -->
+        <!-- exp-stairs-n 5.600 0.6 0 0 0 3.14159 -->
+        <!-- <model name="terrain-stairs_2">
+            <pose frame=''>2.00 -0.6 0 0 0 0</pose>
             <include>
                 <uri>model://terrain-stairs_2</uri>
             </include>
-        </model>
+        </model> -->
         <!-- <model name="terrain-stairs">
             <pose frame=''>-3.00 0.45 0 0 0 -3.14159</pose>
             <include>
@@ -86,37 +88,37 @@
             </include>
         </model> -->
         
-        <!-- <model name="terrain-stepfield">
-            <pose frame=''>2.0 2.45 0 0 0 0</pose>
+        <model name="terrain-stepfield">
+            <pose frame=''>3.0 0 0 0 0 0.7854</pose>
             <include>
-                <uri>model://terrain-stepfield_2</uri>
+                <uri>model://terrain-stepfield_1</uri>
             </include>
-        </model> -->
+        </model>
 
         <!-- lab-small-ladder -->
         <!-- <model name="terrain-ladder">
-            <pose frame=''>-2.60 0.0 0 0 0 0</pose>
+            <pose frame=''>2.80 0.0 0 0 0 0</pose>
             <include>
                 <uri>model://terrain-ladder</uri>
             </include>
         </model>
 
         <model name="terrain-step_600">
-            <pose frame=''>-2.60 0.0 0 0 0 0</pose>
+            <pose frame=''>2.80 0.0 0 0 0 0</pose>
             <include>
                 <uri>model://terrain-step_600</uri>
             </include>
         </model>
 
         <model name="terrain-ramps_1">
-            <pose frame=''>-1.40 0.0 0 0 0 0</pose>
+            <pose frame=''>4.00 0.0 0 0 0 0</pose>
             <include>
                 <uri>model://terrain-ramps_1</uri>
             </include>
         </model>
 
         <model name="terrain-ramps_2">
-            <pose frame=''>-1.40 0.0 0 0 0 3.14159</pose>
+            <pose frame=''>4.00 0.0 0 0 0 3.14159</pose>
             <include>
                 <uri>model://terrain-ramps_1</uri>
             </include>

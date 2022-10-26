@@ -32,10 +32,10 @@
             </include>
         </model>
         
-        <model name="terrain-highplate_1_0">
+        <model name="terrain-highplate_100">
             <pose frame=''>-3.65 -2.45 0 0 0 0</pose>
             <include>
-                <uri>model://terrain-highplate_1_0</uri>
+                <uri>model://terrain-highplate_100</uri>
             </include>
         </model>
 

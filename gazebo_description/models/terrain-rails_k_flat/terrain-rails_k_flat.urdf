@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="terrain-rails_k_flat">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="2.4308 -0.618 0.48158"
+        rpy="0 0 0" />
+      <mass
+        value="278.1" />
+      <inertia
+        ixx="30.838"
+        ixy="-4.4409E-16"
+        ixz="1.0452E-14"
+        iyy="70.313"
+        iyz="-2.3567E-15"
+        izz="47.876" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://terrain-rails_k_flat/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://terrain-rails_k_flat/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

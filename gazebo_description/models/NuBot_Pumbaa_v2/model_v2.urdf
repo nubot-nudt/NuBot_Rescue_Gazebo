@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="NuBot_Pumbaa_v2_rviz">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.003044 -0.00039553 -9.8594E-05"
+        rpy="0 0 0" />
+      <mass
+        value="30" />
+      <inertia
+        ixx="0.061877"
+        ixy="-7.1073E-09"
+        ixz="7.6181E-07"
+        iyy="0.2127"
+        iyz="3.9238E-13"
+        izz="0.2403" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <visual name='left_track_visual'>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/left_track_link.STL" />
+      </geometry>
+    </visual>
+    <visual name='right_track_visual'>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/right_track_link.STL" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="front_left_flipper_link">
+    <inertial>
+      <origin
+        xyz="0.16867 0.015987 -6.5778E-16"
+        rpy="0 0 0" />
+      <mass
+        value="2.5" />
+      <inertia
+        ixx="0.002449"
+        ixy="3.092E-11"
+        ixz="2.4426E-17"
+        iyy="0.02168"
+        iyz="-1.2456E-18"
+        izz="0.019288" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/front_left_fin_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/front_left_fin_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="front_left_flipper_joint"
+    type="revolute">
+    <origin
+      xyz="0.276 0.25 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_left_flipper_link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-3"
+      upper="3"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="front_right_flipper_link">
+    <inertial>
+      <origin
+        xyz="0.16867 -0.015987 -4.7985E-06"
+        rpy="0 0 0" />
+      <mass
+        value="2.5" />
+      <inertia
+        ixx="0.002449"
+        ixy="-3.092E-11"
+        ixz="4.7907E-07"
+        iyy="0.02168"
+        iyz="8.796E-16"
+        izz="0.019288" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/front_right_fin_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/front_right_fin_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="front_right_flipper_joint"
+    type="revolute">
+    <origin
+      xyz="0.276 -0.25 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_right_flipper_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3"
+      upper="3"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="rear_left_flipper_link">
+    <inertial>
+      <origin
+        xyz="-0.16867 0.015987 4.7985E-06"
+        rpy="0 0 0" />
+      <mass
+        value="2.5" />
+      <inertia
+        ixx="0.002449"
+        ixy="-3.092E-11"
+        ixz="4.7907E-07"
+        iyy="0.02168"
+        iyz="8.7975E-16"
+        izz="0.019288" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/back_left_fin_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/back_left_fin_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rear_left_flipper_joint"
+    type="revolute">
+    <origin
+      xyz="-0.276 0.25 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rear_left_flipper_link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-3"
+      upper="3"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="rear_right_flipper_link">
+    <inertial>
+      <origin
+        xyz="-0.16867 -0.015987 8.4034E-16"
+        rpy="0 0 0" />
+      <mass
+        value="2.5" />
+      <inertia
+        ixx="0.002449"
+        ixy="3.092E-11"
+        ixz="6.532E-17"
+        iyy="0.02168"
+        iyz="3.9153E-18"
+        izz="0.019288" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/back_right_fin_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/back_right_fin_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rear_right_flipper_joint"
+    type="revolute">
+    <origin
+      xyz="-0.276 -0.25 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rear_right_flipper_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3"
+      upper="3"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="vive_link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/vive_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gazebo_description/models/NuBot_Pumbaa_v2/meshes/vive_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="vive_joint"
+    type="fixed">
+    <origin
+      xyz="0.16175 0 0.138"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="vive_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>
