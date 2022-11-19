@@ -4,6 +4,7 @@
 #include "geometry_msgs/Twist.h"
 #include "geometry_msgs/Pose.h"
 #include "sensor_msgs/JointState.h"
+#include "sensor_msgs/Imu.h"
 #include <tf/tf.h>
 #include <tf/transform_broadcaster.h>
 #include <eigen3/Eigen/Eigen>
@@ -21,6 +22,7 @@ public:
     void Callback_Pumbaa_Cmd(const nubot_msgs::base_drive_cmd &base_drive_cmd);
     void Callback_Vive(const geometry_msgs::PoseStamped &vive_tracker);
     void Callback_Gazebo_robot(const geometry_msgs::PoseStamped &gazebo_robot);
+    void Callback_Imu(const sensor_msgs::Imu &imu_data);
 	// void Callback_Cobra(const nubot_msgs::angle_position &cobra);
     //void Callback_Cobra3(const nubot_msgs::cobra3_angle_position &cobra3); //2022/0314
     
@@ -28,20 +30,44 @@ public:
 
 private:
 	ros::Subscriber pumbaa_sub;
-    ros::Subscriber vive_sub;
+    // ros::Subscriber vive_sub;
     ros::Subscriber gazebo_sub;
+    ros::Subscriber imu_sub;
 	// ros::Subscriber cobra_sub;
 	ros::Publisher rviz_state_pub;
         //ros::Timer cmd_timer;
     float angle[20]={0};
     sensor_msgs::JointState current_pos;
 
-    geometry_msgs::Quaternion base_quaternion, vive_quaternion;
+    geometry_msgs::Quaternion base_quaternion, vive_quaternion, imu_quaternion;
+    Eigen::Quaterniond base_quaternion_e, static_q_lidar_base;
+    Eigen::Vector3d real_t_lidar_base, static_t_lidar_base;
     float vive_x=0, vive_y=0, vive_z=0;
     Eigen::Matrix4d vive_matrix = Eigen::Matrix4d::Identity();
     Eigen::Matrix4d base_matrix = Eigen::Matrix4d::Identity();
     Eigen::Matrix4d vive_base_matrix = Eigen::Matrix4d::Identity();
 };
+
+static void toEulerAngle(const Eigen::Quaterniond& q, double& roll, double& pitch, double& yaw)
+{
+	// roll (x-axis rotation)
+	double sinr_cosp = +2.0 * (q.w() * q.x() + q.y() * q.z());
+	double cosr_cosp = +1.0 - 2.0 * (q.x() * q.x() + q.y() * q.y());
+	roll = atan2(sinr_cosp, cosr_cosp);
+
+	// pitch (y-axis rotation)
+	double sinp = +2.0 * (q.w() * q.y() - q.z() * q.x()); // right-hand frame
+	// double sinp = -2.0 * (q.w() * q.y() - q.z() * q.x()); // left-hand frame
+	if (fabs(sinp) >= 1)
+		pitch = copysign(M_PI / 2, sinp); // use 90 degrees if out of range
+	else
+		pitch = asin(sinp);
+
+	// yaw (z-axis rotation)
+	double siny_cosp = +2.0 * (q.w() * q.z() + q.x() * q.y());
+	double cosy_cosp = +1.0 - 2.0 * (q.y() * q.y() + q.z() * q.z());
+	yaw = atan2(siny_cosp, cosy_cosp);
+}
 
 void state_publish::Callback_Pumbaa(const nubot_msgs::base_info &base_info)
 {
@@ -92,8 +118,49 @@ void state_publish::Callback_Gazebo_robot(const geometry_msgs::PoseStamped &gaze
     // double roll, pitch, yaw;//定义存储r\p\y的容器
     base_quaternion = gazebo_robot.pose.orientation;
     Eigen::Quaterniond base_quaternion_e(base_quaternion.w, base_quaternion.x, base_quaternion.y, base_quaternion.z);
-    base_matrix.block<3,3>(0,0) = base_quaternion_e.toRotationMatrix();//旋转部分赋值
-    base_matrix.block<3,1>(0,3) = Eigen::Vector3d(gazebo_robot.pose.position.x, gazebo_robot.pose.position.y, gazebo_robot.pose.position.z); //平移部分赋值
+
+    // remove imu_yaw
+    double roll, pitch, yaw;
+    toEulerAngle(base_quaternion_e, roll, pitch, yaw);//手动四元数转欧拉角计算
+    Eigen::AngleAxisd rollAngle(roll,Eigen::Vector3d::UnitX());
+    Eigen::AngleAxisd pitchAngle(pitch,Eigen::Vector3d::UnitY());
+    Eigen::AngleAxisd yawAngle(0,Eigen::Vector3d::UnitZ());//eulerAngle(0)
+    base_quaternion_e = yawAngle*pitchAngle*rollAngle;
+    // printf("pitch:%f\n",pitch);
+
+    // base_quaternion_e = base_quaternion_e * static_q_lidar_base;
+    real_t_lidar_base = base_quaternion_e * static_t_lidar_base;
+    base_quaternion.w = base_quaternion_e.w();
+    base_quaternion.x = base_quaternion_e.x();
+    base_quaternion.y = base_quaternion_e.y();
+    base_quaternion.z = base_quaternion_e.z();
+
+    // base_matrix.block<3,3>(0,0) = base_quaternion_e.toRotationMatrix();//旋转部分赋值
+    // base_matrix.block<3,1>(0,3) = Eigen::Vector3d(gazebo_robot.pose.position.x, gazebo_robot.pose.position.y, gazebo_robot.pose.position.z); //平移部分赋值
+}
+
+void state_publish::Callback_Imu(const sensor_msgs::Imu &imu_data)
+{
+    // double roll, pitch, yaw;//定义存储r\p\y的容器
+    imu_quaternion = imu_data.orientation;
+    Eigen::Quaterniond imu_quaternion_e(imu_quaternion.w, imu_quaternion.x, imu_quaternion.y, imu_quaternion.z);
+
+    // remove imu_yaw
+    double roll, pitch, yaw;
+    toEulerAngle(imu_quaternion_e, roll, pitch, yaw);//手动四元数转欧拉角计算
+    //因为gazebo的问题，urdf中修改IMU朝向无效，IMU坐标系与机器人坐标系相同，这里手动转换，给roll和pitch加负号
+    Eigen::AngleAxisd rollAngle(-roll,Eigen::Vector3d::UnitX());
+    Eigen::AngleAxisd pitchAngle(-pitch,Eigen::Vector3d::UnitY());
+    Eigen::AngleAxisd yawAngle(0,Eigen::Vector3d::UnitZ());
+    imu_quaternion_e = yawAngle*pitchAngle*rollAngle;
+    // printf("pitch:%f\n",pitch);
+    
+    base_quaternion_e = imu_quaternion_e * static_q_lidar_base;
+    real_t_lidar_base = base_quaternion_e * static_t_lidar_base;
+    base_quaternion.w = base_quaternion_e.w();
+    base_quaternion.x = base_quaternion_e.x();
+    base_quaternion.y = base_quaternion_e.y();
+    base_quaternion.z = base_quaternion_e.z();
 }
 
 // void state_publish::Callback_Cobra(const nubot_msgs::angle_position &cobra)
@@ -124,20 +191,24 @@ state_publish::state_publish(int argc,char** argv,const char* name)
     // angle.arm={0,0,0,0,0,0,0};
     
     geometry_msgs::TransformStamped odom_trans;
-    odom_trans.header.frame_id = "map";
+    odom_trans.header.frame_id = "aft_mapped_yaw";
     odom_trans.child_frame_id = "base_link";//因为urdf模型中base_link为parent，所以只能发布base_link的tf才能在rviz里正常显示
-    vive_base_matrix(0,3) = -0.16175;//平移部分赋值
-    vive_base_matrix(1,3) = 0.0;
-    vive_base_matrix(2,3) = -0.138;
-    std::cout << "vive_base_matrix:" << vive_base_matrix.block<4,4>(0,0) << std::endl;
+    // vive_base_matrix(0,3) = -0.16175;//平移部分赋值
+    // vive_base_matrix(1,3) = 0.0;
+    // vive_base_matrix(2,3) = -0.138;
+    // std::cout << "vive_base_matrix:" << vive_base_matrix.block<4,4>(0,0) << std::endl;
+    static_t_lidar_base.x() = 0.36277;//平移部分赋值
+    static_t_lidar_base.y() = 0.0;
+    static_t_lidar_base.z() = -0.2115;
+    static_q_lidar_base = {0,0,0,1}; // w,x,y,z
     tf::TransformBroadcaster broadcaster;
 
     rviz_state_pub = n.advertise<sensor_msgs::JointState>("/joint_states", 100);
     pumbaa_sub = n.subscribe("/nubot_drive/base_info", 1,  &state_publish::Callback_Pumbaa, this);
     // pumbaa_sub = n.subscribe("/nubot_drive/base_drive_cmd", 1,  &state_publish::Callback_Pumbaa_Cmd, this);
-
     // vive_sub = n.subscribe("/vive/LHR_6E09A2CE_pose", 1,  &state_publish::Callback_Vive, this); //LHR_50EACBF2_pose LHR_FFADBD42_pose LHR_6E09A2CE_pose
-    gazebo_sub = n.subscribe("/gazebo_state/pumbaa_pose", 1,  &state_publish::Callback_Gazebo_robot, this); //LHR_50EACBF2_pose LHR_FFADBD42_pose LHR_6E09A2CE_pose
+    // gazebo_sub = n.subscribe("/gazebo_state/pumbaa_pose", 1,  &state_publish::Callback_Gazebo_robot, this); //LHR_50EACBF2_pose LHR_FFADBD42_pose LHR_6E09A2CE_pose
+    imu_sub = n.subscribe("/imu/data", 1,  &state_publish::Callback_Imu, this); 
 
     // ros::Subscriber cobra_sub = n.subscribe("/timon_angle", 1,  &state_publish::Callback_Cobra, this);
 
@@ -237,9 +308,13 @@ state_publish::state_publish(int argc,char** argv,const char* name)
 
         //publish the transform over tf
         odom_trans.header.stamp = ros::Time::now();
-        odom_trans.transform.translation.x = base_matrix(0,3);
-        odom_trans.transform.translation.y = base_matrix(1,3);
-        odom_trans.transform.translation.z = base_matrix(2,3);
+        // odom_trans.transform.translation.x = base_matrix(0,3);
+        // odom_trans.transform.translation.y = base_matrix(1,3);
+        // odom_trans.transform.translation.z = base_matrix(2,3);
+        odom_trans.transform.translation.x = real_t_lidar_base.x();
+        odom_trans.transform.translation.y = real_t_lidar_base.y();
+        odom_trans.transform.translation.z = real_t_lidar_base.z();
+        
         odom_trans.transform.rotation = base_quaternion;//vive与base之间没有旋转变换关系，只有平移，因此直接复制即可
         //send the transform
         broadcaster.sendTransform(odom_trans);
