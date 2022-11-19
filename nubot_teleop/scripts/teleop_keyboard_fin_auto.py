@@ -366,7 +366,7 @@ class PublishThread(threading.Thread):
                     #front left
                     if key == 'u': #键盘 u
                         self.velocity[2] = self.speed_fin #上抬
-                    elif 'j': #键盘 j
+                    elif key == 'j': #键盘 j
                         self.velocity[2] = -self.speed_fin #下压
                     else:
                         self.velocity[2] = 0
@@ -380,10 +380,10 @@ class PublishThread(threading.Thread):
                         self.velocity[4] = 0
 
                     #rear 后摆臂共同控制
-                    if key == 'i': #键盘 u
+                    if key == 'i': #键盘 i
                         self.velocity[3] = self.speed_fin #上抬
                         self.velocity[5] = self.speed_fin #上抬
-                    elif key == 'k': #键盘 u
+                    elif key == 'k': #键盘 k
                         self.velocity[3] = -self.speed_fin #下压
                         self.velocity[5] = -self.speed_fin #下压
                     else:

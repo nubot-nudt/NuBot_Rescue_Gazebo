@@ -433,13 +433,17 @@
       <front_right_flipper_j>front_right_flipper_joint</front_right_flipper_j>
       <rear_right_flipper_j>rear_right_flipper_joint</rear_right_flipper_j>
       <!--The Mu/Mu2 of tracks, which influnce the simulating performance-->
-      <track_mu>4</track_mu>
+      <track_mu>2</track_mu>
       <track_mu2>0.8</track_mu2>
       <!--The PID parameter of flippers position controll & initial position 1.5708 -->
       <flip_p>2000</flip_p>
       <flip_i>100</flip_i>
       <flip_d>10</flip_d>
       <flip_initial>0</flip_initial><!--1.0472-->
+      <!--The PID parameter of flippers velocity controll, not working-->
+      <flip_vel_p>100</flip_vel_p>
+      <flip_vel_i>100</flip_vel_i>
+      <flip_vel_d>0</flip_vel_d>
       <!--The parameters of tracks-->
       <tracksSeparation>0.29</tracksSeparation>
       <steeringEfficiency>0.5</steeringEfficiency>
@@ -460,10 +464,10 @@
   </xacro:IMU> -->
 
   <!-- RS-Bpearl lidar includes -->
-  <!-- <xacro:include filename="$(find gazebo_description)/models/RS_Bpearl/model_2.urdf.xacro"/>
+  <xacro:include filename="$(find gazebo_description)/models/RS_Bpearl/model_2.urdf.xacro"/>
   <xacro:RS_Bpearl parent="chassis_link" name="rs_bpearl" topic="/velodyne_points" hz="10" lasers="32" samples="1800" min_angle="-${PI}" max_angle="${PI}" min_range ="0.1" max_range="50.0" gpu="true">
     <origin xyz="-0.36277 0 0.2115" rpy="0 ${PI/2} ${PI}" />
-  </xacro:RS_Bpearl> -->
+  </xacro:RS_Bpearl>
   <!-- IMU includes (RS-Bpearl) -->
   <xacro:include filename="$(find gazebo_description)/models/IMU/model.urdf.xacro"/>
   <xacro:IMU parent="chassis_link" name="imu" topic="/imu/data" hz="400">
@@ -471,7 +475,7 @@
   </xacro:IMU>
 
   <!-- camera includes -->
-  <xacro:include filename="$(find gazebo_description)/models/camera_sensor/camera_sensor.urdf.xacro"/>
+  <!-- <xacro:include filename="$(find gazebo_description)/models/camera_sensor/camera_sensor.urdf.xacro"/>
   <xacro:usb_camera parent="chassis_link" name="usb_camera_back" topic="usb_camera_back" hz="30.0" fov="2.0" img_width="1080" img_height="720" >
     <origin xyz="-0.32 0 0.1" rpy="0 0 ${PI}" />
   </xacro:usb_camera>
@@ -479,6 +483,6 @@
   <xacro:include filename="$(find gazebo_description)/models/camera_sensor/camera_sensor.urdf.xacro" />
   <xacro:usb_camera parent="chassis_link" name="usb_camera_front" topic="usb_camera_front" hz="30" fov="2.0" img_width="1080" img_height="720" >
     <origin xyz="0.32 0 0.1" rpy="0 0 0" />
-  </xacro:usb_camera>
+  </xacro:usb_camera> -->
 
 </robot>

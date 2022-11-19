@@ -25,21 +25,21 @@
           </mesh>
         </geometry>
         <surface>
-            <contact>
-              <collide_bitmask>65535</collide_bitmask>
+          <contact>
+            <collide_bitmask>65535</collide_bitmask>
+            <ode/>
+          </contact>
+          <friction>
+            <ode>
+              <mu>2</mu>
+              <mu2>2</mu2>
+            </ode>
+            <torsional>
               <ode/>
-            </contact>
-            <friction>
-              <ode>
-                <mu>10</mu>
-                <mu2>10</mu2>
-              </ode>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <bounce/>
-          </surface>
+            </torsional>
+          </friction>
+          <bounce/>
+        </surface>
       </collision>
       <visual name='base_link_visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>

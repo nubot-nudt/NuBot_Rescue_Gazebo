@@ -185,6 +185,15 @@ namespace gazebo
       double                      flip_i;             // Parameter of flippers position control
       double                      flip_d;             // Parameter of flippers position control
       double                      flip_initial;       // Parameter of flippers position control
+      double                      flip_vel_p;             // Parameter of flippers position control
+      double                      flip_vel_i;             // Parameter of flippers position control
+      double                      flip_vel_d;             // Parameter of flippers position control
+      const double flip_relax = 3.1416/180;
+      double flip_err[4] = {0,0,0,0};
+      double flip_err_last[4] = {0,0,0,0};
+      double flip_integral[4] = {0,0,0,0};
+      double flip_speed[4] = {0,0,0,0};
+      const double flip_speed_limit = 3.1416*60/180;
       const float main_velocity_trans = 0.1*2*3.1416/25/60;  // 2pi/减速机减速比/60
       const float fin_rate_trans = 2*3.1416/(64*40/30)/60;  // 2pi/减速机减速比/60
       const float angle2radian = 3.1416/180; // pi/180
@@ -285,6 +294,8 @@ namespace gazebo
       /// \param[in] _rearleft Desired angular position of the rear_left flipper.
       /// \param[in] _rearright Desired angular position of the rear_right flipper.
       void SetFlipAngle(double _frontleft, double _frontright, double _rearleft,
+                       double _rearright);  // TODO: make virtual
+      void SetFlipAngle_PID(double _frontleft, double _frontright, double _rearleft,
                        double _rearright);  // TODO: make virtual
 
       /// \brief Set new target position for the flippers.

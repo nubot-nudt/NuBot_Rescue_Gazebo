@@ -47,7 +47,7 @@
   <gazebo reference="base_link">
     <selfCollide>false</selfCollide>
     <mu1>10</mu1>
-    <mu2>10</mu2>
+    <mu2>2</mu2>
     <kp value="10000000.0" />
     <kd value="1.0" />
     <!-- <fdir1 value="0 1 0" /> -->

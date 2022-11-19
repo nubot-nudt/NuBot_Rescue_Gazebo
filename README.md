@@ -68,10 +68,6 @@ threadpool libraries (need to be installed manually, as shown below)
 
 - The hector_gazebo sensor sensor pkg.
 
-#### /Pumbaa-v2-vive-urdf
-
-- The robot model for rviz display.
-
 #### /rviz_state_publish
 
 - The rviz_state_publish node for rviz display.
@@ -201,4 +197,3 @@ you can change mechanical parameters of robot, including friction, flippers PID 
 ## TODO
 1. Add RGBD camera.  
 2. Make the simulation more real.  
-3. Add rviz GUI.

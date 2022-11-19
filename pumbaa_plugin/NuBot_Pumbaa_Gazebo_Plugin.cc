@@ -107,6 +107,7 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   ///          "tracksSeparation" "steeringEfficiency"
   ///          "maxLinearSpeed" "maxAngularSpeed"
   ///          "flip_p" "flip_i" "flip_d" "flip_initial"
+  ///          "flip_vel_p" "flip_vel_i" "flip_vel_d"
   /// form .sdf file
   if (robot_sdf_->HasElement("track_mu"))
   {
@@ -154,6 +155,21 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   if (robot_sdf_->HasElement("flip_initial"))// the initial position of flippers
   {
     flip_initial = std::stod(robot_sdf_->GetElement("flip_initial")
+                         ->GetValue()->GetDefaultAsString());
+  }
+  if (robot_sdf_->HasElement("flip_vel_p"))
+  {
+    flip_vel_p = std::stod(robot_sdf_->GetElement("flip_vel_p")
+                         ->GetValue()->GetDefaultAsString());
+  }
+  if (robot_sdf_->HasElement("flip_vel_i"))
+  {
+    flip_vel_i = std::stod(robot_sdf_->GetElement("flip_vel_i")
+                         ->GetValue()->GetDefaultAsString());
+  }
+  if (robot_sdf_->HasElement("flip_vel_d"))
+  {
+    flip_vel_d = std::stod(robot_sdf_->GetElement("flip_vel_d")
                          ->GetValue()->GetDefaultAsString());
   }
 
@@ -306,7 +322,7 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
       robot_model_->GetJointController()->SetPositionTarget(
                   front_left_j->GetScopedName(), -flip_initial);
       // robot_model_->GetJointController()->SetVelocityPID(
-      //             front_left_j->GetScopedName(),common::PID(100, 20, 0));
+      //             front_left_j->GetScopedName(),common::PID(flip_vel_p, flip_vel_i, flip_vel_d));
       gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
@@ -333,7 +349,7 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
       robot_model_->GetJointController()->SetPositionTarget(
                   rear_left_j->GetScopedName(), flip_initial);
       // robot_model_->GetJointController()->SetVelocityPID(
-      //             rear_left_j->GetScopedName(),common::PID(100, 20, 0));
+      //             rear_left_j->GetScopedName(),common::PID(flip_vel_p, flip_vel_i, flip_vel_d));
       gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
@@ -360,7 +376,7 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
       robot_model_->GetJointController()->SetPositionTarget(
                   front_right_j->GetScopedName(), -flip_initial);
       // robot_model_->GetJointController()->SetVelocityPID(
-      //             front_right_j->GetScopedName(),common::PID(100, 20, 0));
+      //             front_right_j->GetScopedName(),common::PID(flip_vel_p, flip_vel_i, flip_vel_d));
       gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
@@ -388,7 +404,7 @@ void NuBotPumbaaGazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
                   rear_right_j->GetScopedName(), flip_initial);
                   // Setup a P-controller, with a gain of 0.1.
       // robot_model_->GetJointController()->SetVelocityPID(
-      //             rear_right_j->GetScopedName(),common::PID(100, 20, 0));
+      //             rear_right_j->GetScopedName(),common::PID(flip_vel_p, flip_vel_i, flip_vel_d));
       gzmsg << "NuBotPumbaaGazebo_Plugin: Successfully added joint '"
             << flipperName_j << "'" << std::endl;
     }
@@ -551,6 +567,37 @@ void NuBotPumbaaGazebo::SetFlipAngle(
     robot_model_->GetJointController()->SetPositionTarget(
                 rear_right_j->GetScopedName(), _rearright);
 }
+
+// Set the rotate position of flippers through PID.
+// not working, the Gazebo's SetVelocityTarget() function not good.
+void NuBotPumbaaGazebo::SetFlipAngle_PID(
+        double _frontleft, double _frontright, double _rearleft, double _rearright)
+{
+    flip_err[0] = _frontleft - front_left_j->Position(0);
+    flip_err[1] = _frontright - front_right_j->Position(0);
+    flip_err[2] = _rearleft - rear_left_j->Position(0);
+    flip_err[3] = _rearright - rear_right_j->Position(0);
+    for (int i=0;i<4;i++)
+    {
+      if (abs(flip_err[i]) >= flip_relax)
+          flip_integral[i] += flip_err[i];
+      flip_speed[i] = flip_p * flip_err[i] + flip_i * flip_integral[i] + flip_d * (flip_err[i] - flip_err_last[i]);
+      flip_err_last[i] = flip_err[i];
+      if (flip_speed[i] > flip_speed_limit)
+          flip_speed[i] = flip_speed_limit;
+      else if (flip_speed[i] < -flip_speed_limit)
+          flip_speed[i] = -flip_speed_limit;
+    }
+    robot_model_->GetJointController()->SetVelocityTarget(
+                front_left_j->GetScopedName(), flip_speed[0]);
+    robot_model_->GetJointController()->SetVelocityTarget(
+                front_right_j->GetScopedName(), flip_speed[1]);
+    robot_model_->GetJointController()->SetVelocityTarget(
+                rear_left_j->GetScopedName(), flip_speed[2]);
+    robot_model_->GetJointController()->SetVelocityTarget(
+                rear_right_j->GetScopedName(), flip_speed[3]);
+}
+
 // Set the rotate velocity of flippers direct to the model, called by Flip_Cmd_CB.
 void NuBotPumbaaGazebo::SetFlipVelocity(
         double _frontleft, double _frontright, double _rearleft, double _rearright)

@@ -28,7 +28,7 @@
         <!-- exp-stairs-p 2.00 -0.6 0 0 0 0 -->
         <!-- exp-stairs-n 5.600 0.6 0 0 0 3.14159 -->
         <!-- <model name="terrain-stairs_2">
-            <pose frame=''>2.00 -0.6 0 0 0 0</pose>
+            <pose frame=''>5.600 0.6 0 0 0 3.14159</pose>
             <include>
                 <uri>model://terrain-stairs_2</uri>
             </include>
@@ -88,12 +88,27 @@
             </include>
         </model> -->
         
+        <!-- lab-stepfield 2.85 0 0 0 0 0-->
         <model name="terrain-stepfield">
-            <pose frame=''>3.0 0 0 0 0 0.7854</pose>
+            <pose frame=''>3.75 0 0 0 0 0</pose>
             <include>
-                <uri>model://terrain-stepfield_1</uri>
+                <uri>model://terrain-stepfield_2</uri>
             </include>
         </model>
+
+        <!-- lab-rails_k_flat -->
+        <!-- <model name="terrain-rails_k_flat">
+            <pose frame=''>2.0 0.6 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-rails_k_flat_2</uri>
+            </include>
+        </model> -->
+        <!-- <model name="terrain-rail_lift">
+            <pose frame=''>2.0 0.6 -0.1 0 0 0</pose>
+            <include>
+                <uri>model://terrain-rail_lift</uri>
+            </include>
+        </model> -->
 
         <!-- lab-small-ladder -->
         <!-- <model name="terrain-ladder">
@@ -157,6 +172,13 @@
             <pose frame=''>-4.0 -4.0 0 0 0 0</pose>
             <include>
                 <uri>model://terrain-ramps_2</uri>
+            </include>
+        </model> -->
+
+        <!-- <model name="terrain-step">
+            <pose frame=''>3.5.0 0.0 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-box</uri>
             </include>
         </model> -->
         

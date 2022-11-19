@@ -31,8 +31,8 @@
           </contact>
           <friction>
             <ode>
-              <mu>10</mu>
-              <mu2>10</mu2>
+              <mu>2</mu>
+              <mu2>2</mu2>
             </ode>
             <torsional>
               <ode/>
@@ -46,7 +46,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://terrain-stepfield_2/meshes/base_link.STL</uri>
+            <uri>model://terrain-stepfield_2/meshes/base_link.dae</uri>
           </mesh>
         </geometry>
       </visual>
