@@ -64,7 +64,7 @@
             <noise>
               <type>gaussian</type>
               <mean>0.0</mean>
-              <stddev>0.0</stddev>
+              <stddev>${noise}</stddev>
             </noise>
           </ray>
           <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_velodyne_gpu_laser.so">
@@ -105,7 +105,7 @@
             <noise>
               <type>gaussian</type>
               <mean>0.0</mean>
-              <stddev>0.0</stddev>
+              <stddev>${noise}</stddev>
             </noise>
           </ray>
           <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_velodyne_laser.so">

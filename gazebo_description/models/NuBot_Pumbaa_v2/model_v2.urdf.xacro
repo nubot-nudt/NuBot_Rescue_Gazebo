@@ -436,8 +436,8 @@
       <track_mu>2</track_mu>
       <track_mu2>0.8</track_mu2>
       <!--The PID parameter of flippers position controll & initial position 1.5708 -->
-      <flip_p>1500</flip_p>
-      <flip_i>100</flip_i>
+      <flip_p>1750</flip_p>
+      <flip_i>800</flip_i>
       <flip_d>0</flip_d>
       <flip_initial>0</flip_initial><!--1.0472-->
       <!--The PID parameter of flippers velocity controll, not working-->

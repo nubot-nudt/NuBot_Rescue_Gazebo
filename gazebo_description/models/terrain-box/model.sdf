@@ -1,41 +1,47 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-        <model name="terrain-box">
-            <static>true</static>
-            <pose>0 0 0 0 0 0</pose>
-            <link name="box">
-                <collision name="box_collision">
-                    <pose frame="">0 0 0 0 0 0</pose>
-                    <geometry>
-                        <box>
-                            <size>3 2 0.60</size>
-                        </box>
-                    </geometry>
-                    <surface>
-                        <contact>
-                            <collide_bitmask>65535</collide_bitmask>
-                            <ode/>
-                        </contact>
-                        <friction>
-                            <ode>
-                            <mu>2</mu>
-                            <mu2>2</mu2>
-                            </ode>
-                            <torsional>
-                            <ode/>
-                            </torsional>
-                        </friction>
-                        <bounce/>
-                    </surface>
-                </collision>
-                <visual name="box_visual">
-                    <pose frame="">0 0 0 0 0 0</pose>
-                    <geometry>
-                        <box>
-                            <size>3 2 0.60</size>
-                        </box>
-                    </geometry>
-                </visual>
-            </link>
-        </model>
+    <model name="terrain-box">
+        <static>true</static>
+        <pose>0 0 0 0 0 0</pose>
+        <link name="box">
+            <collision name="box_collision">
+                <pose frame="">0 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>3 2 0.60</size>
+                    </box>
+                </geometry>
+                <surface>
+                    <contact>
+                        <collide_bitmask>65535</collide_bitmask>
+                        <ode/>
+                    </contact>
+                    <friction>
+                        <ode>
+                        <mu>2</mu>
+                        <mu2>2</mu2>
+                        </ode>
+                        <torsional>
+                        <ode/>
+                        </torsional>
+                    </friction>
+                    <bounce/>
+                </surface>
+            </collision>
+            <visual name="box_visual">
+                <pose frame="">0 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>3 2 0.60</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>
+                        <name>Gazebo/Wood</name>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+        </link>
+    </model>
 </sdf>

@@ -1,29 +1,32 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="IMU">
     <xacro:property name="M_PI" value="3.1415926535897931" />
     <xacro:macro name="IMU" params="*origin parent:=base_link name:=imu topic:=/imu/data hz:=400">
-        <joint name="${name}_mount_joint" type='fixed'>
+        
+        <joint name="${name}_mount_joint" type="fixed">
             <xacro:insert_block name="origin" /> 
             <parent link="${parent}"/>
             <child link="${name}" />
         </joint>
-        <link name='${name}'>
+
+        <link name="${name}">
             <!-- <inertial>
                 <mass value="0.1"/>
             </inertial> -->
-            <visual name='visual'>
+            <visual name="visual">
                 <origin xyz="0 0 0.013" rpy="0 0 0"/>
                 <geometry>
                     <box size="0.05 0.04 0.026" />
                 </geometry>
             </visual>
-            <collision name='collision'>
+            <collision name="collision">
             <origin xyz="0 0 0.013" rpy="0 0 0"/>
             <geometry>
                 <box size="0.05 0.04 0.026" />
             </geometry>
             </collision>
         </link>
+
         <!-- <gazebo reference="${name}">
             <gravity>true</gravity>
             <sensor name='imu_sensor' type='imu'>
@@ -34,7 +37,7 @@
                 <plugin filename='libgazebo_ros_imu_sensor.so' name='imu_plugin'>
                     <topicName>${topic}</topicName>
                     <updateRateHZ>${hz}</updateRateHZ>
-                    <gaussianNoise>0.0</gaussianNoise>
+                    <gaussianNoise>0.005</gaussianNoise>
                     <xyzOffset>0 0 0</xyzOffset>
                     <rpyOffset>0 0 0</rpyOffset>
                     <frameName>${name}</frameName>
@@ -47,8 +50,8 @@
                 <bodyName>${name}</bodyName>
                 <topicName>${topic}</topicName>
                 <serviceName>${topic}_service</serviceName>
-                <gaussianNoise>0.0</gaussianNoise>
-                <updateRate>400.0</updateRate>
+                <gaussianNoise>0.005</gaussianNoise>
+                <updateRate>${hz}</updateRate>
             </plugin>
         </gazebo> -->
         <gazebo>

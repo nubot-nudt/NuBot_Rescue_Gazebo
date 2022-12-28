@@ -1186,7 +1186,6 @@ void NuBotPumbaaGazebo::update_child()
       //nubot_test();
   this->DriveTracks();
   // message_publish();
-  //this->SetFlipAngle(0,front_right_j_speed,0,0);
   //gzmsg << "NuBotPumbaaGazebo_Plugin: update_child is running" << std::endl;
 
       /**********  EDIT ENDS  **********/

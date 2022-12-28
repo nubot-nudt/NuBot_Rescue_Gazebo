@@ -11,20 +11,27 @@
             <uri>model://ground_plane</uri>
         </include>
 
-        <model name="wall-room">
+    <!-- room-type -->
+        <!-- <model name="wall-room">
             <pose frame=''>4.0 0 0 0 0 0</pose>
             <include>
                 <uri>model://walls/wall-room</uri>
             </include>
-        </model>
+        </model> -->
         <!-- <model name="wall-outdoor">
             <pose frame=''>0.0 0 0 0 0 0</pose>
             <include>
                 <uri>model://walls/wall-outdoor</uri>
             </include>
         </model> -->
+        <model name="wall-room-rough">
+            <pose frame=''>4.0 0 0 0 0 0</pose>
+            <include>
+                <uri>model://walls/wall-room-rough</uri>
+            </include>
+        </model>
 
-        <!-- lab-stairs -->
+    <!-- lab-stairs -->
         <!-- exp-stairs-p 2.00 -0.6 0 0 0 0 -->
         <!-- exp-stairs-n 5.600 0.6 0 0 0 3.14159 -->
         <!-- <model name="terrain-stairs_2">
@@ -33,6 +40,111 @@
                 <uri>model://terrain-stairs_2</uri>
             </include>
         </model> -->
+        <!-- <model name="terrain-stairs_3">
+            <pose frame=''>2.00 -0.6 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-stairs_3</uri>
+            </include>
+        </model> -->
+        
+    <!-- lab-stepfield 2.85 0 0 0 0 0-->
+        <!-- <model name="terrain-stepfield">
+            <pose frame=''>4.0 0 0 0 0 0.5236</pose>
+            <include>
+                <uri>model://terrain-stepfield_2</uri>
+            </include>
+        </model> -->
+
+    <!-- lab-rails_k_flat -->
+        <!-- <model name="terrain-rails_k_flat">
+            <pose frame=''>2.0 0.6 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-rails_k_flat_2</uri>
+            </include>
+        </model> -->
+        <!-- <model name="terrain-rail_lift">
+            <pose frame=''>2.0 0.6 -0.1 0 0 0</pose>
+            <include>
+                <uri>model://terrain-rail_lift</uri>
+            </include>
+        </model> -->
+
+    <!-- lab-small_ladder -->
+        <!-- <model name="terrain-ladder">
+            <pose frame=''>2.80 0.0 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-ladder</uri>
+            </include>
+        </model>
+
+        <model name="terrain-step_600">
+            <pose frame=''>2.80 0.0 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-step_600</uri>
+            </include>
+        </model>
+
+        <model name="terrain-ramps_1">
+            <pose frame=''>4.00 0.0 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-ramps_1</uri>
+            </include>
+        </model>
+
+        <model name="terrain-ramps_2">
+            <pose frame=''>4.00 0.0 0 0 0 3.14159</pose>
+            <include>
+                <uri>model://terrain-ramps_1</uri>
+            </include>
+        </model> -->
+
+    <!-- lab-ramps_wave -->
+        <!-- <model name="terrain-ramps_1">
+            <pose frame=''>2.6 0.0 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-ramps_1</uri>
+            </include>
+        </model>
+
+        <model name="terrain-ramps_3">
+            <pose frame=''>2.6 0.0 0 0 0 3.14159</pose>
+            <include>
+                <uri>model://terrain-ramps_1</uri>
+            </include>
+        </model>
+
+        <model name="terrain-ramps_4">
+            <pose frame=''>3.8 0.0 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-ramps_1</uri>
+            </include>
+        </model>
+
+        <model name="terrain-ramps_2">
+            <pose frame=''>3.8 0.0 0 0 0 3.14159</pose>
+            <include>
+                <uri>model://terrain-ramps_1</uri>
+            </include>
+        </model> -->
+
+    <!-- lab-ramps -->
+        <!-- <model name="terrain-ramps_3">
+            <pose frame=''>-4.0 -4.0 0 0 0 0</pose>
+            <include>
+                <uri>model://terrain-ramps_2</uri>
+            </include>
+        </model> -->
+
+    <!-- lab-single_step -->
+        <!-- <pose frame=''>3.5 1.0 0 0 0 0</pose> -->
+        <model name="terrain-step">
+            <pose frame=''>3.5 0.0 0.1 0 0 0</pose>
+            <include>
+                <uri>model://terrain-box</uri>
+            </include>
+        </model>
+
+    <!-- lab-staris_highplate_slope -->
         <!-- <model name="terrain-stairs">
             <pose frame=''>-3.00 0.45 0 0 0 -3.14159</pose>
             <include>
@@ -85,100 +197,6 @@
             <pose frame=''>-1.8 0.6 0 0 0 0</pose>
             <include>
                 <uri>model://terrain-slope</uri>
-            </include>
-        </model> -->
-        
-        <!-- lab-stepfield 2.85 0 0 0 0 0-->
-        <model name="terrain-stepfield">
-            <pose frame=''>3.75 0 0 0 0 0</pose>
-            <include>
-                <uri>model://terrain-stepfield_2</uri>
-            </include>
-        </model>
-
-        <!-- lab-rails_k_flat -->
-        <!-- <model name="terrain-rails_k_flat">
-            <pose frame=''>2.0 0.6 0 0 0 0</pose>
-            <include>
-                <uri>model://terrain-rails_k_flat_2</uri>
-            </include>
-        </model> -->
-        <!-- <model name="terrain-rail_lift">
-            <pose frame=''>2.0 0.6 -0.1 0 0 0</pose>
-            <include>
-                <uri>model://terrain-rail_lift</uri>
-            </include>
-        </model> -->
-
-        <!-- lab-small-ladder -->
-        <!-- <model name="terrain-ladder">
-            <pose frame=''>2.80 0.0 0 0 0 0</pose>
-            <include>
-                <uri>model://terrain-ladder</uri>
-            </include>
-        </model>
-
-        <model name="terrain-step_600">
-            <pose frame=''>2.80 0.0 0 0 0 0</pose>
-            <include>
-                <uri>model://terrain-step_600</uri>
-            </include>
-        </model>
-
-        <model name="terrain-ramps_1">
-            <pose frame=''>4.00 0.0 0 0 0 0</pose>
-            <include>
-                <uri>model://terrain-ramps_1</uri>
-            </include>
-        </model>
-
-        <model name="terrain-ramps_2">
-            <pose frame=''>4.00 0.0 0 0 0 3.14159</pose>
-            <include>
-                <uri>model://terrain-ramps_1</uri>
-            </include>
-        </model> -->
-
-        <!-- lab-small-JFR -->
-        <!-- <model name="terrain-ramps_1">
-            <pose frame=''>-1.20 0.0 0 0 0 0</pose>
-            <include>
-                <uri>model://terrain-ramps_1</uri>
-            </include>
-        </model>
-
-        <model name="terrain-ramps_3">
-            <pose frame=''>-1.20 0.0 0 0 0 3.14159</pose>
-            <include>
-                <uri>model://terrain-ramps_1</uri>
-            </include>
-        </model>
-
-        <model name="terrain-ramps_4">
-            <pose frame=''>-0.0 0.0 0 0 0 0</pose>
-            <include>
-                <uri>model://terrain-ramps_1</uri>
-            </include>
-        </model>
-
-        <model name="terrain-ramps_2">
-            <pose frame=''>-0.0 0.0 0 0 0 3.14159</pose>
-            <include>
-                <uri>model://terrain-ramps_1</uri>
-            </include>
-        </model> -->
-
-        <!-- <model name="terrain-ramps_3">
-            <pose frame=''>-4.0 -4.0 0 0 0 0</pose>
-            <include>
-                <uri>model://terrain-ramps_2</uri>
-            </include>
-        </model> -->
-
-        <!-- <model name="terrain-step">
-            <pose frame=''>3.5.0 0.0 0 0 0 0</pose>
-            <include>
-                <uri>model://terrain-box</uri>
             </include>
         </model> -->
         
