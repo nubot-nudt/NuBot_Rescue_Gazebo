@@ -1,0 +1,15 @@
+# topic name
+base_info_sub_name: "/nubot_drive/base_info" # 
+imu_sub_name: "/imu/data" # 
+LidarYawFrame: "lidar_yaw" # 
+
+# robot parameters
+lidar_pumbaa_trans: [-0.36277, 0, -0.2115] # xyz coordinate of pumbaa in lidar frame
+lidar_pumbaa_dir: -1 # lidar-frame & robot-frame -1:opposite-dir 1:same-dir
+
+# subscribe ground_truth:"pose_sub_name" or odometry:"odometry_sub_name"
+is_gt: false # true
+vive_pumbaa_trans: [0.16175, 0, -0.138] # xyz coordinate of pumbaa in vive frame
+vive_pumbaa_dir: -1 # lidar-frame & robot-frame -1:opposite-dir 1:same-dir
+pose_sub_name: "/gazebo_state/pumbaa_pose" # "/gazebo_state/pumbaa_pose"
+# "/vive/LHR_50EACBF2_pose" "/vive/LHR_FFADBD42_pose" "/vive/LHR_6E09A2CE_pose" 

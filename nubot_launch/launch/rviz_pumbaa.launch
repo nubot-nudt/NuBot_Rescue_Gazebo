@@ -1,5 +1,7 @@
 <launch>    
     <!-- RViz -->
+    <rosparam command="load" file="$(find rviz_state_publish)/config/config.yaml" />
+    <node pkg="rviz_state_publish" name="rviz_state_publish" type="rviz_state_publish" output="screen"/>
     <!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
         <param name="publish_frequency" type="double" value="30.0" />
     </node> -->
@@ -7,9 +9,6 @@
     <arg name="gui" default="False" />
     <param name="robot_description" textfile="$(find gazebo_description)/models/NuBot_Pumbaa_v2/model_v2.urdf" />
     <param name="use_gui" value="$(arg gui)" />
-    <node pkg="rviz_state_publish" name="rviz_state_publish" type="rviz_state_publish" output="screen"/>
-    
-    <!--  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>  -->
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
     <arg name="debug" default="false" />
     <arg unless="$(arg debug)" name="launch_prefix" value="" />
